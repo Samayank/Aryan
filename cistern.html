@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flush Tanks — All Series | ARYAN India</title>
+    <meta name="description"
+        content="Explore ARYAN's complete range of premium cisterns — Continental, Curve, Kubix, and Deluxe series.">
+    <meta property="og:title" content="Flush Tanks — All Series | ARYAN India">
+    <meta property="og:description"
+        content="Premium cisterns from ARYAN India — Continental, Curve, Kubix, and Deluxe series for modern bathrooms.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .cistern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .cistern-card {
+            background: var(--card-bg, #fff);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cistern-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .cistern-card-image {
+            aspect-ratio: 5 / 4;
+            height: auto;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cistern-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cistern-card-image .cistern-emoji {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .cistern-card-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .cistern-card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cistern-card-body h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .cistern-card-body p {
+            color: var(--text-secondary, #666);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .cistern-card-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .cistern-tag {
+            background: var(--bg-secondary, #f0f0f0);
+            color: var(--text-secondary, #555);
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: 0.72rem;
+            font-weight: 500;
+        }
+
+        .cistern-card-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .cistern-card-footer .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Continental flush popup */
+        .flush-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flush-overlay.active {
+            display: flex;
+        }
+
+        .flush-popup {
+            background: var(--card-bg, #fff);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .flush-popup h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .flush-popup .flush-sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary, #666);
+            margin-bottom: 1.25rem;
+        }
+
+        .flush-option {
+            border: 2px solid var(--border, #e0e0e0);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .flush-option:hover {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 2px 12px rgba(230, 126, 34, 0.1);
+        }
+
+        .flush-option h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .flush-option p {
+            font-size: 0.8rem;
+            color: var(--text-secondary, #666);
+            margin: 0;
+        }
+
+        .flush-cancel {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary, #888);
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            margin-top: 0.25rem;
+        }
+
+        .flush-cancel:hover {
+            color: var(--text-primary, #333);
+        }
+    </style>
+</head>
+
+<body>
+    <main id="main-content">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <div class="container">
+                <ol class="breadcrumb-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Flush Tanks</li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1>Flush Tanks & Toilet Seat Covers</h1>
+                <p>4 distinct series of Flush Tanks designed for efficiency, style, and silent operation, along with
+                    durable and premium Toilet Seat Covers.</p>
+            </div>
+        </section>
+
+        <!-- Series Cards -->
+        <section class="product-categories" id="products">
+            <div class="container">
+                <h2 class="section-title">Our Range</h2>
+                <div class="product-tabs" style="justify-content: center; margin-bottom: 2rem;">
+                    <button class="tab-button active" data-category="tank">Flush Tanks</button>
+                    <button class="tab-button" data-category="cover">Toilet Seat Covers</button>
+                </div>
+                <div class="cistern-grid" id="cistern-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Continental Flush Type Popup -->
+    <div class="flush-overlay" id="flushOverlay">
+        <div class="flush-popup">
+            <h3>Continental Cistern</h3>
+            <p class="flush-sub">Choose your flush type to add to cart:</p>
+            <div class="flush-option" id="flush-single" onclick="addContinental('single')">
+                <h4>Single Flush — Center Push</h4>
+                <p>Classic single flush mechanism with a center push button for reliable, consistent flushing.</p>
+            </div>
+            <div class="flush-option" id="flush-double" onclick="addContinental('double')">
+                <h4>Double Flush</h4>
+                <p>Dual flush system with half and full flush options for water conservation.</p>
+            </div>
+            <button class="flush-cancel" onclick="closeFlushPopup()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        var cisternSeries = [
+            {
+                id: 'continental',
+                name: 'Continental',
+                category: 'tank',
+                badge: 'Most Premium',
+                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/continental.png',
+                description: 'Our most premium cistern — available in both single flush (center push) and double flush configurations. Superior build quality and elegant design.',
+                tags: ['Single Flush Center Push', 'Double Flush'],
+                hasPopup: true
+            },
+            {
+                id: 'curve',
+                name: 'Curve',
+                category: 'tank',
+                badge: 'Premium',
+                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/curve.png',
+                description: 'Premium cistern with sleek curved aesthetics and a reliable single flush side handle mechanism.',
+                tags: ['Single Flush', 'Side Handle'],
+                hasPopup: false
+            },
+            {
+                id: 'kubiks',
+                name: 'Kubix',
+                category: 'tank',
+                badge: 'Standard',
+                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/kubix.png',
+                description: 'Clean, geometric cistern design with a dependable single flush side handle for everyday use.',
+                tags: ['Single Flush', 'Side Handle'],
+                hasPopup: false
+            },
+            {
+                id: 'deluxe',
+                name: 'Deluxe',
+                category: 'tank',
+                badge: 'Essentials',
+                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/deluxe.png',
+                description: 'Reliable and durable cistern with single flush side handle — great value for any bathroom.',
+                tags: ['Single Flush', 'Side Handle'],
+                hasPopup: false
+            },
+            {
+                id: 'solid-seat-cover',
+                name: 'Solid Seat Cover',
+                category: 'cover',
+                badge: 'Standard',
+                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/solid.png',
+                description: 'Durable and high-quality solid toilet seat cover for everyday use.',
+                tags: ['Normal'],
+                hasPopup: false
+            },
+            {
+                id: 'ewc-seat-cover',
+                name: 'EWC Seat Cover',
+                category: 'cover',
+                badge: 'Standard',
+                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/ewc.png',
+                description: 'Standard EWC toilet seat cover ensuring comfort and a perfect fit.',
+                tags: ['Normal'],
+                hasPopup: false
+            },
+            {
+                id: 'jet-seat-cover',
+                name: 'Jet Seat Cover',
+                category: 'cover',
+                badge: 'Standard',
+                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/jet.png',
+                description: 'Reliable jet toilet seat cover designed for convenience and hygiene.',
+                tags: ['Normal'],
+                hasPopup: false
+            }
+        ];
+
+        function renderCisterns(filter) {
+            var grid = document.getElementById('cistern-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            var filtered = filter === 'all' ? cisternSeries : cisternSeries.filter(function (c) { return c.category === filter; });
+            filtered.forEach(function (series) {
+                var card = document.createElement('div');
+                card.className = 'cistern-card';
+                card.innerHTML =
+                    '<div class="cistern-card-image">' +
+                    '<img src="' + escapeHTML(series.image) + '" alt="' + escapeHTML(series.name) + '" loading="lazy">' +
+                    '<span class="cistern-card-badge">' + escapeHTML(series.badge) + '</span>' +
+                    '</div>' +
+                    '<div class="cistern-card-body">' +
+                    '<h3>' + escapeHTML(series.name) + '</h3>' +
+                    '<p>' + escapeHTML(series.description) + '</p>' +
+                    '<div class="cistern-card-tags">' + series.tags.map(function (t) { return '<span class="cistern-tag">' + escapeHTML(t) + '</span>'; }).join('') + '</div>' +
+                    '</div>' +
+                    '<div class="cistern-card-footer">' +
+                    '<button class="btn btn-primary add-cistern-btn">🛒 Add to Cart</button>' +
+                    '</div>';
+                var btn = card.querySelector('.add-cistern-btn');
+                if (series.hasPopup) {
+                    btn.addEventListener('click', function () { openFlushPopup(); });
+                } else {
+                    btn.addEventListener('click', function () {
+                        if (series.category === 'tank') {
+                            window.aryanCart.addToCart({
+                                id: 'cistern-' + series.id,
+                                name: series.name + ' Cistern (Single Flush, Side Handle)',
+                                image: series.image,
+                                price: 0,
+                                quantity: 1,
+                                config: {
+                                    series: series.name + ' Cistern',
+                                    subtitle: null,
+                                    grade: 'Single Flush',
+                                    size: 'Side Handle',
+                                    bowl: 'Cistern'
+                                }
+                            });
+                            showToast('✓ ' + series.name + ' Cistern added to cart!');
+                        } else {
+                            window.aryanCart.addToCart({
+                                id: 'cover-' + series.id,
+                                name: series.name,
+                                image: series.image,
+                                price: 0,
+                                quantity: 1,
+                                config: {
+                                    series: series.name,
+                                    subtitle: null,
+                                    grade: series.tags.join(', '),
+                                    size: 'Standard Fit',
+                                    bowl: 'Seat Cover'
+                                }
+                            });
+                            showToast('✓ ' + series.name + ' added to cart!');
+                        }
+                    });
+                }
+                grid.appendChild(card);
+            });
+        }
+
+        function openFlushPopup() {
+            document.getElementById('flushOverlay').classList.add('active');
+        }
+
+        function closeFlushPopup() {
+            document.getElementById('flushOverlay').classList.remove('active');
+        }
+
+        function addContinental(flushType) {
+            var flushLabel = flushType === 'single' ? 'Single Flush, Center Push' : 'Double Flush';
+            window.aryanCart.addToCart({
+                id: 'cistern-continental-' + flushType,
+                name: 'Continental Cistern (' + flushLabel + ')',
+                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/continental.png',
+                price: 0,
+                quantity: 1,
+                config: {
+                    series: 'Continental Cistern',
+                    subtitle: flushLabel,
+                    grade: flushType === 'single' ? 'Single Flush' : 'Double Flush',
+                    size: flushType === 'single' ? 'Center Push' : 'Dual Button',
+                    bowl: 'Cistern'
+                }
+            });
+            closeFlushPopup();
+            showToast('✓ Continental Cistern (' + flushLabel + ') added to cart!');
+        }
+
+        // Close popup on overlay click
+        document.getElementById('flushOverlay').addEventListener('click', function (e) {
+            if (e.target === this) closeFlushPopup();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initAryanWebsite('cistern');
+            renderCisterns('tank');
+
+            document.querySelectorAll('.tab-button').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.tab-button').forEach(function (b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    renderCisterns(this.getAttribute('data-category'));
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

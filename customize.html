@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Your Sink | ARYAN India</title>
+    <meta name="description"
+        content="Customize your ARYAN kitchen sink — choose your series, steel grade (202 or 304), and size for a perfect fit.">
+    <meta property="og:title" content="Customize Your Sink | ARYAN India">
+    <meta property="og:description"
+        content="Build your perfect kitchen sink — choose series, grade, and size from ARYAN India.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .customize-layout {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Series Header */
+        .series-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .series-header .series-badge {
+            display: inline-block;
+            background: var(--accent, #e67e22);
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.75rem;
+        }
+
+        .series-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .series-header .series-subtitle {
+            color: var(--accent, #e67e22);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .series-header p {
+            color: var(--text-secondary, #666);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Step sections */
+        .customize-step {
+            margin-bottom: 2.5rem;
+        }
+
+        .step-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-label h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Grade selector */
+        .grade-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .grade-option {
+            border: 2px solid var(--border, #e0e0e0);
+            border-radius: 14px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: var(--card-bg, #fff);
+        }
+
+        .grade-option:hover {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .grade-option.selected {
+            border-color: var(--accent, #e67e22);
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.04), rgba(230, 126, 34, 0.08));
+            box-shadow: 0 4px 20px rgba(230, 126, 34, 0.15);
+        }
+
+        .grade-option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--accent, #e67e22);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .grade-option h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .grade-option .grade-nickel {
+            color: var(--accent, #e67e22);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .grade-option p {
+            color: var(--text-secondary, #666);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        /* Size selector */
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .size-option {
+            border: 2px solid var(--border, #e0e0e0);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: var(--card-bg, #fff);
+        }
+
+        .size-option:hover {
+            border-color: var(--accent, #e67e22);
+        }
+
+        .size-option.selected {
+            border-color: var(--accent, #e67e22);
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.04), rgba(230, 126, 34, 0.08));
+            box-shadow: 0 2px 12px rgba(230, 126, 34, 0.12);
+        }
+
+        .size-option .size-dimension {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .size-option .size-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary, #666);
+        }
+
+        /* Bowl type info */
+        .bowl-info {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .bowl-chip {
+            background: var(--bg-secondary, #f0f0f0);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary, #555);
+        }
+
+        /* Summary */
+        .summary-card {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+
+        .summary-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .summary-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .summary-row .label {
+            opacity: 0.7;
+        }
+
+        .summary-row .value {
+            font-weight: 600;
+        }
+
+        .summary-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .summary-actions .btn {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        /* 304 finish popup */
+        .finish-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .finish-overlay.active {
+            display: flex;
+        }
+
+        .finish-popup {
+            background: var(--card-bg, #fff);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 460px;
+            width: 92%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            animation: popIn 0.3s ease;
+        }
+
+        .finish-popup h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .finish-popup .finish-sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary, #666);
+            margin-bottom: 1.25rem;
+        }
+
+        .finish-option {
+            border: 2px solid var(--border, #e0e0e0);
+            border-radius: 14px;
+            padding: 1.1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .finish-option:hover {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 2px 12px rgba(230, 126, 34, 0.1);
+        }
+
+        .finish-option h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .finish-option p {
+            font-size: 0.8rem;
+            color: var(--text-secondary, #666);
+            margin: 0;
+        }
+
+        .finish-cancel {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary, #888);
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            margin-top: 0.25rem;
+        }
+
+        .finish-cancel:hover {
+            color: var(--text-primary, #333);
+        }
+
+        /* Size popup (non-handmade) */
+        .size-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .size-overlay.active {
+            display: flex;
+        }
+
+        .size-popup {
+            background: var(--card-bg, #fff);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 520px;
+            width: 92%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            animation: popIn 0.3s ease;
+        }
+
+        .size-popup h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .size-popup .size-sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary, #666);
+            margin-bottom: 1.25rem;
+        }
+
+        .size-popup-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .size-popup-btn {
+            border: 2px solid var(--border, #e0e0e0);
+            border-radius: 14px;
+            padding: 0.9rem 0.75rem;
+            background: var(--card-bg, #fff);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .size-popup-btn:hover {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 2px 12px rgba(230, 126, 34, 0.1);
+        }
+
+        .size-popup-btn .sub {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-secondary, #666);
+        }
+
+        .size-popup-cancel {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary, #888);
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            margin-top: 0.75rem;
+        }
+
+        .size-popup-cancel:hover {
+            color: var(--text-primary, #333);
+        }
+
+        @media (max-width: 520px) {
+            .size-popup-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1ebe57;
+        }
+
+        .note-text {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .grade-options {
+                grid-template-columns: 1fr;
+            }
+
+            .size-options {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .series-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main id="main-content">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <div class="container">
+                <ol class="breadcrumb-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="kitchen.html">Kitchen Sinks</a></li>
+                    <li id="breadcrumb-series">Customize</li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- Content rendered by JS -->
+        <div class="customize-layout" id="customize-content">
+            <div style="text-align:center; padding: 4rem 0;">
+                <p>Loading series information...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 304 Finish Selection Popup -->
+    <div class="finish-overlay" id="finishOverlay" aria-hidden="true">
+        <div class="finish-popup" role="dialog" aria-modal="true" aria-labelledby="finishTitle">
+            <h3 id="finishTitle">Choose Finish (304 Grade)</h3>
+            <p class="finish-sub">Select the finish for your 304 grade sink:</p>
+            <div class="finish-option" onclick="selectFinish('Matte Finish')">
+                <h4>Matte Finish</h4>
+                <p>Soft, satin look that helps reduce visible water spots and fingerprints.</p>
+            </div>
+            <div class="finish-option" onclick="selectFinish('Mirror Finish')">
+                <h4>Mirror Finish</h4>
+                <p>High-gloss polished look for a bright, premium appearance.</p>
+            </div>
+            <button class="finish-cancel" onclick="closeFinishPopup()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Size Selection Popup (Non-Handmade) -->
+    <div class="size-overlay" id="sizeOverlay" aria-hidden="true">
+        <div class="size-popup" role="dialog" aria-modal="true" aria-labelledby="sizeTitle">
+            <h3 id="sizeTitle">Choose Size (inches)</h3>
+            <p class="size-sub" id="sizeSub">Select a size to continue:</p>
+            <div class="size-popup-grid" id="sizePopupGrid"></div>
+            <button class="size-popup-cancel" onclick="closeSizePopup()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        var seriesData = {
+            handmade: {
+                name: 'Handmade Series',
+                subtitle: null,
+                badge: 'Top Tier',
+                bowl: 'Handcrafted',
+                description: 'Our finest handcrafted sinks - meticulously built with precision square bowls, tight-radius corners, and a flawless finish. The pinnacle of ARYAN craftsmanship.',
+                sizes: ['24×18', '27×18', '30×18', '33×20', '36×18', '37×18', '45×20']
+            },
+            smart: {
+                name: 'Smart Series',
+                subtitle: null,
+                badge: 'Modern',
+                bowl: 'Square Bowl',
+                description: 'Clean, geometric square bowl design for the modern kitchen. Engineered for functionality with a contemporary aesthetic.',
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+            },
+            premium: {
+                name: 'Premium Series',
+                subtitle: 'The Silk Series',
+                badge: 'Premium',
+                bowl: 'Oval Bowl',
+                description: 'Elegant oval bowl sinks with a silky-smooth finish. A perfect blend of premium quality and timeless style.',
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+            },
+            oscar: {
+                name: 'Oscar Series',
+                subtitle: 'The Deluxe Series',
+                badge: 'Deluxe',
+                bowl: 'Oval Bowl',
+                description: 'The Deluxe oval bowl series — offering outstanding quality and refined design at an accessible price point.',
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+            },
+            silver: {
+                name: 'Silver Series',
+                subtitle: null,
+                badge: 'Value',
+                bowl: 'Oval Bowl',
+                description: 'Reliable oval bowl sinks with a polished silver finish. Great durability and performance for everyday kitchens.',
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18']
+            },
+            economy: {
+                name: 'Economy Series',
+                subtitle: null,
+                badge: 'Essentials',
+                bowl: 'Oval Bowl',
+                description: 'Quality oval bowl sinks at an unbeatable value. Durable stainless steel construction for budget-conscious homes.',
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18']
+            }
+        };
+
+        var selectedGrade = null;
+        var selectedSize = null;
+        var selectedFinish = null;
+        var currentSeriesId = null;
+        var currentSeries = null;
+
+        function getSeriesFromURL() {
+            var params = new URLSearchParams(window.location.search);
+            return params.get('series') || 'handmade';
+        }
+
+        function renderCustomize() {
+            var seriesId = getSeriesFromURL();
+            var series = seriesData[seriesId];
+            if (!series) {
+                document.getElementById('customize-content').innerHTML =
+                    '<div style="text-align:center;padding:4rem 0;"><h2>Series Not Found</h2><p>Please select a valid series from our <a href="kitchen.html">kitchen page</a>.</p></div>';
+                return;
+            }
+
+            document.getElementById('breadcrumb-series').textContent = series.name;
+            document.title = series.name + ' — Customize | ARYAN India';
+
+            currentSeriesId = seriesId;
+            currentSeries = series;
+
+            // reset state on render
+            selectedGrade = null;
+            selectedSize = null;
+            selectedFinish = null;
+
+            var isHandmade = seriesId === 'handmade';
+            if (!isHandmade) {
+                // Non-handmade: no grade customization; keep grade fixed so cart formatting doesn't break
+                selectedGrade = '202';
+            }
+
+            var html =
+                '<div class="series-header">' +
+                '<span class="series-badge">' + escapeHTML(series.badge) + '</span>' +
+                (series.subtitle ? '<div class="series-subtitle">' + escapeHTML(series.subtitle) + '</div>' : '') +
+                '<h1>' + escapeHTML(series.name) + '</h1>' +
+                '<p>' + escapeHTML(series.description) + '</p>' +
+                '</div>' +
+
+                '<div class="bowl-info">' +
+                '<span class="bowl-chip">🔲 ' + escapeHTML(series.bowl) + '</span>' +
+                '<span class="bowl-chip">🔩 Stainless Steel</span>' +
+                '</div>' +
+
+                (isHandmade
+                    ? (
+                        '<!-- Step 1: Grade -->' +
+                        '<div class="customize-step">' +
+                        '<div class="step-label"><span class="step-number">1</span><h2>Choose Steel Grade</h2></div>' +
+                        '<div class="grade-options">' +
+                        '<div class="grade-option" id="grade-304" onclick="selectGrade(\'304\')">' +
+                        '<h3>304 Grade</h3>' +
+                        '<div class="grade-nickel"></div>' +
+                        '<p>Superior corrosion resistance, excellent durability, and a lasting mirror or matte finish (as per request).</p>' +
+                        '</div>' +
+                        '<div class="grade-option" id="grade-202" onclick="selectGrade(\'202\')">' +
+                        '<h3>202 Grade</h3>' +
+                        '<div class="grade-nickel"></div>' +
+                        '<p>A cost-effective choice with good corrosion resistance and a lasting mirror finish for everyday use.</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '<!-- Step 2: Size -->' +
+                        '<div class="customize-step">' +
+                        '<div class="step-label"><span class="step-number">2</span><h2>Choose Size (inches)</h2></div>' +
+                        '<div class="size-options">' +
+                        series.sizes.map(function (size) {
+                            return '<div class="size-option" id="size-' + size.replace('×', 'x') + '" onclick="selectSize(\'' + size + '\')">' +
+                                '<div class="size-dimension">' + size + '"</div>' +
+                                '<div class="size-label">L × W</div>' +
+                                '</div>';
+                        }).join('') +
+                        '</div>' +
+                        '</div>'
+                    )
+                    : (
+                        '<!-- Step 1: Size (Popup) -->' +
+                        '<div class="customize-step">' +
+                        '<div class="step-label"><span class="step-number">1</span><h2>Choose Size (inches)</h2></div>' +
+                        '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">' +
+                        '<button class="btn btn-primary" type="button" onclick="openSizePopup()" style="padding:12px 18px;">Choose Size</button>' +
+                        '<span style="color:var(--text-secondary,#666);font-size:0.9rem;">You’ll be prompted to pick a size for this series.</span>' +
+                        '</div>' +
+                        '</div>'
+                    )
+                ) +
+
+                '<!-- Summary -->' +
+                '<div class="customize-step">' +
+                '<div class="step-label"><span class="step-number">' + (isHandmade ? '3' : '2') + '</span><h2>Your Configuration</h2></div>' +
+                '<div class="summary-card" id="summary-card">' +
+                '<h3>Order Summary</h3>' +
+                '<div class="summary-row"><span class="label">Series</span><span class="value">' + escapeHTML(series.name) + (series.subtitle ? ' — ' + escapeHTML(series.subtitle) : '') + '</span></div>' +
+                '<div class="summary-row"><span class="label">Bowl Type</span><span class="value">' + escapeHTML(series.bowl) + '</span></div>' +
+                (isHandmade
+                    ? (
+                        '<div class="summary-row"><span class="label">Steel Grade</span><span class="value" id="summary-grade">—</span></div>' +
+                        '<div class="summary-row"><span class="label">Finish</span><span class="value" id="summary-finish">—</span></div>'
+                    )
+                    : ''
+                ) +
+                '<div class="summary-row"><span class="label">Size</span><span class="value" id="summary-size">—</span></div>' +
+                '<div class="summary-actions" id="summary-actions" style="display:none;">' +
+                '<button class="btn btn-primary" id="add-to-cart-btn" style="width:100%;font-size:1.05rem;padding:14px 24px;">🛒 Add to Cart</button>' +
+                '</div>' +
+                '<p class="note-text">Prices vary by city and dealer. Add items to cart and enquire via WhatsApp for the best quote.</p>' +
+                '</div>' +
+                '</div>';
+
+            document.getElementById('customize-content').innerHTML = html;
+
+            // Non-handmade: immediately prompt for size via popup
+            if (!isHandmade) {
+                openSizePopup();
+            }
+        }
+
+        function selectGrade(grade) {
+            selectedGrade = grade;
+            document.querySelectorAll('.grade-option').forEach(function (el) { el.classList.remove('selected'); });
+            document.getElementById('grade-' + grade).classList.add('selected');
+            document.getElementById('summary-grade').textContent = grade + ' Grade (' + (grade === '304' ? '18% Nickel' : '4% Nickel') + ')';
+            if (grade === '304') {
+                if (!selectedFinish || (selectedFinish !== 'Matte Finish' && selectedFinish !== 'Mirror Finish')) {
+                    selectedFinish = null;
+                    document.getElementById('summary-finish').textContent = '—';
+                    openFinishPopup();
+                } else {
+                    document.getElementById('summary-finish').textContent = selectedFinish;
+                }
+            } else {
+                selectedFinish = 'Mirror Finish';
+                document.getElementById('summary-finish').textContent = selectedFinish;
+                closeFinishPopup();
+            }
+            updateSummaryActions();
+        }
+
+        function openFinishPopup() {
+            var overlay = document.getElementById('finishOverlay');
+            if (!overlay) return;
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeFinishPopup() {
+            var overlay = document.getElementById('finishOverlay');
+            if (!overlay) return;
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        function selectFinish(finish) {
+            selectedFinish = finish;
+            var finishEl = document.getElementById('summary-finish');
+            if (finishEl) finishEl.textContent = finish;
+            closeFinishPopup();
+            updateSummaryActions();
+        }
+
+        function selectSize(size) {
+            selectedSize = size;
+            // Size tiles exist only for handmade flow
+            if (document.querySelectorAll('.size-option').length) {
+                document.querySelectorAll('.size-option').forEach(function (el) { el.classList.remove('selected'); });
+                var el = document.getElementById('size-' + size.replace('×', 'x'));
+                if (el) el.classList.add('selected');
+            }
+            document.getElementById('summary-size').textContent = size + ' inches';
+            updateSummaryActions();
+        }
+
+        function openSizePopup() {
+            var overlay = document.getElementById('sizeOverlay');
+            var grid = document.getElementById('sizePopupGrid');
+            if (!overlay || !grid || !currentSeries) return;
+
+            grid.innerHTML = (currentSeries.sizes || []).map(function (s) {
+                return '<button type="button" class="size-popup-btn" onclick="selectPopupSize(\'' + s + '\')">' +
+                    escapeHTML(s) + '"' +
+                    '<span class="sub">L × W</span>' +
+                    '</button>';
+            }).join('');
+
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeSizePopup() {
+            var overlay = document.getElementById('sizeOverlay');
+            if (!overlay) return;
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        function selectPopupSize(size) {
+            closeSizePopup();
+            selectSize(size);
+        }
+
+        function updateSummaryActions() {
+            var isHandmade = currentSeriesId === 'handmade';
+            var ready = isHandmade
+                ? !!(selectedGrade && selectedSize && (selectedGrade !== '304' || !!selectedFinish))
+                : !!selectedSize;
+            if (ready) {
+                document.getElementById('summary-actions').style.display = 'flex';
+                var series = currentSeries || seriesData[getSeriesFromURL()];
+                var seriesId = currentSeriesId || getSeriesFromURL();
+                var cartBtn = document.getElementById('add-to-cart-btn');
+                cartBtn.onclick = function () {
+                    var isHm = seriesId === 'handmade';
+                    var finishText = (isHm && selectedFinish) ? (', ' + selectedFinish) : '';
+                    var base = series.name + (series.subtitle ? ' (' + series.subtitle + ')' : '');
+                    var itemName = isHm
+                        ? (base + ' — ' + selectedGrade + ' Grade' + finishText + ', ' + selectedSize + '"')
+                        : (base + ' — ' + selectedSize + '"');
+                    var cartItem = {
+                        id: isHm
+                            ? (seriesId + '-' + selectedGrade + '-' + (selectedFinish ? selectedFinish.toLowerCase().replace(/\s+/g, '-') : 'finish') + '-' + selectedSize.replace('×', 'x'))
+                            : (seriesId + '-202-' + selectedSize.replace('×', 'x')),
+                        name: itemName,
+                        image: (seriesId === 'smart'
+                            ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/smart.png'
+                            : (seriesId === 'premium'
+                                ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silk.png'
+                                : (seriesId === 'silver'
+                                    ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silver.png'
+                                    : (seriesId === 'oscar'
+                                        ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/oscar.png'
+                                        : (seriesId === 'economy'
+                                            ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/economy.png'
+                                            : 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png'))))),
+                        price: 0,
+                        quantity: 1,
+                        config: {
+                            series: series.name,
+                            subtitle: series.subtitle,
+                            grade: isHm ? selectedGrade : '202',
+                            finish: isHm ? (selectedFinish || null) : null,
+                            size: selectedSize,
+                            bowl: series.bowl
+                        }
+                    };
+                    window.aryanCart.addToCart(cartItem);
+                    showToast('✓ ' + series.name + ' added to cart!');
+                };
+            } else {
+                var actions = document.getElementById('summary-actions');
+                if (actions) actions.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initAryanWebsite('kitchen');
+            renderCustomize();
+        });
+
+        // Close popup on overlay click
+        document.getElementById('finishOverlay').addEventListener('click', function (e) {
+            if (e.target === this) closeFinishPopup();
+        });
+
+        // Close size popup on overlay click
+        document.getElementById('sizeOverlay').addEventListener('click', function (e) {
+            if (e.target === this) closeSizePopup();
+        });
+    </script>
+</body>
+
+</html>

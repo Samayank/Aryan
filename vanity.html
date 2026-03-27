@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanity Cabinets — All Series | ARYAN India</title>
+    <meta name="description"
+        content="Explore ARYAN's vanity cabinets — UV, Golden, and Normal series. Premium HDHMR board construction for washbasin storage.">
+    <meta property="og:title" content="Vanity Cabinets — All Series | ARYAN India">
+    <meta property="og:description"
+        content="Premium vanity cabinets from ARYAN India — UV, Golden, and Normal series in durable HDHMR board.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .vanity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .vanity-card {
+            background: var(--card-bg, #fff);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vanity-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .vanity-card-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .vanity-card:nth-child(1) .vanity-card-image {
+            background: linear-gradient(135deg, #2d1b69 0%, #5b21b6 50%, #7c3aed 100%);
+        }
+
+        .vanity-card:nth-child(2) .vanity-card-image {
+            background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%);
+        }
+
+        .vanity-card:nth-child(3) .vanity-card-image {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .vanity-card-image .vanity-emoji {
+            font-size: 4rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .vanity-card-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .vanity-card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vanity-card-body h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .vanity-card-body p {
+            color: var(--text-secondary, #666);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .vanity-card-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .vanity-tag {
+            background: var(--bg-secondary, #f0f0f0);
+            color: var(--text-secondary, #555);
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: 0.72rem;
+            font-weight: 500;
+        }
+
+        .vanity-card-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .vanity-card-footer .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Material info */
+        .material-info {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .material-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .material-chips {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .material-chip {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .vanity-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main id="main-content">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <div class="container">
+                <ol class="breadcrumb-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Vanity</li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1>Vanity Cabinets</h1>
+                <p>Premium washbasin storage cabinets crafted from durable HDHMR board — available in UV, Golden, and
+                    Normal finishes.</p>
+            </div>
+        </section>
+
+        <!-- Series Cards -->
+        <section class="product-categories" id="products">
+            <div class="container">
+                <h2 class="section-title">Our Vanity Range</h2>
+                <div class="vanity-grid" id="vanity-grid"></div>
+
+                <!-- Material Info -->
+                <div class="material-info">
+                    <h3>Built with Quality Materials</h3>
+                    <div class="material-chips">
+                        <span class="material-chip">🪵 HDHMR Board Construction</span>
+                        <span class="material-chip">✨ UV Sheet (UV Series)</span>
+                        <span class="material-chip">🟡 Mica Finish (Golden & Normal)</span>
+                        <span class="material-chip">💧 Water-Resistant</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="cart.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        var vanitySeries = [
+            {
+                id: 'uv',
+                name: 'UV Vanity',
+                emoji: '💎',
+                material: 'UV Sheet',
+                description: 'Our most premium vanity cabinet — finished with a high-gloss UV sheet over HDHMR board for a luxurious, scratch-resistant, and long-lasting surface.',
+                tags: ['HDHMR Board', 'UV Sheet', 'High Gloss', 'Scratch Resistant']
+            },
+            {
+                id: 'golden',
+                name: 'Golden Vanity',
+                emoji: '🏆',
+                material: 'Mica',
+                description: 'The Deluxe vanity cabinet with an elegant golden mica finish over HDHMR board — blending style and durability for a sophisticated bathroom.',
+                tags: ['HDHMR Board', 'Mica Finish', 'Golden Tone', 'Durable']
+            },
+            {
+                id: 'normal',
+                name: 'Normal Vanity',
+                emoji: '🔲',
+                material: 'Mica',
+                description: 'A reliable and well-built vanity cabinet with a clean mica finish over HDHMR board — great quality at an accessible price point.',
+                tags: ['HDHMR Board', 'Mica Finish', 'Clean Design', 'Value']
+            }
+        ];
+
+        function renderVanities() {
+            var grid = document.getElementById('vanity-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            vanitySeries.forEach(function (series) {
+                var card = document.createElement('div');
+                card.className = 'vanity-card';
+                card.innerHTML =
+                    '<div class="vanity-card-image">' +
+                    '<span class="vanity-emoji">' + series.emoji + '</span>' +
+                    '<span class="vanity-card-badge">' + escapeHTML(series.badge) + '</span>' +
+                    '</div>' +
+                    '<div class="vanity-card-body">' +
+                    '<h3>' + escapeHTML(series.name) + '</h3>' +
+                    '<p>' + escapeHTML(series.description) + '</p>' +
+                    '<div class="vanity-card-tags">' + series.tags.map(function (t) { return '<span class="vanity-tag">' + escapeHTML(t) + '</span>'; }).join('') + '</div>' +
+                    '</div>' +
+                    '<div class="vanity-card-footer">' +
+                    '<button class="btn btn-primary add-vanity-btn">\ud83d\uded2 Add to Cart</button>' +
+                    '</div>';
+                card.querySelector('.add-vanity-btn').addEventListener('click', function () {
+                    window.aryanCart.addToCart({
+                        id: 'vanity-' + series.id,
+                        name: series.name + ' (' + series.material + ', HDHMR Board)',
+                        image: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=600&h=400&fit=crop',
+                        price: 0,
+                        quantity: 1,
+                        config: {
+                            series: series.name,
+                            subtitle: series.material + ' finish',
+                            grade: series.material,
+                            size: 'HDHMR Board',
+                            bowl: 'Vanity Cabinet'
+                        }
+                    });
+                    showToast('\u2713 ' + series.name + ' added to cart!');
+                });
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initAryanWebsite('vanity');
+            renderVanities();
+        });
+    </script>
+</body>
+
+</html>

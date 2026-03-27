@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Sinks — All Series | ARYAN India</title>
+    <meta name="description"
+        content="Explore ARYAN's complete range of premium stainless steel kitchen sinks — Handmade (202 & 304 grade), Smart, Premium (Silk), Oscar (Deluxe), Silver, and Economy series.">
+    <meta property="og:title" content="Kitchen Sinks — All Series | ARYAN India">
+    <meta property="og:description"
+        content="Premium stainless steel kitchen sinks from ARYAN India — 6 distinct series, with Handmade available in 202 & 304 grade.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .series-card {
+            background: var(--card-bg, #fff);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .series-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .series-card-image {
+            aspect-ratio: 17 / 11;
+            height: auto;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .series-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .series-card-image .series-emoji {
+            font-size: 4rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .series-card-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .series-card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .series-card-subtitle {
+            color: var(--accent, #e67e22);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.25rem;
+        }
+
+        .series-card-body h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .series-card-body p {
+            color: var(--text-secondary, #666);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .series-card-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .series-tag {
+            background: var(--bg-secondary, #f0f0f0);
+            color: var(--text-secondary, #555);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .series-card-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .series-card-footer .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Grade info banner */
+        .grade-info {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .grade-info h3 {
+            grid-column: 1 / -1;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .grade-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .grade-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent, #e67e22);
+        }
+
+        .grade-box p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        /* Size popup (non-handmade) */
+        .size-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .size-overlay.active {
+            display: flex;
+        }
+
+        .size-popup {
+            background: var(--card-bg, #fff);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 520px;
+            width: 92%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            animation: popIn 0.3s ease;
+        }
+
+        .size-popup h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .size-popup .size-sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary, #666);
+            margin-bottom: 1.25rem;
+        }
+
+        .size-popup-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .size-popup-btn {
+            border: 2px solid var(--border, #e0e0e0);
+            border-radius: 14px;
+            padding: 0.9rem 0.75rem;
+            background: var(--card-bg, #fff);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .size-popup-btn:hover {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 2px 12px rgba(230, 126, 34, 0.1);
+        }
+
+        .size-popup-btn .sub {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-secondary, #666);
+        }
+
+        .size-popup-cancel {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary, #888);
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            margin-top: 0.75rem;
+        }
+
+        .size-popup-cancel:hover {
+            color: var(--text-primary, #333);
+        }
+
+        @media (max-width: 520px) {
+            .size-popup-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grade-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main id="main-content">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <div class="container">
+                <ol class="breadcrumb-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Kitchen Sinks</li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1>Premium Kitchen Sinks</h1>
+                <p>6 distinct series crafted for every need — from handcrafted luxury to everyday economy. Handmade is
+                    available in both 202 & 304 grade stainless steel.</p>
+            </div>
+        </section>
+
+        <!-- Series Showcase -->
+        <section class="product-categories" id="products">
+            <div class="container">
+                <h2 class="section-title">Our Sink Series</h2>
+                <div class="series-grid" id="series-grid"></div>
+
+                <!-- Grade Info -->
+                <div class="grade-info">
+                    <h3>Available in Two Steel Grades</h3>
+                    <div class="grade-box">
+                        <h4>304 Grade — Premium</h4>
+                        <p>For superior corrosion resistance, durability, and a lasting mirror or matte
+                            finish (as per request).</p>
+                    </div>
+                    <div class="grade-box">
+                        <h4>202 Grade — Standard</h4>
+                        <p>For a cost-effective choice with good corrosion resistance and a mirror finish for everyday
+                            kitchen use.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Size Selection Popup (Non-Handmade) -->
+    <div class="size-overlay" id="kitchenSizeOverlay" aria-hidden="true">
+        <div class="size-popup" role="dialog" aria-modal="true" aria-labelledby="kitchenSizeTitle">
+            <h3 id="kitchenSizeTitle">Choose Size (inches)</h3>
+            <p class="size-sub" id="kitchenSizeSub">Select a size to add to cart:</p>
+            <div class="size-popup-grid" id="kitchenSizeGrid"></div>
+            <button class="size-popup-cancel" type="button" onclick="closeKitchenSizePopup()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        var seriesData = [
+            {
+                id: 'handmade',
+                name: 'Handmade Series',
+                subtitle: null,
+                badge: 'Top Tier',
+                bowl: 'Handcrafted',
+                emoji: '🔶',
+                description: 'Our finest handcrafted sinks - meticulously built with precision, tight-radius corners, and a flawless finish. The pinnacle of ARYAN craftsmanship.',
+                tags: ['Handcrafted', '202 & 304 Grade'],
+                sizes: ['24×18', '27×18', '30×18', '33×20', '36×18', '37×18', '45×20']
+            },
+            {
+                id: 'smart',
+                name: 'Smart Series',
+                subtitle: null,
+                badge: 'Modern',
+                bowl: 'Square Bowl',
+                emoji: '⬛',
+                description: 'Clean, geometric square bowl design for the modern kitchen. Engineered for functionality with a contemporary aesthetic.',
+                tags: ['Square Bowl', 'Modern Design'],
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+            },
+            {
+                id: 'premium',
+                name: 'Premium Series',
+                subtitle: 'The Silk Series',
+                badge: 'Premium',
+                bowl: 'Oval Bowl',
+                emoji: '✨',
+                description: 'Elegant oval bowl sinks with a silky-smooth finish. A perfect blend of premium quality and timeless style.',
+                tags: ['Oval Bowl', 'Silk Finish'],
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+            },
+            {
+                id: 'oscar',
+                name: 'Oscar Series',
+                subtitle: 'The Deluxe Series',
+                badge: 'Deluxe',
+                bowl: 'Oval Bowl',
+                emoji: '🏆',
+                description: 'The Deluxe oval bowl series — offering outstanding quality and refined design at an accessible price point.',
+                tags: ['Oval Bowl', 'Deluxe Build'],
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+            },
+            {
+                id: 'silver',
+                name: 'Silver Series',
+                subtitle: null,
+                badge: 'Value',
+                bowl: 'Oval Bowl',
+                emoji: '🪙',
+                description: 'Reliable oval bowl sinks with a polished silver finish. Great durability and performance for everyday kitchens.',
+                tags: ['Oval Bowl', 'Polished Finish'],
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18']
+            },
+            {
+                id: 'economy',
+                name: 'Economy Series',
+                subtitle: null,
+                badge: 'Essentials',
+                bowl: 'Oval Bowl',
+                emoji: '🔷',
+                description: 'Quality oval bowl sinks at an unbeatable value. Durable stainless steel construction for budget-conscious homes.',
+                tags: ['Oval Bowl', 'Budget-Friendly'],
+                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18']
+            }
+        ];
+
+        var popupSeries = null;
+
+        function openKitchenSizePopup(series) {
+            popupSeries = series;
+            var overlay = document.getElementById('kitchenSizeOverlay');
+            var grid = document.getElementById('kitchenSizeGrid');
+            var sub = document.getElementById('kitchenSizeSub');
+            if (!overlay || !grid) return;
+
+            if (sub && series) {
+                sub.textContent = 'Select a size for ' + series.name + ' to add to cart:';
+            }
+
+            grid.innerHTML = (series.sizes || []).map(function (s) {
+                return '<button type="button" class="size-popup-btn" onclick="addSeriesToCart(\'' + series.id + '\', \'' + s + '\')">' +
+                    escapeHTML(s) + '"' +
+                    '<span class="sub">L × W</span>' +
+                    '</button>';
+            }).join('');
+
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeKitchenSizePopup() {
+            var overlay = document.getElementById('kitchenSizeOverlay');
+            if (!overlay) return;
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        function addSeriesToCart(seriesId, size) {
+            var series = seriesData.find(function (s) { return s.id === seriesId; });
+            if (!series) return;
+            closeKitchenSizePopup();
+
+            var itemName = series.name + (series.subtitle ? ' (' + series.subtitle + ')' : '') + ' — ' + size + '"';
+            var itemImage = seriesId === 'smart'
+                ? ''
+                : (seriesId === 'premium'
+                    ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silk.png'
+                    : (seriesId === 'silver'
+                        ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silver.png'
+                        : (seriesId === 'oscar'
+                            ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/oscar.png'
+                            : (seriesId === 'economy'
+                                ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/economy.png'
+                                : 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png'))));
+            var cartItem = {
+                id: seriesId + '-202-' + size.replace('×', 'x'),
+                name: itemName,
+                image: itemImage,
+                price: 0,
+                quantity: 1,
+                config: {
+                    series: series.name,
+                    subtitle: series.subtitle,
+                    grade: '202',
+                    finish: null,
+                    size: size,
+                    bowl: series.bowl
+                }
+            };
+            window.aryanCart.addToCart(cartItem);
+            showToast('✓ ' + series.name + ' added to cart!');
+        }
+
+        function renderSeries() {
+            var grid = document.getElementById('series-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            seriesData.forEach(function (series) {
+                var isHandmade = series.id === 'handmade';
+                var isSmart = series.id === 'smart';
+                var isSilk = series.id === 'premium';
+                var isSilver = series.id === 'silver';
+                var isOscar = series.id === 'oscar';
+                var isEconomy = series.id === 'economy';
+                var card = document.createElement(isHandmade ? 'a' : 'div');
+                if (isHandmade) {
+                    card.href = 'customize.html?series=' + series.id;
+                } else {
+                    card.setAttribute('role', 'button');
+                    card.tabIndex = 0;
+                    card.addEventListener('click', function () { openKitchenSizePopup(series); });
+                    card.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter' || e.key === ' ') openKitchenSizePopup(series);
+                    });
+                }
+                card.className = 'series-card';
+                card.innerHTML =
+                    '<div class="series-card-image">' +
+                    (isHandmade
+                        ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" alt="Handmade kitchen sink" loading="lazy">'
+                        : isSmart
+                            ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/smart.png" alt="Smart series kitchen sink" loading="lazy">'
+                            : isSilk
+                                ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/silk.png" alt="Silk series kitchen sink" loading="lazy">'
+                                : isSilver
+                                    ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/silver.png" alt="Silver series kitchen sink" loading="lazy">'
+                                    : isOscar
+                                        ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/oscar.png" alt="Oscar series kitchen sink" loading="lazy">'
+                                        : isEconomy
+                                            ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/economy.png" alt="Economy series kitchen sink" loading="lazy">'
+                                            : '<span class="series-emoji">' + series.emoji + '</span>') +
+                    '<span class="series-card-badge">' + escapeHTML(series.badge) + '</span>' +
+                    '</div>' +
+                    '<div class="series-card-body">' +
+                    (series.subtitle ? '<div class="series-card-subtitle">' + escapeHTML(series.subtitle) + '</div>' : '') +
+                    '<h3>' + escapeHTML(series.name) + '</h3>' +
+                    '<p>' + escapeHTML(series.description) + '</p>' +
+                    '<div class="series-card-tags">' + series.tags.map(function (t) { return '<span class="series-tag">' + escapeHTML(t) + '</span>'; }).join('') + '</div>' +
+                    '</div>' +
+                    '<div class="series-card-footer">' +
+                    '<button class="btn btn-primary" type="button">' + (isHandmade ? 'Customize & Order →' : 'Choose Size →') + '</button>' +
+                    '</div>';
+                if (!isHandmade) {
+                    var btn = card.querySelector('button');
+                    if (btn) btn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        openKitchenSizePopup(series);
+                    });
+                }
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initAryanWebsite('kitchen');
+            renderSeries();
+        });
+
+        // Close popup on overlay click
+        document.getElementById('kitchenSizeOverlay').addEventListener('click', function (e) {
+            if (e.target === this) closeKitchenSizePopup();
+        });
+    </script>
+</body>
+
+</html>

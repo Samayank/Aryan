@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unbreakable Accessories | ARYAN India</title>
+    <meta name="description"
+        content="Explore ARYAN's unbreakable collection — durable bathroom accessories including corner sets, shelves, holders, and towel rings.">
+    <meta property="og:title" content="Unbreakable Accessories | ARYAN India">
+    <meta property="og:description"
+        content="Durable, stylish unbreakable bathroom products from ARYAN India.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main id="main-content">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <div class="container">
+                <ol class="breadcrumb-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Accessories</li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1>Accessories</h1>
+                <p>Durable, transparent, and practical — our accessories are designed
+                    for everyday bathroom use without compromise.</p>
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section class="product-categories" id="products">
+            <div class="container">
+                <h2 class="section-title">Our Range</h2>
+                <div class="product-tabs" style="justify-content: center; margin-bottom: 2rem;">
+                    <button class="tab-button active" data-category="all">Unbreakable</button>
+                </div>
+                <div class="product-grid" id="product-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="cart.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        var products = [
+            { id: 'u1', name: 'Jumbo Corner Set', category: 'corner', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/jumbo.png', description: 'Large capacity transparent corner set for maximum storage.', features: ['Unbreakable material', 'Transparent finish', 'Space saving'], price: 'Enquire' },
+            { id: 'u2', name: 'Corner Set', category: 'corner', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/normal.png', description: 'Standard transparent corner set for organizing bathroom essentials.', features: ['Unbreakable material', 'Transparent finish', 'Durable'], price: 'Enquire' },
+            { id: 'u3', name: 'Set Top Box Holder', category: 'shelf', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/set.png', description: 'Sturdy wall-mounted holder for set top boxes and routers.', features: ['Unbreakable material', 'Transparent finish', 'Secure grip'], price: 'Enquire' },
+            { id: 'u4', name: '18" Shelf', category: 'shelf', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/18.png', description: 'Spacious 18-inch transparent shelf for bathroom utilities.', features: ['Unbreakable material', '18-inch length', 'Transparent finish'], price: 'Enquire' },
+            { id: 'u5', name: 'Deluxe Shelf', category: 'shelf', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/deluxeShelf.png', description: 'Premium transparent shelf with built-in compartments.', features: ['Unbreakable material', 'Segmented storage', 'Transparent finish'], price: 'Enquire' },
+            { id: 'u_org', name: 'Bathroom Organizer', category: 'holder', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/5.png', description: 'Versatile multi-purpose bathroom organizers. Available in 2, 3, 4, and 5-in-1 variants.', features: ['Unbreakable material', 'Multiple options', 'Transparent finish'], price: 'Options', isOrganizerGroup: true },
+            { id: 'u10', name: 'Double Soap Dish', category: 'soap', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/double.png', description: 'Transparent double soap dish for his & hers or different soaps.', features: ['Unbreakable material', 'Drainage slots', 'Transparent finish'], price: 'Enquire' },
+            { id: 'u11', name: 'Single Soap Dish', category: 'soap', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/single.png', description: 'Minimalist transparent single soap dish.', features: ['Unbreakable material', 'Drainage slots', 'Transparent finish'], price: 'Enquire' },
+            { id: 'u12', name: 'Towel Ring Triangle', category: 'towel', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/tri.png', description: 'Modern triangular transparent towel ring.', features: ['Unbreakable material', 'Unique triangular shape', 'Transparent finish'], price: 'Enquire' },
+            { id: 'u13', name: 'Towel Ring Round', category: 'towel', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/round.png', description: 'Classic round transparent towel ring.', features: ['Unbreakable material', 'Classic round design', 'Transparent finish'], price: 'Enquire' },
+            { id: 'u14', name: 'Towel Rod', category: 'towel', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/rod.png', description: 'Sturdy and clear transparent towel rod.', features: ['Unbreakable material', 'Optimal length', 'Transparent finish'], price: 'Enquire' },
+            { id: 'u15', name: 'Corner Set Nano', category: 'corner', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/nano.png', description: 'Compact nano corner set for small spaces.', features: ['Unbreakable material', 'Nano size', 'Transparent finish'], price: 'Enquire' }
+        ];
+
+        function renderProducts(filter) {
+            var grid = document.getElementById('product-grid');
+            if (!grid) return;
+            var filtered = filter === 'all' ? products : products.filter(function (p) { return p.category === filter; });
+            grid.innerHTML = '';
+            filtered.forEach(function (product) {
+                var card = document.createElement('div');
+                card.className = 'product-card';
+                var isGroup = product.isOrganizerGroup;
+                var btnText = isGroup ? 'View Options' : '🛒 Add to Cart';
+                card.innerHTML =
+                    '<div class="product-image"><img src="' + escapeHTML(product.image) + '" alt="' + escapeHTML(product.name) + '" loading="lazy"></div>' +
+                    '<div class="product-info">' +
+                    '<h3>' + escapeHTML(product.name) + '</h3>' +
+                    '<p>' + escapeHTML(product.description) + '</p>' +
+                    '<ul class="product-features">' + product.features.map(function (f) { return '<li>' + escapeHTML(f) + '</li>'; }).join('') + '</ul>' +
+                    '<div class="product-price">' + escapeHTML(product.price) + '</div>' +
+                    '<div class="product-actions">' +
+                    '<button class="btn btn-primary action-btn" style="width: 100%;">' + btnText + '</button>' +
+                    '</div></div>';
+                card.querySelector('.action-btn').addEventListener('click', function () {
+                    if (isGroup) {
+                        window.location.href = 'organizer.html';
+                    } else {
+                        var priceNum = Number(String(product.price).replace(/[^\d.]/g, ''));
+                        if (isNaN(priceNum)) priceNum = 0;
+                        window.aryanCart.addToCart({ 
+                            id: product.id, 
+                            name: product.name, 
+                            image: product.image, 
+                            price: priceNum, 
+                            quantity: 1, 
+                            config: { series: 'Unbreakable Accessories', grade: 'Unbreakable', size: product.category, bowl: 'Accessory' } 
+                        });
+                        showToast('✓ Added to cart!');
+                    }
+                });
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initAryanWebsite('unbreakable');
+            renderProducts('all');
+            document.querySelectorAll('.tab-button').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.tab-button').forEach(function (b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    renderProducts(this.getAttribute('data-category'));
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

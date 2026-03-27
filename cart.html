@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | ARYAN India</title>
+    <meta name="description" content="Review your ARYAN cart and place your order via WhatsApp.">
+    <meta property="og:title" content="Shopping Cart | ARYAN India">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main id="main-content">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <div class="container">
+                <ol class="breadcrumb-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Cart</li>
+                </ol>
+            </div>
+        </nav>
+
+        <section style="padding:60px 0;min-height:50vh;">
+            <div class="container">
+                <h2 class="section-title">Your Cart</h2>
+                <!-- Empty State (shown when cart is empty) -->
+                <div class="cart-empty" id="cartEmpty" style="display:none;">
+                    <div class="cart-empty-icon">🛒</div>
+                    <h2>Your cart is empty</h2>
+                    <p>Looks like you haven't added anything yet. Browse our products to find something you love!</p>
+                    <a href="index.html" class="btn btn-primary">Browse Products</a>
+                </div>
+
+                <!-- Cart Table (shown when cart has items) -->
+                <div id="cartContent" style="display:none;">
+                    <div style="overflow-x: auto; width: 100%; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 30px;">
+                        <table class="cart-table" style="margin-bottom: 0; box-shadow: none;">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartBody"></tbody>
+                            <tfoot>
+                                <tr class="total-row">
+                                    <td colspan="4" style="text-align:right;">Total:</td>
+                                    <td id="cartTotal">₹0</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
+                        <button class="btn btn-secondary" id="clearCartBtn">Clear Cart</button>
+                        <a href="index.html" class="btn btn-secondary" style="text-decoration:none;">Continue
+                            Shopping</a>
+                    </div>
+
+                    <div class="checkout-section">
+                        <h3 style="margin-bottom:20px;">Enquire via WhatsApp</h3>
+                        <form class="checkout-form" id="checkoutForm">
+                            <label for="custName">Full Name *</label>
+                            <input type="text" id="custName" required placeholder="Your name">
+                            <label for="custPhone">Phone *</label>
+                            <input type="tel" id="custPhone" required placeholder="Your phone number">
+                            <label for="custAddress">City / Address</label>
+                            <textarea id="custAddress"
+                                placeholder="Your city or delivery address (optional)"></textarea>
+                            <button type="submit" class="place-order-btn">💬 Enquire on WhatsApp</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="cart.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function renderCart() {
+            var cart = window.aryanCart ? window.aryanCart.loadCart() : [];
+            var emptyEl = document.getElementById('cartEmpty');
+            var contentEl = document.getElementById('cartContent');
+            if (!emptyEl || !contentEl) return;
+
+            if (cart.length === 0) {
+                emptyEl.style.display = 'block';
+                contentEl.style.display = 'none';
+                return;
+            }
+            emptyEl.style.display = 'none';
+            contentEl.style.display = 'block';
+
+            var body = document.getElementById('cartBody');
+            var total = 0;
+            body.innerHTML = '';
+            cart.forEach(function (item) {
+                var hasConfig = item.config && item.config.series;
+                var isEnquiry = item.price === 0 || hasConfig;
+                var subtotal = item.price * item.quantity;
+                if (!isEnquiry) total += subtotal;
+                var tr = document.createElement('tr');
+                var nameCell = escapeHTML(item.name);
+                if (hasConfig) {
+                    nameCell += '<div style="font-size:0.8rem;color:#888;margin-top:4px;">' +
+                        escapeHTML(item.config.bowl) + ' · ' +
+                        escapeHTML(item.config.grade) + ' Grade · ' +
+                        escapeHTML(item.config.size) + '"</div>';
+                }
+                tr.innerHTML =
+                    '<td><img src="' + escapeHTML(item.image || 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png') + '" alt="' + escapeHTML(item.name) + '" loading="lazy"></td>' +
+                    '<td>' + nameCell + '</td>' +
+                    '<td>' + (isEnquiry ? '<span style="color:var(--accent,#e67e22);font-weight:600;">Enquire</span>' : '₹' + item.price.toLocaleString()) + '</td>' +
+                    '<td><input type="number" min="1" max="99" value="' + item.quantity + '" data-id="' + escapeHTML(String(item.id)) + '" class="qty-input"></td>' +
+                    '<td>' + (isEnquiry ? '—' : '₹' + subtotal.toLocaleString()) + '</td>' +
+                    '<td><button class="remove-btn" data-id="' + escapeHTML(String(item.id)) + '">Remove</button></td>';
+                body.appendChild(tr);
+            });
+            document.getElementById('cartTotal').textContent = '₹' + total.toLocaleString();
+
+            body.querySelectorAll('.qty-input').forEach(function (input) {
+                input.addEventListener('change', function () {
+                    window.aryanCart.updateCartItem(this.getAttribute('data-id'), parseInt(this.value) || 1);
+                    renderCart();
+                });
+            });
+
+            body.querySelectorAll('.remove-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    window.aryanCart.removeCartItem(this.getAttribute('data-id'));
+                    renderCart();
+                    showToast('Item removed from cart');
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initAryanWebsite('cart');
+            renderCart();
+
+            var clearBtn = document.getElementById('clearCartBtn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function () {
+                    if (confirm('Clear all items from your cart?')) {
+                        window.aryanCart.clearCart();
+                        renderCart();
+                        showToast('Cart cleared');
+                    }
+                });
+            }
+
+            var form = document.getElementById('checkoutForm');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var name = document.getElementById('custName').value.trim();
+                    var phone = document.getElementById('custPhone').value.trim();
+                    var address = document.getElementById('custAddress').value.trim();
+                    var cart = window.aryanCart.loadCart();
+                    if (cart.length === 0) { showToast('Cart is empty!'); return; }
+
+                    var msg = 'Hi, I would like to enquire about the following products from ARYAN.\n\n';
+                    msg += '*' + name + '*\n';
+                    msg += phone + '\n';
+                    if (address) msg += address + '\n';
+                    msg += '\n---\n\n';
+                    var count = 1;
+                    cart.forEach(function (item) {
+                        var hasConfig = item.config && item.config.series;
+                        if (hasConfig) {
+                            msg += '*' + count + '. ' + item.config.series;
+                            if (item.config.subtitle) msg += ' - ' + item.config.subtitle;
+                            msg += '*\n';
+                            if (item.config.bowl === 'Cistern') {
+                                msg += item.config.grade + ' ' + item.config.size + ' | ' + item.config.bowl + '\n';
+                            } else if (item.config.bowl === 'Vanity Cabinet') {
+                                msg += item.config.grade + ' | ' + item.config.size + ' | ' + item.config.bowl + '\n';
+                            } else {
+                                msg += item.config.grade + ' Grade | ' + item.config.size + '" | ' + item.config.bowl + '\n';
+                            }
+                            if (item.quantity > 1) msg += 'Qty: ' + item.quantity + '\n';
+                        } else {
+                            msg += '*' + count + '. ' + item.name + '*';
+                            if (item.quantity > 1) msg += ' (x' + item.quantity + ')';
+                            msg += '\n';
+                        }
+                        msg += '\n';
+                        count++;
+                    });
+                    msg += 'Kindly share the pricing and availability. Thank you!';
+                    var url = 'https://wa.me/919873108210?text=' + encodeURIComponent(msg);
+                    window.open(url, '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
