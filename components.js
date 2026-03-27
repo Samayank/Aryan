@@ -257,7 +257,9 @@ function renderMobileMenu() {
                 <li><a href="index.html#about">About</a></li>
             </ul>
             <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
-                <button class="search-btn" onclick="openSearch();document.getElementById('mobileMenuOverlay').classList.remove('active');">Search</button>
+                <button class="search-btn" onclick="openSearch();document.getElementById('mobileMenuOverlay').classList.remove('active');" aria-label="Search">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
                 <button class="contact-btn" onclick="openContact();document.getElementById('mobileMenuOverlay').classList.remove('active');">Contact</button>
             </div>
         </nav>
