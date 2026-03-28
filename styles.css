@@ -1,4 +1,15 @@
 /* ============================================================
+   Custom Fonts
+   ============================================================ */
+@font-face {
+    font-family: 'Algerian';
+    src: url('https://raw.githubusercontent.com/Samayank/Aryan/main/algerian.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ============================================================
    ARYAN Sinks Website — Shared Stylesheet
    ============================================================ */
 
@@ -1696,6 +1707,12 @@ footer {
    Responsive Breakpoints
    ============================================================ */
 @media (max-width: 768px) {
+    .main-header .container {
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 0.5rem;
+    }
+
     .hamburger {
         display: flex;
         width: 32px;
