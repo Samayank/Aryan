@@ -12,7 +12,7 @@ function renderHeader(activePage) {
         <div class="main-header">
             <div class="container">
                 <div class="header-content">
-                    <a href="index.html" class="logo">ARYAN<span class="logo-tagline">Stainless Steel Kitchen Sink</span></a>
+                    <a href="index.html" class="logo">ARYAN<span class="logo-tagline">Kitchen & Bath Solutions</span></a>
                     <button class="hamburger" id="hamburgerMenu" aria-label="Open menu">
                         <span></span><span></span><span></span>
                     </button>
@@ -20,43 +20,127 @@ function renderHeader(activePage) {
                         <ul class="nav-menu">
                             <li class="dropdown">
                                 <a href="kitchen.html">Sink</a>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-category">Series</div>
-                                    <a href="customize.html?series=handmade" class="dropdown-item">Handmade</a>
-                                    <a href="customize.html?series=smart" class="dropdown-item">Smart Series</a>
-                                    <a href="customize.html?series=premium" class="dropdown-item">Premium (Silk)</a>
-                                    <a href="customize.html?series=oscar" class="dropdown-item">Oscar (Deluxe)</a>
-                                    <a href="customize.html?series=silver" class="dropdown-item">Silver Series</a>
-                                    <a href="customize.html?series=economy" class="dropdown-item">Economy Series</a>
+                                <div class="dropdown-content mega-menu">
+                                    <div class="dropdown-list">
+                                        <div class="dropdown-category">Series</div>
+                                        <a href="customize.html?series=handmade" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Handmade <span class="nav-badge popular">Popular</span></div>
+                                                <div class="dropdown-item-subtitle">304 & 202 Grade</div>
+                                            </div>
+                                        </a>
+                                        <a href="customize.html?series=smart" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Smart Series</div>
+                                                <div class="dropdown-item-subtitle">Clean modern geometry</div>
+                                            </div>
+                                        </a>
+                                        <a href="customize.html?series=premium" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Premium (Silk)</div>
+                                                <div class="dropdown-item-subtitle">Sleek styling and finish</div>
+                                            </div>
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a href="customize.html?series=oscar" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Oscar (Deluxe)</div>
+                                                <div class="dropdown-item-subtitle">Great value oval bowl</div>
+                                            </div>
+                                        </a>
+                                        <a href="customize.html?series=silver" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Silver Series</div>
+                                                <div class="dropdown-item-subtitle">Everyday utility design</div>
+                                            </div>
+                                        </a>
+                                        <a href="customize.html?series=economy" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Economy Series</div>
+                                                <div class="dropdown-item-subtitle">Budget friendly essential</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-image-panel" style="background-image: url('https://raw.githubusercontent.com/Samayank/Aryan/main/smartCard.png');"></div>
                                 </div>
                             </li>
                             <li class="dropdown">
                                 <a href="cistern.html">Flush Tanks</a>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-category">Series</div>
-                                    <a href="cistern.html" class="dropdown-item">Continental</a>
-                                    <a href="cistern.html" class="dropdown-item">Curve</a>
-                                    <a href="cistern.html" class="dropdown-item">Kubix</a>
-                                    <a href="cistern.html" class="dropdown-item">Deluxe</a>
+                                <div class="dropdown-content mega-menu">
+                                    <div class="dropdown-list">
+                                        <div class="dropdown-category">Series</div>
+                                        <a href="cistern.html" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Continental</div>
+                                                <div class="dropdown-item-subtitle">Most premium operation</div>
+                                            </div>
+                                        </a>
+                                        <a href="cistern.html" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Curve <span class="nav-badge new">New</span></div>
+                                                <div class="dropdown-item-subtitle">Sleek curved design</div>
+                                            </div>
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a href="cistern.html" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Kubix</div>
+                                                <div class="dropdown-item-subtitle">Modern geometric shape</div>
+                                            </div>
+                                        </a>
+                                        <a href="cistern.html" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Deluxe</div>
+                                                <div class="dropdown-item-subtitle">Standard fit reliability</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-image-panel" style="background-image: url('https://raw.githubusercontent.com/Samayank/Aryan/main/continentalCard.png');"></div>
                                 </div>
                             </li>
                             <li class="dropdown">
                                 <a href="vanity.html">Vanity</a>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-category">Series</div>
-                                    <a href="vanity.html" class="dropdown-item">UV (Premium)</a>
-                                    <a href="vanity.html" class="dropdown-item">Golden (Deluxe)</a>
-                                    <a href="vanity.html" class="dropdown-item">Normal</a>
+                                <div class="dropdown-content mega-menu">
+                                    <div class="dropdown-list">
+                                        <div class="dropdown-category">Series</div>
+                                        <a href="vanity.html" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">UV (Premium)</div>
+                                                <div class="dropdown-item-subtitle">High-gloss sheet finish</div>
+                                            </div>
+                                        </a>
+                                        <a href="vanity.html" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Golden (Deluxe)</div>
+                                                <div class="dropdown-item-subtitle">Elegant mica finish</div>
+                                            </div>
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a href="vanity.html" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Normal</div>
+                                                <div class="dropdown-item-subtitle">Reliable everyday build</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-image-panel" style="background-image: url('vanityCard.png');"></div>
                                 </div>
                             </li>
                             <li class="dropdown">
                                 <a href="unbreak.html">Accessories</a>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-category">Accessories</div>
-                                    <a href="unbreak.html" class="dropdown-item">Unbreakable</a>
+                                <div class="dropdown-content mega-menu">
+                                    <div class="dropdown-list">
+                                        <div class="dropdown-category">Accessories</div>
+                                        <a href="unbreak.html" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Unbreakable</div>
+                                                <div class="dropdown-item-subtitle">Jumbo corner set, deluxe shelf, bathroom organizer</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-image-panel" style="background-image: url('https://raw.githubusercontent.com/Samayank/Aryan/main/deluxeShelf.png');"></div>
                                 </div>
                             </li>
-                            <li><a href="service.html">Service</a></li>
                             <li><a href="index.html#about">About</a></li>
                         </ul>
                     </nav>
@@ -64,7 +148,10 @@ function renderHeader(activePage) {
                         <button class="search-btn" aria-label="Search products">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         </button>
-                        <button class="contact-btn" aria-label="Contact us">Contact</button>
+                        <a href="cart.html" class="nav-cart" aria-label="View cart">
+                            <span class="nav-cart-icon">🛒</span>
+                            <span class="nav-cart-count">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -97,18 +184,17 @@ function renderFooter() {
                     <h3>Company</h3>
                     <ul>
                         <li><a href="index.html#about">About ARYAN</a></li>
-                        <li><a href="service.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Find Us</h3>
                     <ul>
-                        <li><a href="service.html">Service Locations</a></li>
+                        <li><a href="index.html#network">Service Locations</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; ${year} <span class="aryan-text">ARYAN</span> India Pvt. Ltd. All rights reserved. | <a href="#">Privacy Policy</a></p>
+                <p>&copy; ${year} <span class="aryan-text">ARYAN</span> India Pvt. Ltd. All rights reserved. | <a href="#">Privacy Policy</a> <br><br> <span style="font-weight: 500;">Made in India 🇮🇳</span></p>
             </div>
         </div>
     </footer>`;
@@ -168,16 +254,39 @@ function renderContactModal() {
 }
 
 /**
- * Render the floating cart button.
+ * Render the floating contact FAB.
  */
-function renderFloatingCart() {
-    const cartHTML = `
-    <a href="cart.html" class="floating-cart" id="floating-cart" aria-label="View cart">
-        <span class="floating-cart-icon">🛒</span>
-        <span class="floating-cart-count" id="floating-cart-count">0</span>
-    </a>`;
+function renderFloatingContact() {
+    const contactHTML = `
+    <div class="floating-contact-container">
+        <div class="floating-contact-options">
+            <div class="floating-contact-option-wrapper">
+                <span class="floating-contact-label">WhatsApp</span>
+                <a href="https://wa.me/919873108210?text=Hello%2C%20I%20want%20to%20know%20more!" target="_blank" rel="noopener" class="floating-contact-option whatsapp" aria-label="WhatsApp Us">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                </a>
+            </div>
+            <div class="floating-contact-option-wrapper">
+                <span class="floating-contact-label">Phone</span>
+                <a href="tel:9873108210" class="floating-contact-option phone" aria-label="Call Us">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </a>
+            </div>
+        </div>
+        <button class="floating-contact-main" id="floatingContactMain" aria-label="Contact Options">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </button>
+    </div>`;
 
-    document.body.insertAdjacentHTML('beforeend', cartHTML);
+    document.body.insertAdjacentHTML('beforeend', contactHTML);
+
+    const mainBtn = document.getElementById('floatingContactMain');
+    const container = document.querySelector('.floating-contact-container');
+    if(mainBtn && container) {
+        mainBtn.addEventListener('click', () => {
+            container.classList.toggle('active');
+        });
+    }
 }
 
 /**
@@ -253,14 +362,12 @@ function renderMobileMenu() {
                         <a href="unbreak.html">Unbreakable</a>
                     </div>
                 </li>
-                <li><a href="service.html">Service</a></li>
                 <li><a href="index.html#about">About</a></li>
             </ul>
             <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
                 <button class="search-btn" onclick="openSearch();document.getElementById('mobileMenuOverlay').classList.remove('active');" aria-label="Search">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
-                <button class="contact-btn" onclick="openContact();document.getElementById('mobileMenuOverlay').classList.remove('active');">Contact</button>
             </div>
         </nav>
     </div>`;
@@ -366,7 +473,7 @@ function initComponents(activePage) {
     renderSearchModal();
     renderContactModal();
     renderProductDetailModal();
-    renderFloatingCart();
+    renderFloatingContact();
     renderBackToTop();
     renderToast();
 }

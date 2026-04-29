@@ -8,12 +8,14 @@
     <meta name="description"
         content="Explore ARYAN's unbreakable collection — durable bathroom accessories including corner sets, shelves, holders, and towel rings.">
     <meta property="og:title" content="Unbreakable Accessories | ARYAN India">
-    <meta property="og:description"
-        content="Durable, stylish unbreakable bathroom products from ARYAN India.">
+    <meta property="og:description" content="Durable, stylish unbreakable bathroom products from ARYAN India.">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon"
+        href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -36,7 +38,7 @@
         <section class="hero">
             <div class="container">
                 <h1>Accessories</h1>
-                <p>Durable, transparent, and practical — our accessories are designed
+                <p>Durable, transparent, and practical. Our accessories are designed
                     for everyday bathroom use without compromise.</p>
             </div>
         </section>
@@ -98,13 +100,13 @@
                     } else {
                         var priceNum = Number(String(product.price).replace(/[^\d.]/g, ''));
                         if (isNaN(priceNum)) priceNum = 0;
-                        window.aryanCart.addToCart({ 
-                            id: product.id, 
-                            name: product.name, 
-                            image: product.image, 
-                            price: priceNum, 
-                            quantity: 1, 
-                            config: { series: 'Unbreakable Accessories', grade: 'Unbreakable', size: product.category, bowl: 'Accessory' } 
+                        window.aryanCart.addToCart({
+                            id: product.id,
+                            name: product.name,
+                            image: product.image,
+                            price: priceNum,
+                            quantity: 1,
+                            config: { series: 'Unbreakable Accessories', grade: 'Unbreakable', size: product.category, bowl: 'Accessory' }
                         });
                         showToast('✓ Added to cart!');
                     }

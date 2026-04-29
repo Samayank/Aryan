@@ -647,11 +647,11 @@
                         '<!-- Step 2: Size -->' +
                         '<div class="customize-step">' +
                         '<div class="step-label"><span class="step-number">2</span><h2>Choose Size (inches)</h2></div>' +
-                        '<div class="size-options">' +
+                        '<div class="size-options" id="size-options-container">' +
                         series.sizes.map(function (size) {
-                            return '<div class="size-option" id="size-' + size.replace('×', 'x') + '" onclick="selectSize(\'' + size + '\')">' +
+                            return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
                                 '<div class="size-dimension">' + size + '"</div>' +
-                                '<div class="size-label">L × W</div>' +
+                                '<div class="size-label">' + (size.indexOf('×10') > -1 ? 'L × W × D' : 'L × W') + '</div>' +
                                 '</div>';
                         }).join('') +
                         '</div>' +
@@ -700,11 +700,40 @@
         }
 
         function selectGrade(grade) {
+            var previousGrade = selectedGrade;
             selectedGrade = grade;
             document.querySelectorAll('.grade-option').forEach(function (el) { el.classList.remove('selected'); });
             document.getElementById('grade-' + grade).classList.add('selected');
             document.getElementById('summary-grade').textContent = grade + ' Grade (' + (grade === '304' ? '18% Nickel' : '4% Nickel') + ')';
+            
+            if (currentSeriesId === 'handmade') {
+                var sizes = grade === '202' 
+                    ? ['24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
+                    : ['24×18', '27×18', '30×18', '33×20', '36×18', '37×18', '45×20']; // 304 fallback sizes
+                    
+                var container = document.getElementById('size-options-container');
+                if (container) {
+                    container.innerHTML = sizes.map(function (size) {
+                        return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
+                            '<div class="size-dimension">' + size + '"</div>' +
+                            '<div class="size-label">' + (size.indexOf('×10') > -1 ? 'L × W × D' : 'L × W') + '</div>' +
+                            '</div>';
+                    }).join('');
+                }
+                
+                if (selectedSize && sizes.indexOf(selectedSize) === -1) {
+                    selectedSize = null;
+                    document.getElementById('summary-size').textContent = '—';
+                } else if (selectedSize) {
+                    var el = document.getElementById('size-' + selectedSize.replace(/×/g, 'x'));
+                    if (el) el.classList.add('selected');
+                }
+            }
+
             if (grade === '304') {
+                if (previousGrade === '202') {
+                    selectedFinish = null;
+                }
                 if (!selectedFinish || (selectedFinish !== 'Matte Finish' && selectedFinish !== 'Mirror Finish')) {
                     selectedFinish = null;
                     document.getElementById('summary-finish').textContent = '—';

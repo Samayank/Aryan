@@ -11,9 +11,12 @@
     <meta property="og:description"
         content="Premium stainless steel kitchen sinks from ARYAN India — 6 distinct series, with Handmade available in 202 & 304 grade.">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon"
+        href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -284,7 +287,7 @@
         <section class="hero">
             <div class="container">
                 <h1>Premium Kitchen Sinks</h1>
-                <p>6 distinct series crafted for every need — from handcrafted luxury to everyday economy. Handmade is
+                <p>6 distinct series crafted for every need, from handcrafted luxury to everyday economy. Handmade is
                     available in both 202 & 304 grade stainless steel.</p>
             </div>
         </section>
@@ -348,7 +351,7 @@
                 emoji: '⬛',
                 description: 'Clean, geometric square bowl design for the modern kitchen. Engineered for functionality with a contemporary aesthetic.',
                 tags: ['Square Bowl', 'Modern Design'],
-                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+                sizes: ['18×16×8', '20×18×9']
             },
             {
                 id: 'premium',
@@ -359,7 +362,7 @@
                 emoji: '✨',
                 description: 'Elegant oval bowl sinks with a silky-smooth finish. A perfect blend of premium quality and timeless style.',
                 tags: ['Oval Bowl', 'Silk Finish'],
-                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+                sizes: ['18×16×8', '20×17×8', '21×18×8', '22×18×8', '24×18×9']
             },
             {
                 id: 'oscar',
@@ -370,7 +373,7 @@
                 emoji: '🏆',
                 description: 'The Deluxe oval bowl series — offering outstanding quality and refined design at an accessible price point.',
                 tags: ['Oval Bowl', 'Deluxe Build'],
-                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
+                sizes: ['12×12', '15×12', '14×16', '18×16×8', '20×17×8', '21×18×8', '22×18×8', '24×18×9']
             },
             {
                 id: 'silver',
@@ -381,7 +384,7 @@
                 emoji: '🪙',
                 description: 'Reliable oval bowl sinks with a polished silver finish. Great durability and performance for everyday kitchens.',
                 tags: ['Oval Bowl', 'Polished Finish'],
-                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18']
+                sizes: ['18×16×8', '20×17×8', '21×18×8', '22×18×8', '24×18×9']
             },
             {
                 id: 'economy',
@@ -392,7 +395,7 @@
                 emoji: '🔷',
                 description: 'Quality oval bowl sinks at an unbeatable value. Durable stainless steel construction for budget-conscious homes.',
                 tags: ['Oval Bowl', 'Budget-Friendly'],
-                sizes: ['24×18', '27×18', '30×18', '36×18', '37×18']
+                sizes: ['18×16×8', '20×17×8', '21×18×8', '22×18×8', '24×18×9', '37×18×8', '45×20×8']
             }
         ];
 
@@ -410,9 +413,10 @@
             }
 
             grid.innerHTML = (series.sizes || []).map(function (s) {
+                var dimLabel = (s.match(/×/g) || []).length === 2 ? 'L × W × H' : 'L × W';
                 return '<button type="button" class="size-popup-btn" onclick="addSeriesToCart(\'' + series.id + '\', \'' + s + '\')">' +
                     escapeHTML(s) + '"' +
-                    '<span class="sub">L × W</span>' +
+                    '<span class="sub">' + dimLabel + '</span>' +
                     '</button>';
             }).join('');
 
@@ -445,7 +449,7 @@
                                 ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/economy.png'
                                 : 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png'))));
             var cartItem = {
-                id: seriesId + '-202-' + size.replace('×', 'x'),
+                id: seriesId + '-202-' + size.replace(/×/g, 'x'),
                 name: itemName,
                 image: itemImage,
                 price: 0,

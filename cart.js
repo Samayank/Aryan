@@ -58,10 +58,10 @@ function clearCart() {
 }
 
 function updateCartIcon() {
-    const icon = document.getElementById('floating-cart-count');
-    if (icon) {
+    const icons = document.querySelectorAll('.nav-cart-count');
+    icons.forEach(icon => {
         icon.textContent = getCartCount();
-    }
+    });
 }
 
 // Call this on page load to sync icon

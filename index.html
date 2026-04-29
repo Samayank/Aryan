@@ -21,6 +21,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -30,10 +31,25 @@
     <main id="main-content">
         <!-- Hero Section -->
         <section class="hero">
-            <div class="container">
-                <h1>Premium Kitchen &amp; Bath</h1>
-                <p>India's trusted name in stainless steel Kitchen Sinks, Flush Tanks, Vanity and Accessories.</p>
-                <a href="#products" class="cta-button">Explore Products</a>
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1>Premium Kitchen &amp; Bath</h1>
+                    <p>India's trusted name in stainless steel Kitchen Sinks, Flush Tanks, Vanity and Accessories.</p>
+                    <div class="hero-badges">
+                        <span><span class="badge-icon">✔️</span> ISO Certified</span>
+                        <span><span class="badge-icon">🇮🇳</span> Made in India</span>
+                        <span><span class="badge-icon">🏠</span> 10,000+ Homes</span>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#products" class="cta-button primary-cta">Explore Products</a>
+                        <a href="aryan-catalogue.pdf" target="_blank" class="cta-button secondary-cta">View
+                            Catalogue</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png"
+                        alt="Premium Stainless Steel Sink" class="hero-product-img">
+                </div>
             </div>
         </section>
 
@@ -43,7 +59,10 @@
                 <h2 class="section-title">Product Categories</h2>
                 <div class="category-grid">
                     <a href="kitchen.html" class="category-card">
-                        <div class="category-image">🚰</div>
+                        <div class="category-image">
+                            <img src="https://raw.githubusercontent.com/Samayank/Aryan/main/smartCard.png"
+                                style="width: 100%; height: 100%; object-fit: cover;" alt="Kitchen Sinks">
+                        </div>
                         <div class="category-content">
                             <h3>Kitchen Sinks</h3>
                             <p>6 series of premium stainless steel sinks — Handmade, Smart, Premium, Oscar, Silver &
@@ -51,27 +70,37 @@
                         </div>
                     </a>
                     <a href="cistern.html" class="category-card">
-                        <div class="category-image">🚽</div>
+                        <div class="category-image">
+                            <img src="https://raw.githubusercontent.com/Samayank/Aryan/main/continentalCard.png"
+                                style="width: 100%; height: 100%; object-fit: cover;" alt="Flush Tanks">
+                        </div>
                         <div class="category-content">
                             <h3>Flush Tanks</h3>
                             <p>4 series — Continental, Curve, Kubix & Deluxe. Single flush, double flush, and center
                                 push options.</p>
                         </div>
                     </a>
-                    <a href="vanity.html" class="category-card">
-                        <div class="category-image">🪞</div>
-                        <div class="category-content">
-                            <h3>Vanity Cabinets</h3>
-                            <p>Premium HDHMR board vanity cabinets — UV, Golden & Normal series with UV sheet and mica
-                                finishes.</p>
-                        </div>
-                    </a>
                     <a href="unbreak.html" class="category-card">
-                        <div class="category-image">🏺</div>
+                        <div class="category-image">
+                            <img src="https://raw.githubusercontent.com/Samayank/Aryan/main/deluxeShelf.png"
+                                style="width: 100%; height: 100%; object-fit: contain;" alt="Accessories">
+                        </div>
                         <div class="category-content">
                             <h3>Accessories</h3>
                             <p>Durable, stylish unbreakable jugs, glasses, plates, and everyday items for the modern
                                 home.</p>
+                        </div>
+                    </a>
+
+                    <a href="vanity.html" class="category-card">
+                        <div class="category-image">
+                            <img src="vanityCard.png" style="width: 100%; height: 100%; object-fit: cover;"
+                                alt="Vanity Cabinets">
+                        </div>
+                        <div class="category-content">
+                            <h3>Vanity Cabinets</h3>
+                            <p>Premium HDHMR board vanity cabinets — UV, Golden & Normal series with UV sheet and mica
+                                finishes.</p>
                         </div>
                     </a>
                 </div>
@@ -83,27 +112,37 @@
             <div class="container">
                 <h2 class="section-title">Why Choose <span class="aryan-text">ARYAN</span>?</h2>
                 <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">💎</div>
-                        <h3>Premium Quality</h3>
-                        <p>Every product is crafted from the finest materials with rigorous quality checks at every
-                            stage.</p>
+                    <div class="feature-card">
+                        <div class="feature-card-bg">01</div>
+                        <div class="feature-tag">Quality</div>
+                        <div class="feature-line"></div>
+                        <h3 class="feature-heading">Premium Quality</h3>
+                        <p class="feature-text">Finest materials with rigorous quality checks at every stage of
+                            manufacturing.</p>
                     </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🔧</div>
-                        <h3>Expert Installation</h3>
-                        <p>Free professional installation by certified technicians across 200+ service points in India.
-                        </p>
+                    <div class="feature-card">
+                        <div class="feature-card-bg">02</div>
+                        <div class="feature-tag">Service</div>
+                        <div class="feature-line"></div>
+                        <h3 class="feature-heading">Expert Installation</h3>
+                        <p class="feature-text">Free installation by certified technicians across 5000+ service points
+                            in India.</p>
                     </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🛡️</div>
-                        <h3>Warranty Covered</h3>
-                        <p>All ARYAN products come with a comprehensive warranty and dedicated after-sales support.</p>
+                    <div class="feature-card">
+                        <div class="feature-card-bg">03</div>
+                        <div class="feature-tag">Assurance</div>
+                        <div class="feature-line"></div>
+                        <h3 class="feature-heading">Warranty Covered</h3>
+                        <p class="feature-text">Comprehensive warranty and dedicated after-sales support on all
+                            products.</p>
                     </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🏢</div>
-                        <h3>Trusted Brand</h3>
-                        <p>Serving millions of Indian homes with innovative, reliable kitchen and bath solutions.</p>
+                    <div class="feature-card">
+                        <div class="feature-card-bg">04</div>
+                        <div class="feature-tag">Legacy</div>
+                        <div class="feature-line"></div>
+                        <h3 class="feature-heading">Trusted Brand</h3>
+                        <p class="feature-text">Serving millions of Indian homes with reliable kitchen and bath
+                            solutions.</p>
                     </div>
                 </div>
             </div>
@@ -132,6 +171,8 @@
                 <h2 class="section-title">What Our Customers Say</h2>
                 <div class="testimonials-grid">
                     <div class="testimonial-card">
+                        <div class="quote-mark">“</div>
+                        <div class="testimonial-stars">★★★★★</div>
                         <p class="testimonial-text">Installed ARYAN double bowl sink in our new kitchen — the quality is
                             outstanding. Stainless steel finish is scratch-resistant and the drain system works
                             perfectly.</p>
@@ -139,32 +180,33 @@
                             <div class="testimonial-avatar">RS</div>
                             <div>
                                 <div class="testimonial-name">Rajesh Sharma</div>
-                                <div class="testimonial-location">Mumbai, Maharashtra</div>
-                                <div class="testimonial-stars">★★★★★</div>
+                                <div class="testimonial-location chip">📍 Mumbai, Maharashtra</div>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card">
+                    <div class="testimonial-card featured">
+                        <div class="quote-mark">“</div>
+                        <div class="testimonial-stars">★★★★★</div>
                         <p class="testimonial-text">The concealed cistern we bought is whisper-quiet and saves water.
                             ARYAN's service team installed it in under an hour. Very impressed!</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">PK</div>
                             <div>
                                 <div class="testimonial-name">Priya Kapoor</div>
-                                <div class="testimonial-location">Delhi NCR</div>
-                                <div class="testimonial-stars">★★★★★</div>
+                                <div class="testimonial-location chip">📍 Delhi NCR</div>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-card">
+                        <div class="quote-mark">“</div>
+                        <div class="testimonial-stars">★★★★☆</div>
                         <p class="testimonial-text">We've been using ARYAN unbreakable jugs at our restaurant for over a
                             year. Not a single crack. Best investment for a commercial kitchen.</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">AM</div>
                             <div>
                                 <div class="testimonial-name">Arjun Mehta</div>
-                                <div class="testimonial-location">Bangalore, Karnataka</div>
-                                <div class="testimonial-stars">★★★★☆</div>
+                                <div class="testimonial-location chip">📍 Bangalore, Karnataka</div>
                             </div>
                         </div>
                     </div>
@@ -174,22 +216,86 @@
 
         <!-- About Section -->
         <section class="about fade-in" id="about">
+            <div class="about-cut-divider"></div>
             <div class="container">
                 <div class="about-content">
                     <div class="about-text">
                         <h2>About <span class="aryan-text">ARYAN</span></h2>
-                        <p>ARYAN is a leading brand of premium stainless steel kitchen sinks,
-                            cisterns, vanity cabinets, and unbreakable home accessories. With state-of-the-art
-                            manufacturing and an unwavering commitment to quality, we serve homes and businesses across
-                            India.</p>
-                        <p>Our kitchen sink range spans 6 distinct series — from our finest Handmade collection to the
-                            value-driven Economy line; with Handmade available in both 304 Grade and 202 Grade Stainless
-                            Steel.
-                            Complementing our sinks, we offer modern cisterns, stylish vanity
-                            storage solutions, and a growing line of durable unbreakable products for everyday use.</p>
+                        <div class="about-text-block">
+                            <p>ARYAN is a leading brand of premium stainless steel kitchen sinks,
+                                cisterns, vanity cabinets, and unbreakable home accessories. With state-of-the-art
+                                manufacturing and an unwavering commitment to quality, we serve homes and businesses
+                                across
+                                India.</p>
+                            <p>Our kitchen sink range spans 6 distinct series from our finest Handmade collection to the
+                                value-driven Economy line, with Handmade available in both 304 Grade and 202 Grade
+                                Stainless
+                                Steel.
+                                Complementing our sinks, we offer modern flush tanks and toilet seat covers, stylish
+                                vanity
+                                storage solutions, and a growing line of durable unbreakable products for everyday use.
+                            </p>
+                        </div>
                     </div>
-                    <div class="about-image" aria-label="ARYAN factory and showroom">
-                        🏢
+                    <div class="about-stats">
+                        <div class="stats-grid">
+                            <div class="stat-item fade-in">
+                                <div class="stat-number" data-target="6">0</div>
+                                <div class="stat-label">Kitchen Series</div>
+                            </div>
+                            <div class="stat-item fade-in">
+                                <div class="stat-number" data-target="5000" data-suffix="+">0</div>
+                                <div class="stat-label">Service Points</div>
+                            </div>
+                            <div class="stat-item fade-in">
+                                <div class="stat-number" data-target="100000" data-suffix="+">0</div>
+                                <div class="stat-label">Happy Homes</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Network Map -->
+        <section class="service-network fade-in" id="network">
+            <div class="container">
+                <div class="network-header">
+                    <span class="network-eyebrow">Across India</span>
+                    <h2 class="network-title">Our Service Network</h2>
+                    <p class="network-subtext">Trusted installation & after-sales support in states across India</p>
+                </div>
+
+                <div class="network-stats-strip">
+                    <div class="net-stat-card">
+                        <span class="net-stat-val">14</span>
+                        <span class="net-stat-label">States Covered</span>
+                    </div>
+                    <div class="net-stat-card">
+                        <span class="net-stat-val">5000+</span>
+                        <span class="net-stat-label">Service Points</span>
+                    </div>
+                    <div class="net-stat-card">
+                        <span class="net-stat-val">1,00,000+</span>
+                        <span class="net-stat-label">Homes Served</span>
+                    </div>
+                </div>
+
+                <div class="map-layout">
+                    <div id="map-container"></div>
+                </div>
+
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#1a5fd1"></div> Serviced States
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background:#e2e8f0"></div> Coming Soon
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color circle"
+                            style="background:#D62B2B; border: 2px solid white; box-shadow: 0 1px 2px rgba(0,0,0,0.2);">
+                        </div> Key Cities
                     </div>
                 </div>
             </div>
@@ -199,7 +305,112 @@
     <!-- JS: Cart, Components, Shared Logic -->
     <script src="cart.js"></script>
     <script src="components.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="script.js"></script>
+    <script>
+        // Init Map
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.getElementById('map-container');
+            if (container) {
+                var map = L.map('map-container', {
+                    center: [22.5, 82.0],
+                    zoom: 4.5,
+                    scrollWheelZoom: false
+                });
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
+                }).addTo(map);
+
+                const servicedStates = [
+                    "delhi", "haryana", "punjab", "assam", "uttar pradesh",
+                    "rajasthan", "madhya pradesh", "maharashtra", "andhra pradesh",
+                    "tamil nadu", "kerala", "karnataka", "bihar", "chandigarh"
+                ];
+
+                function isServiced(stateName) {
+                    if (!stateName) return false;
+                    const normalized = stateName.toLowerCase().trim();
+                    return servicedStates.some(state => normalized.includes(state));
+                }
+
+                function getFeatureName(feature) {
+                    if (!feature.properties) return null;
+                    return feature.properties.NAME_1 || feature.properties.name || feature.properties.ST_NM || feature.properties.STNAME || null;
+                }
+
+                function styleFeature(feature) {
+                    var name = getFeatureName(feature);
+                    var active = isServiced(name);
+                    return {
+                        fillColor: active ? '#1a5fd1' : '#e2e8f0',
+                        fillOpacity: active ? 0.75 : 0.6,
+                        color: '#ffffff',
+                        weight: 1.5
+                    };
+                }
+
+                fetch('https://raw.githubusercontent.com/Subhash9325/GeoJson-Data-of-Indian-States/master/Indian_States')
+                    .then(r => r.json())
+                    .then(data => {
+                        var statesLayer = L.geoJSON(data, {
+                            style: styleFeature,
+                            onEachFeature: function (feature, layer) {
+                                var name = getFeatureName(feature);
+                                if (!name) return;
+
+                                var active = isServiced(name);
+                                var statusText = active ? '<span style="color:#1a5fd1;">✓ Serviced</span>' : '<span style="color:#999;">Coming soon</span>';
+
+                                layer.bindTooltip('<div style="font-size:13px; font-family:Inter, sans-serif;"><strong>' + name + '</strong><br/>' + statusText + '</div>', {
+                                    sticky: true,
+                                    opacity: 1
+                                });
+
+                                layer.on('mouseover', function () {
+                                    layer.setStyle({ fillOpacity: 0.95 });
+                                });
+                                layer.on('mouseout', function () {
+                                    layer.setStyle(styleFeature(feature));
+                                });
+                            }
+                        }).addTo(map);
+                    });
+
+                // Pin Markers
+                const keyCities = [
+                    { name: "Delhi", lat: 28.6139, lng: 77.2090, points: 35 },
+                    { name: "Rohtak", lat: 28.8955, lng: 76.5897, points: 12 },
+                    { name: "Ludhiana", lat: 30.9010, lng: 75.8573, points: 14 },
+                    { name: "Chandigarh", lat: 30.7333, lng: 76.7794, points: 10 },
+                    { name: "Guwahati", lat: 26.1445, lng: 91.7362, points: 11 },
+                    { name: "Lucknow", lat: 26.8467, lng: 80.9462, points: 20 },
+                    { name: "Jaipur", lat: 26.9124, lng: 75.7873, points: 18 },
+                    { name: "Bhopal", lat: 23.2599, lng: 77.4126, points: 16 },
+                    { name: "Mumbai", lat: 19.0760, lng: 72.8777, points: 28 },
+                    { name: "Visakhapatnam", lat: 17.6868, lng: 83.2185, points: 14 },
+                    { name: "Chennai", lat: 13.0827, lng: 80.2707, points: 14 },
+                    { name: "Kochi", lat: 9.9312, lng: 76.2673, points: 18 },
+                    { name: "Bangalore", lat: 12.9716, lng: 77.5946, points: 22 },
+                    { name: "Patna", lat: 25.5941, lng: 85.1376, points: 15 }
+                ];
+
+                var pinIcon = L.divIcon({
+                    className: 'custom-city-pin',
+                    iconSize: [12, 12]
+                });
+
+                keyCities.forEach(city => {
+                    var marker = L.marker([city.lat, city.lng], { icon: pinIcon }).addTo(map);
+                    marker.bindTooltip('<div style="font-family:Inter, sans-serif;"><strong>' + city.name + '</strong><br><span style="color:#D62B2B; font-size:12px;">' + city.points + ' service points</span></div>', {
+                        opacity: 1,
+                        direction: 'top',
+                        offset: [0, -6]
+                    });
+                });
+            }
+        });
+    </script>
     <script>
         var homeProducts = [
             { id: 'k1', name: 'Handmade Series Sink', category: 'kitchen', description: 'Our finest handcrafted square bowl kitchen sink — the pinnacle of ARYAN craftsmanship', price: 'View Series →', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png', badge: 'Top Tier', features: ['Handcrafted Build', 'Square Bowl', '202 & 304 Grade', 'Tight Radius Corners'], link: 'customize.html?series=handmade' },

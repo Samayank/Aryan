@@ -317,6 +317,135 @@ function initFadeInObserver() {
     }
 }
 
+/* ---- Counters Observer ---- */
+function initCounters() {
+    var counters = document.querySelectorAll('.stat-number');
+    var hasAnimated = new Map();
+    
+    function animateCounter(el, start, end, duration, prefix, suffix) {
+        var startTime = null;
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            var current = Math.floor(progress * (end - start) + start);
+            el.textContent = prefix + current.toLocaleString('en-IN') + suffix;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                el.textContent = prefix + end.toLocaleString('en-IN') + suffix;
+            }
+        }
+        window.requestAnimationFrame(step);
+    }
+
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var target = entry.target;
+                    if (hasAnimated.get(target)) return;
+                    hasAnimated.set(target, true);
+                    var endValue = parseInt(target.getAttribute('data-target') || 0, 10);
+                    var suffix = target.getAttribute('data-suffix') || '';
+                    var prefix = target.getAttribute('data-prefix') || '';
+                    animateCounter(target, 0, endValue, 2000, prefix, suffix);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(function (c) { observer.observe(c); });
+    } else {
+        counters.forEach(function(c) {
+             c.textContent = (c.getAttribute('data-prefix') || '') + parseInt(c.getAttribute('data-target') || 0, 10).toLocaleString('en-IN') + (c.getAttribute('data-suffix') || '');
+        });
+    }
+}
+
+/* ---- Particle Background Effect ---- */
+function initParticles() {
+    var container = document.getElementById('particleContainer');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'particleContainer';
+        // z-index: -1 behind everything, fixed to screen layout
+        container.style.position = 'fixed';
+        container.style.top = '0';
+        container.style.left = '0';
+        container.style.width = '100%';
+        container.style.height = '100%';
+        container.style.zIndex = '-1';
+        container.style.pointerEvents = 'none';
+        
+        var canvas = document.createElement('canvas');
+        canvas.id = 'particleCanvas';
+        canvas.style.display = 'block';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        
+        container.appendChild(canvas);
+        document.body.insertBefore(container, document.body.firstChild);
+    }
+    
+    var cvs = document.getElementById('particleCanvas');
+    var ctx = cvs.getContext('2d');
+    var particles = [];
+    var particleCount = Math.floor(window.innerWidth / 35); // sparse
+    if (particleCount > 60) particleCount = 60;
+    if (particleCount < 15) particleCount = 15;
+
+    function resize() {
+        var dpr = window.devicePixelRatio || 1;
+        cvs.width = window.innerWidth * dpr;
+        cvs.height = window.innerHeight * dpr;
+        ctx.scale(dpr, dpr);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    function createParticle(resetY) {
+        return {
+            x: Math.random() * window.innerWidth,
+            y: resetY ? window.innerHeight + Math.random() * 100 : Math.random() * window.innerHeight,
+            size: Math.random() * 3 + 1, // 1 to 4px
+            opacity: Math.random() * 0.4 + 0.2, // 20% to 60%
+            speedY: Math.random() * 0.8 + 0.2,
+            speedX: (Math.random() - 0.5) * 0.3,
+            swayOffset: Math.random() * Math.PI * 2,
+            swaySpeed: Math.random() * 0.01 + 0.005
+        };
+    }
+
+    for (var i = 0; i < particleCount; i++) {
+        particles.push(createParticle(false));
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        particles.forEach(function (p) {
+            p.y -= p.speedY;
+            p.x += Math.sin(p.swayOffset) * 0.5 + p.speedX;
+            p.swayOffset += p.swaySpeed;
+
+            if (p.x < -10) p.x = window.innerWidth + 10;
+            if (p.x > window.innerWidth + 10) p.x = -10;
+
+            if (p.y < -10) {
+                Object.assign(p, createParticle(true));
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(130, 177, 255, ' + p.opacity.toFixed(2) + ')';
+            ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
 /* ---- Mobile Menu ---- */
 function initMobileMenu() {
     var hamburger = document.getElementById('hamburgerMenu');
@@ -485,7 +614,9 @@ function initAryanWebsite(activePage) {
     initHeaderScroll();
     initSmoothScroll();
     initFadeInObserver();
+    initCounters();
     initBackToTop();
+    initParticles();
     // Update cart icon
     if (window.aryanCart) {
         window.aryanCart.updateCartIcon();
