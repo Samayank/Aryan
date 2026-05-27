@@ -72,7 +72,7 @@ var productDatabase = [
     { id: 'u1', name: 'Jumbo Corner Set', category: 'accessories', description: 'Large capacity transparent corner set for maximum storage', icon: getRawImg('jumbo.png'), popular: true },
     { id: 'u2', name: 'Corner Set', category: 'accessories', description: 'Standard transparent corner set for organizing bathroom essentials', icon: getRawImg('normal.png'), popular: false },
     { id: 'u3', name: 'Set Top Box Holder', category: 'accessories', description: 'Sturdy wall-mounted holder for set top boxes and routers', icon: getRawImg('set.png'), popular: false },
-    { id: 'u4', name: '18" Shelf', category: 'accessories', description: 'Spacious 18-inch transparent shelf for bathroom utilities', icon: getRawImg('18.png'), popular: false },
+    { id: 'u4', name: 'Shelf', category: 'accessories', description: 'Durable transparent shelf for bathroom utilities. Available in 12\", 15\" and 18\" sizes', icon: getRawImg('18.png'), popular: false },
     { id: 'u5', name: 'Deluxe Shelf', category: 'accessories', description: 'Premium transparent shelf with built-in compartments', icon: getRawImg('deluxeShelf.png'), popular: true },
     { id: 'u_org', name: 'Bathroom Organizer', category: 'accessories', description: 'Versatile multi-purpose organizers (2, 3, 4 & 5-in-1 variants)', icon: getRawImg('5.png'), popular: true },
     { id: 'u10', name: 'Double Soap Dish', category: 'accessories', description: 'Transparent double soap dish for his & hers or different soaps', icon: getRawImg('double.png'), popular: false },

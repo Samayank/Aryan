@@ -20,9 +20,178 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Size Picker Popup */
+        .size-picker-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .size-picker-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .size-picker-modal {
+            background: linear-gradient(145deg, #1a1f2e, #141824);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 2rem 2rem 1.5rem;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            transform: translateY(30px) scale(0.95);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .size-picker-overlay.active .size-picker-modal {
+            transform: translateY(0) scale(1);
+        }
+        .size-picker-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        .size-picker-header h3 {
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        .size-picker-close {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            color: #aaa;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .size-picker-close:hover {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+        }
+        .size-picker-subtitle {
+            color: #8892a4;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .size-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .size-option-btn {
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .size-option-btn:hover {
+            background: rgba(26, 95, 209, 0.15);
+            border-color: #1a5fd1;
+            transform: translateX(4px);
+        }
+        .size-option-btn:active {
+            transform: translateX(4px) scale(0.98);
+        }
+        .size-option-btn .size-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .size-option-btn .size-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1a5fd1, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .size-option-btn .size-text {
+            text-align: left;
+        }
+        .size-option-btn .size-text span {
+            display: block;
+            font-size: 0.8rem;
+            color: #8892a4;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        .size-option-btn .size-arrow {
+            color: #555;
+            font-size: 1.1rem;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .size-option-btn:hover .size-arrow {
+            color: #1a5fd1;
+            transform: translateX(3px);
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Size Picker Popup -->
+    <div class="size-picker-overlay" id="sizePickerOverlay">
+        <div class="size-picker-modal">
+            <div class="size-picker-header">
+                <h3>Select Shelf Size</h3>
+                <button class="size-picker-close" id="closeSizePicker">&times;</button>
+            </div>
+            <p class="size-picker-subtitle">Choose your preferred shelf size to add to cart</p>
+            <div class="size-options">
+                <button class="size-option-btn" data-size='12"'>
+                    <div class="size-label">
+                        <div class="size-icon">12"</div>
+                        <div class="size-text">12 Inch Shelf<span>Compact size</span></div>
+                    </div>
+                    <span class="size-arrow">→</span>
+                </button>
+                <button class="size-option-btn" data-size='15"'>
+                    <div class="size-label">
+                        <div class="size-icon">15"</div>
+                        <div class="size-text">15 Inch Shelf<span>Medium size</span></div>
+                    </div>
+                    <span class="size-arrow">→</span>
+                </button>
+                <button class="size-option-btn" data-size='18"'>
+                    <div class="size-label">
+                        <div class="size-icon">18"</div>
+                        <div class="size-text">18 Inch Shelf<span>Large size</span></div>
+                    </div>
+                    <span class="size-arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <main id="main-content">
         <!-- Breadcrumb -->
         <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -63,7 +232,7 @@
             { id: 'u1', name: 'Jumbo Corner Set', category: 'corner', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/jumbo.png', description: 'Large capacity transparent corner set for maximum storage.', features: ['Unbreakable material', 'Transparent finish', 'Space saving'], price: 'Enquire' },
             { id: 'u2', name: 'Corner Set', category: 'corner', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/normal.png', description: 'Standard transparent corner set for organizing bathroom essentials.', features: ['Unbreakable material', 'Transparent finish', 'Durable'], price: 'Enquire' },
             { id: 'u3', name: 'Set Top Box Holder', category: 'shelf', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/set.png', description: 'Sturdy wall-mounted holder for set top boxes and routers.', features: ['Unbreakable material', 'Transparent finish', 'Secure grip'], price: 'Enquire' },
-            { id: 'u4', name: '18" Shelf', category: 'shelf', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/18.png', description: 'Spacious 18-inch transparent shelf for bathroom utilities.', features: ['Unbreakable material', '18-inch length', 'Transparent finish'], price: 'Enquire' },
+            { id: 'u4', name: 'Shelf', category: 'shelf', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/18.png', description: 'Durable transparent shelf for bathroom utilities. Available in 12\", 15\" and 18\" sizes.', features: ['Unbreakable material', 'Available in 12\", 15\" & 18\"', 'Transparent finish'], price: 'Enquire', hasSizes: true, sizes: ['12"', '15"', '18"'] },
             { id: 'u5', name: 'Deluxe Shelf', category: 'shelf', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/deluxeShelf.png', description: 'Premium transparent shelf with built-in compartments.', features: ['Unbreakable material', 'Segmented storage', 'Transparent finish'], price: 'Enquire' },
             { id: 'u_org', name: 'Bathroom Organizer', category: 'holder', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/5.png', description: 'Versatile multi-purpose bathroom organizers. Available in 2, 3, 4, and 5-in-1 variants.', features: ['Unbreakable material', 'Multiple options', 'Transparent finish'], price: 'Options', isOrganizerGroup: true },
             { id: 'u10', name: 'Double Soap Dish', category: 'soap', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/double.png', description: 'Transparent double soap dish for his & hers or different soaps.', features: ['Unbreakable material', 'Drainage slots', 'Transparent finish'], price: 'Enquire' },
@@ -74,6 +243,58 @@
             { id: 'u15', name: 'Corner Set Nano', category: 'corner', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/nano.png', description: 'Compact nano corner set for small spaces.', features: ['Unbreakable material', 'Nano size', 'Transparent finish'], price: 'Enquire' }
         ];
 
+        /* Size Picker Logic */
+        var pendingSizeProduct = null;
+
+        function openSizePicker(product) {
+            pendingSizeProduct = product;
+            var overlay = document.getElementById('sizePickerOverlay');
+            if (overlay) {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSizePicker() {
+            var overlay = document.getElementById('sizePickerOverlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            pendingSizeProduct = null;
+        }
+
+        function addShelfWithSize(size) {
+            if (!pendingSizeProduct) return;
+            var product = pendingSizeProduct;
+            var priceNum = Number(String(product.price).replace(/[^\d.]/g, ''));
+            if (isNaN(priceNum)) priceNum = 0;
+            window.aryanCart.addToCart({
+                id: product.id + '_' + size.replace('"', ''),
+                name: product.name + ' (' + size + ')',
+                image: product.image,
+                price: priceNum,
+                quantity: 1,
+                config: { series: 'Unbreakable Accessories', grade: 'Unbreakable', size: size + ' Shelf', bowl: 'Accessory' }
+            });
+            closeSizePicker();
+            showToast('✓ ' + size + ' Shelf added to cart!');
+        }
+
+        // Size picker event listeners
+        document.getElementById('closeSizePicker').addEventListener('click', closeSizePicker);
+        document.getElementById('sizePickerOverlay').addEventListener('click', function (e) {
+            if (e.target === this) closeSizePicker();
+        });
+        document.querySelectorAll('.size-option-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                addShelfWithSize(this.getAttribute('data-size'));
+            });
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSizePicker();
+        });
+
         function renderProducts(filter) {
             var grid = document.getElementById('product-grid');
             if (!grid) return;
@@ -83,7 +304,8 @@
                 var card = document.createElement('div');
                 card.className = 'product-card';
                 var isGroup = product.isOrganizerGroup;
-                var btnText = isGroup ? 'View Options' : '🛒 Add to Cart';
+                var hasSizes = product.hasSizes;
+                var btnText = isGroup ? 'View Options' : (hasSizes ? '📐 Choose Size' : '🛒 Add to Cart');
                 card.innerHTML =
                     '<div class="product-image"><img src="' + escapeHTML(product.image) + '" alt="' + escapeHTML(product.name) + '" loading="lazy"></div>' +
                     '<div class="product-info">' +
@@ -97,6 +319,8 @@
                 card.querySelector('.action-btn').addEventListener('click', function () {
                     if (isGroup) {
                         window.location.href = 'organizer.html';
+                    } else if (hasSizes) {
+                        openSizePicker(product);
                     } else {
                         var priceNum = Number(String(product.price).replace(/[^\d.]/g, ''));
                         if (isNaN(priceNum)) priceNum = 0;

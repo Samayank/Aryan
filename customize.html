@@ -214,6 +214,146 @@
             color: var(--text-secondary, #555);
         }
 
+        /* Product Showcase */
+        .product-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-main-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8f9fa 0%, #eef1f5 100%);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+            position: relative;
+        }
+
+        .showcase-main-image img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: contain;
+            display: block;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            padding: 1rem;
+        }
+
+        .showcase-main-image img.fade-out {
+            opacity: 0;
+            transform: scale(0.97);
+        }
+
+        .showcase-finish-label {
+            position: absolute;
+            bottom: 14px;
+            left: 14px;
+            background: rgba(26, 26, 46, 0.85);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Finish thumbnail grid */
+        .finish-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .finish-card {
+            width: 80px;
+            border: 2.5px solid var(--border, #e0e0e0);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--card-bg, #fff);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .finish-card:hover {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            transform: translateY(-2px);
+        }
+
+        .finish-card.selected {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 4px 16px rgba(230, 126, 34, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .finish-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent, #e67e22);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+        }
+
+        .finish-card {
+            position: relative;
+        }
+
+        .finish-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            background: #f8f9fa;
+        }
+
+        .finish-card-body {
+            padding: 0.4rem 0.25rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .finish-card h4 {
+            font-size: 0.7rem;
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+
+        .finish-card p {
+            font-size: 0.6rem;
+            color: var(--text-secondary, #666);
+            margin: 0;
+        }
+
+        @media (max-width: 480px) {
+            .finish-card {
+                width: 68px;
+            }
+            .showcase-main-image {
+                max-width: 100%;
+            }
+        }
+
         /* Summary */
         .summary-card {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -530,7 +670,7 @@
                 subtitle: null,
                 badge: 'Top Tier',
                 bowl: 'Handcrafted',
-                description: 'Our finest handcrafted sinks - meticulously built with precision square bowls, tight-radius corners, and a flawless finish. The pinnacle of ARYAN craftsmanship.',
+                description: 'Our finest handcrafted sinks - meticulously built with precision square bowls, tight-radius corners, and a flawless finish. The pinnacle of ARYAN craftsmanship. (202 Grade available in 3+ colors)',
                 sizes: ['24×18', '27×18', '30×18', '33×20', '36×18', '37×18', '45×20']
             },
             smart: {
@@ -634,7 +774,7 @@
                         '<div class="grade-option" id="grade-304" onclick="selectGrade(\'304\')">' +
                         '<h3>304 Grade</h3>' +
                         '<div class="grade-nickel"></div>' +
-                        '<p>Superior corrosion resistance, excellent durability, and a lasting mirror or matte finish (as per request).</p>' +
+                        '<p>Superior corrosion resistance, excellent durability, and a lasting matte finish.</p>' +
                         '</div>' +
                         '<div class="grade-option" id="grade-202" onclick="selectGrade(\'202\')">' +
                         '<h3>202 Grade</h3>' +
@@ -644,9 +784,11 @@
                         '</div>' +
                         '</div>' +
 
-                        '<!-- Step 2: Size -->' +
-                        '<div class="customize-step">' +
-                        '<div class="step-label"><span class="step-number">2</span><h2>Choose Size (inches)</h2></div>' +
+                        '<!-- Step 2: Finish & Color -->' +
+                        '<div class="customize-step" id="finish-step-container" style="display:none;"></div>' +
+                        '<!-- Step 3: Size -->' +
+                        '<div class="customize-step" id="size-step-container" style="display:none;">' +
+                        '<div class="step-label"><span class="step-number">3</span><h2>Choose Size (inches)</h2></div>' +
                         '<div class="size-options" id="size-options-container">' +
                         series.sizes.map(function (size) {
                             return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
@@ -671,7 +813,7 @@
 
                 '<!-- Summary -->' +
                 '<div class="customize-step">' +
-                '<div class="step-label"><span class="step-number">' + (isHandmade ? '3' : '2') + '</span><h2>Your Configuration</h2></div>' +
+                '<div class="step-label"><span class="step-number">' + (isHandmade ? '4' : '2') + '</span><h2>Your Configuration</h2></div>' +
                 '<div class="summary-card" id="summary-card">' +
                 '<h3>Order Summary</h3>' +
                 '<div class="summary-row"><span class="label">Series</span><span class="value">' + escapeHTML(series.name) + (series.subtitle ? ' — ' + escapeHTML(series.subtitle) : '') + '</span></div>' +
@@ -728,46 +870,96 @@
                     var el = document.getElementById('size-' + selectedSize.replace(/×/g, 'x'));
                     if (el) el.classList.add('selected');
                 }
-            }
 
-            if (grade === '304') {
-                if (previousGrade === '202') {
-                    selectedFinish = null;
-                }
-                if (!selectedFinish || (selectedFinish !== 'Matte Finish' && selectedFinish !== 'Mirror Finish')) {
-                    selectedFinish = null;
-                    document.getElementById('summary-finish').textContent = '—';
-                    openFinishPopup();
+                // Render finish step with product showcase
+                var defaultImg = 'handmade_single.png';
+                var finishHtml = '<div class="step-label"><span class="step-number">2</span><h2>Choose Finish / Color</h2></div>' +
+                    '<div class="product-showcase">' +
+                    '<div class="showcase-main-image" id="showcase-main">' +
+                    '<img id="showcase-img" src="https://raw.githubusercontent.com/Samayank/Aryan/main/' + defaultImg + '" alt="Product Preview">' +
+                    '<span class="showcase-finish-label" id="showcase-label">Select a finish</span>' +
+                    '</div>' +
+                    '<div class="finish-grid">';
+                if (grade === '304') {
+                    // 304 grade: Matte finish ONLY — no mirror
+                    finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'handmade_single.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" class="finish-img" alt="Matte Finish"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
                 } else {
-                    document.getElementById('summary-finish').textContent = selectedFinish;
+                    // 202 grade: all finishes including Mirror
+                    finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'handmade_single.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" class="finish-img" alt="Matte Finish"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
+                    finishHtml += '<div class="finish-card" id="finish-Mirror" onclick="selectFinish(\'Mirror Finish\', \'mirror_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/mirror_handmade.png" class="finish-img" alt="Mirror Finish"><div class="finish-card-body"><h4>Mirror</h4><p>Steel</p></div></div>';
+                    finishHtml += '<div class="finish-card" id="finish-Gold" onclick="selectFinish(\'Gold (Matte)\', \'gold_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/gold_handmade.png" class="finish-img" alt="Gold"><div class="finish-card-body"><h4>Gold</h4><p>Matte</p></div></div>';
+                    finishHtml += '<div class="finish-card" id="finish-Rose" onclick="selectFinish(\'Rose Gold (Matte)\', \'rose_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/rose_handmade.png" class="finish-img" alt="Rose Gold"><div class="finish-card-body"><h4>Rose Gold</h4><p>Matte</p></div></div>';
+                    finishHtml += '<div class="finish-card" id="finish-Black" onclick="selectFinish(\'Black (Matte)\', \'black_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/black_handmade.png" class="finish-img" alt="Black"><div class="finish-card-body"><h4>Black</h4><p>Matte</p></div></div>';
+                }
+                finishHtml += '</div></div>';
+
+                var finishStep = document.getElementById('finish-step-container');
+                if (finishStep) {
+                    finishStep.innerHTML = finishHtml;
+                    finishStep.style.display = 'block';
+                }
+
+                if (previousGrade !== grade || !selectedFinish) {
+                    selectedFinish = null;
+                    window.selectedFinishImage = null;
+                    document.getElementById('summary-finish').textContent = '—';
+                    var sizeStep = document.getElementById('size-step-container');
+                    if (sizeStep) sizeStep.style.display = 'block';
+                } else {
+                    var finishId = selectedFinish.split(' ')[0];
+                    var fEl = document.getElementById('finish-' + finishId);
+                    if (fEl) fEl.classList.add('selected');
                 }
             } else {
                 selectedFinish = 'Mirror Finish';
-                document.getElementById('summary-finish').textContent = selectedFinish;
-                closeFinishPopup();
+                window.selectedFinishImage = null;
+                var summaryEl = document.getElementById('summary-finish');
+                if (summaryEl) summaryEl.textContent = selectedFinish;
             }
             updateSummaryActions();
         }
 
         function openFinishPopup() {
-            var overlay = document.getElementById('finishOverlay');
-            if (!overlay) return;
-            overlay.classList.add('active');
-            overlay.setAttribute('aria-hidden', 'false');
+            // Deprecated, UI moved to page step
         }
 
         function closeFinishPopup() {
             var overlay = document.getElementById('finishOverlay');
-            if (!overlay) return;
-            overlay.classList.remove('active');
-            overlay.setAttribute('aria-hidden', 'true');
+            if (overlay) {
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden', 'true');
+            }
         }
 
-        function selectFinish(finish) {
+        function selectFinish(finish, image) {
             selectedFinish = finish;
+            window.selectedFinishImage = image;
             var finishEl = document.getElementById('summary-finish');
             if (finishEl) finishEl.textContent = finish;
-            closeFinishPopup();
+            
+            document.querySelectorAll('.finish-card').forEach(function (el) { el.classList.remove('selected'); });
+            var finishId = finish.split(' ')[0];
+            var fEl = document.getElementById('finish-' + finishId);
+            if (fEl) fEl.classList.add('selected');
+
+            // Update the big showcase image with smooth transition
+            var showcaseImg = document.getElementById('showcase-img');
+            var showcaseLabel = document.getElementById('showcase-label');
+            if (showcaseImg && image) {
+                showcaseImg.classList.add('fade-out');
+                setTimeout(function() {
+                    showcaseImg.src = 'https://raw.githubusercontent.com/Samayank/Aryan/main/' + image;
+                    showcaseImg.alt = finish;
+                    showcaseImg.classList.remove('fade-out');
+                }, 300);
+            }
+            if (showcaseLabel) {
+                showcaseLabel.textContent = finish;
+            }
+
+            var sizeStep = document.getElementById('size-step-container');
+            if (sizeStep) sizeStep.style.display = 'block';
+
             updateSummaryActions();
         }
 
@@ -814,7 +1006,7 @@
         function updateSummaryActions() {
             var isHandmade = currentSeriesId === 'handmade';
             var ready = isHandmade
-                ? !!(selectedGrade && selectedSize && (selectedGrade !== '304' || !!selectedFinish))
+                ? !!(selectedGrade && selectedSize && selectedFinish)
                 : !!selectedSize;
             if (ready) {
                 document.getElementById('summary-actions').style.display = 'flex';
@@ -833,7 +1025,9 @@
                             ? (seriesId + '-' + selectedGrade + '-' + (selectedFinish ? selectedFinish.toLowerCase().replace(/\s+/g, '-') : 'finish') + '-' + selectedSize.replace('×', 'x'))
                             : (seriesId + '-202-' + selectedSize.replace('×', 'x')),
                         name: itemName,
-                        image: (seriesId === 'smart'
+                        image: (isHm && window.selectedFinishImage)
+                            ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/' + window.selectedFinishImage
+                            : (seriesId === 'smart'
                             ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/smart.png'
                             : (seriesId === 'premium'
                                 ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silk.png'
