@@ -2206,13 +2206,21 @@ footer {
     }
 
     .header-actions {
+        display: flex !important;
+        order: 2;
+        margin-left: auto;
+        margin-right: 15px;
+    }
+
+    .header-actions .search-btn {
         display: none !important;
     }
 
     /* Hamburger: show and push to far right */
     .hamburger {
         display: flex;
-        margin-left: auto;
+        order: 3;
+        margin-left: 0;
     }
 
     .container {
