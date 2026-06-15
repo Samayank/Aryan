@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanity Cabinets — All Series | ARYAN India</title>
     <meta name="description"
-        content="Explore ARYAN's vanity cabinets — UV, Golden, and Normal series. Premium HDHMR board construction for washbasin storage.">
+        content="Explore ARYAN's vanity cabinets — Premium HDHMR board construction for washbasin storage.">
     <meta property="og:title" content="Vanity Cabinets — All Series | ARYAN India">
     <meta property="og:description"
-        content="Premium vanity cabinets from ARYAN India — UV, Golden, and Normal series in durable HDHMR board.">
+        content="Premium vanity cabinets from ARYAN India — Golden series in durable HDHMR board.">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
@@ -47,23 +47,6 @@
             align-items: center;
             justify-content: center;
             position: relative;
-        }
-
-        .vanity-card:nth-child(1) .vanity-card-image {
-            background: linear-gradient(135deg, #2d1b69 0%, #5b21b6 50%, #7c3aed 100%);
-        }
-
-        .vanity-card:nth-child(2) .vanity-card-image {
-            background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%);
-        }
-
-        .vanity-card:nth-child(3) .vanity-card-image {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-        }
-
-        .vanity-card-image .vanity-emoji {
-            font-size: 4rem;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
 
         .vanity-card-badge {
@@ -177,8 +160,7 @@
         <section class="hero">
             <div class="container">
                 <h1>Vanity Cabinets</h1>
-                <p>Premium washbasin storage cabinets crafted from durable HDHMR board — available in UV, Golden, and
-                    Normal finishes.</p>
+                <p>Premium washbasin storage cabinets crafted from durable HDHMR board — available in an elegant Golden finish.</p>
             </div>
         </section>
 
@@ -193,8 +175,7 @@
                     <h3>Built with Quality Materials</h3>
                     <div class="material-chips">
                         <span class="material-chip">🪵 HDHMR Board Construction</span>
-                        <span class="material-chip">✨ UV Sheet (UV Series)</span>
-                        <span class="material-chip">🟡 Mica Finish (Golden & Normal)</span>
+                        <span class="material-chip">🟡 Mica Finish</span>
                         <span class="material-chip">💧 Water-Resistant</span>
                     </div>
                 </div>
@@ -208,28 +189,12 @@
     <script>
         var vanitySeries = [
             {
-                id: 'uv',
-                name: 'UV Vanity',
-                emoji: '💎',
-                material: 'UV Sheet',
-                description: 'Our most premium vanity cabinet — finished with a high-gloss UV sheet over HDHMR board for a luxurious, scratch-resistant, and long-lasting surface.',
-                tags: ['HDHMR Board', 'UV Sheet', 'High Gloss', 'Scratch Resistant']
-            },
-            {
                 id: 'golden',
                 name: 'Golden Vanity',
-                emoji: '🏆',
+                image: 'vanity_Golden.png',
                 material: 'Mica',
                 description: 'The Deluxe vanity cabinet with an elegant golden mica finish over HDHMR board — blending style and durability for a sophisticated bathroom.',
                 tags: ['HDHMR Board', 'Mica Finish', 'Golden Tone', 'Durable']
-            },
-            {
-                id: 'normal',
-                name: 'Normal Vanity',
-                emoji: '🔲',
-                material: 'Mica',
-                description: 'A reliable and well-built vanity cabinet with a clean mica finish over HDHMR board — great quality at an accessible price point.',
-                tags: ['HDHMR Board', 'Mica Finish', 'Clean Design', 'Value']
             }
         ];
 
@@ -242,8 +207,8 @@
                 card.className = 'vanity-card';
                 card.innerHTML =
                     '<div class="vanity-card-image">' +
-                    '<span class="vanity-emoji">' + series.emoji + '</span>' +
-                    '<span class="vanity-card-badge">' + escapeHTML(series.badge) + '</span>' +
+                    '<img src="' + escapeHTML(series.image) + '" style="width: 100%; height: 100%; object-fit: cover;" alt="' + escapeHTML(series.name) + '">' +
+                    (series.badge ? '<span class="vanity-card-badge">' + escapeHTML(series.badge) + '</span>' : '') +
                     '</div>' +
                     '<div class="vanity-card-body">' +
                     '<h3>' + escapeHTML(series.name) + '</h3>' +
@@ -257,7 +222,7 @@
                     window.aryanCart.addToCart({
                         id: 'vanity-' + series.id,
                         name: series.name + ' (' + series.material + ', HDHMR Board)',
-                        image: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=600&h=400&fit=crop',
+                        image: series.image,
                         price: 0,
                         quantity: 1,
                         config: {

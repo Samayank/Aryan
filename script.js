@@ -65,9 +65,7 @@ var productDatabase = [
     { id: 'c6', name: 'EWC Seat Cover', category: 'cistern', description: 'Standard EWC toilet seat cover ensuring comfort and a perfect fit', icon: getRawImg('ewc.png'), popular: false },
     { id: 'c7', name: 'Jet Seat Cover', category: 'cistern', description: 'Reliable jet toilet seat cover designed for convenience and hygiene', icon: getRawImg('jet.png'), popular: false },
 
-    { id: 'v1', name: 'UV Vanity Cabinet', category: 'vanity', description: 'High-gloss UV coated vanity cabinet, waterproof and termite proof', icon: getRawImg('https://images.unsplash.com/photo-1620626011761-996317b8d101?w=200&h=200&fit=crop'), popular: true },
-    { id: 'v2', name: 'Golden Vanity Cabinet', category: 'vanity', description: 'Luxurious vanity with golden accents and premium HDHMR build', icon: getRawImg('https://images.unsplash.com/photo-1620626011761-996317b8d101?w=200&h=200&fit=crop'), popular: true },
-    { id: 'v3', name: 'Normal Vanity Cabinet', category: 'vanity', description: 'Reliable HDHMR board vanity for everyday storage', icon: getRawImg('https://images.unsplash.com/photo-1620626011761-996317b8d101?w=200&h=200&fit=crop'), popular: false },
+    { id: 'v2', name: 'Golden Vanity Cabinet', category: 'vanity', description: 'Luxurious vanity with golden accents and premium HDHMR build', icon: getRawImg('vanity_Golden.png'), popular: true },
 
     { id: 'u1', name: 'Jumbo Corner Set', category: 'accessories', description: 'Large capacity transparent corner set for maximum storage', icon: getRawImg('jumbo.png'), popular: true },
     { id: 'u2', name: 'Corner Set', category: 'accessories', description: 'Standard transparent corner set for organizing bathroom essentials', icon: getRawImg('normal.png'), popular: false },
