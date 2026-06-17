@@ -671,7 +671,7 @@
                 badge: 'Top Tier',
                 bowl: 'Handcrafted',
                 description: 'Our finest handcrafted sinks - meticulously built with precision square bowls, tight-radius corners, and a flawless finish. The pinnacle of ARYAN craftsmanship. (202 Grade available in 3+ colors)',
-                sizes: ['24×18', '27×18', '30×18', '33×20', '36×18', '37×18', '45×20']
+                sizes: ['27×18', '18×16', '24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
             },
             smart: {
                 name: 'Smart Series',
@@ -851,7 +851,7 @@
             if (currentSeriesId === 'handmade') {
                 var sizes = grade === '202' 
                     ? ['24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
-                    : ['24×18', '27×18', '30×18', '33×20', '36×18', '37×18', '45×20']; // 304 fallback sizes
+                    : ['27×18', '18×16']; // 304 sizes
                     
                 var container = document.getElementById('size-options-container');
                 if (container) {
