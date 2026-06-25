@@ -196,13 +196,10 @@ function showPopularSearches() {
             '<div class="popular-searches">' +
             '<h4>Popular Searches</h4>' +
             '<div class="popular-tags">' +
-            '<div class="popular-tag" onclick="performSearch(\'kitchen sink\')">Kitchen Sink</div>' +
-            '<div class="popular-tag" onclick="performSearch(\'cistern\')">Flush Tanks</div>' +
-            '<div class="popular-tag" onclick="performSearch(\'vanity\')">Vanity Cabinets</div>' +
-            '<div class="popular-tag" onclick="performSearch(\'seat cover\')">Seat Cover</div>' +
-            '<div class="popular-tag" onclick="performSearch(\'organizer\')">Bathroom Organizer</div>' +
-            '<div class="popular-tag" onclick="performSearch(\'towel\')">Towel Ring</div>' +
-            '<div class="popular-tag" onclick="performSearch(\'unbreakable\')">Accessories</div>' +
+            '<div class="popular-tag" onclick="performSearch(\'kitchen\')">Sinks</div>' +
+            '<div class="popular-tag" onclick="performSearch(\'cistern\')">Cisterns</div>' +
+            '<div class="popular-tag" onclick="performSearch(\'accessories\')">Accessories</div>' +
+            '<div class="popular-tag" onclick="performSearch(\'vanity\')">Vanity</div>' +
             '</div></div>';
     }
 }

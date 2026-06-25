@@ -146,12 +146,6 @@
             margin-bottom: 0.25rem;
         }
 
-        .grade-option .grade-nickel {
-            color: var(--accent, #e67e22);
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-        }
 
         .grade-option p {
             color: var(--text-secondary, #666);
@@ -240,12 +234,15 @@
             display: block;
             transition: opacity 0.35s ease, transform 0.35s ease;
             padding: 1rem;
+            transform: scale(1.35);
         }
 
         .showcase-main-image img.fade-out {
             opacity: 0;
-            transform: scale(0.97);
+            transform: scale(1.28);
         }
+
+        /* fade-out handled above with zoom */
 
         .showcase-finish-label {
             position: absolute;
@@ -668,15 +665,15 @@
             handmade: {
                 name: 'Handmade Series',
                 subtitle: null,
-                badge: 'Top Tier',
+                badge: 'Handmade',
                 bowl: 'Handcrafted',
                 description: 'Our finest handcrafted sinks - meticulously built with precision square bowls, tight-radius corners, and a flawless finish. The pinnacle of ARYAN craftsmanship. (202 Grade available in 3+ colors)',
-                sizes: ['27×18', '18×16', '24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
+                sizes: ['24×18', '18×16', '24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
             },
             smart: {
                 name: 'Smart Series',
                 subtitle: null,
-                badge: 'Modern',
+                badge: 'Smart',
                 bowl: 'Square Bowl',
                 description: 'Clean, geometric square bowl design for the modern kitchen. Engineered for functionality with a contemporary aesthetic.',
                 sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
@@ -684,7 +681,7 @@
             premium: {
                 name: 'Premium Series',
                 subtitle: 'The Silk Series',
-                badge: 'Premium',
+                badge: 'Silk',
                 bowl: 'Oval Bowl',
                 description: 'Elegant oval bowl sinks with a silky-smooth finish. A perfect blend of premium quality and timeless style.',
                 sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
@@ -692,7 +689,7 @@
             oscar: {
                 name: 'Oscar Series',
                 subtitle: 'The Deluxe Series',
-                badge: 'Deluxe',
+                badge: 'Oscar',
                 bowl: 'Oval Bowl',
                 description: 'The Deluxe oval bowl series — offering outstanding quality and refined design at an accessible price point.',
                 sizes: ['24×18', '27×18', '30×18', '36×18', '37×18', '45×20']
@@ -700,7 +697,7 @@
             silver: {
                 name: 'Silver Series',
                 subtitle: null,
-                badge: 'Value',
+                badge: 'Silver',
                 bowl: 'Oval Bowl',
                 description: 'Reliable oval bowl sinks with a polished silver finish. Great durability and performance for everyday kitchens.',
                 sizes: ['24×18', '27×18', '30×18', '36×18', '37×18']
@@ -708,7 +705,7 @@
             economy: {
                 name: 'Economy Series',
                 subtitle: null,
-                badge: 'Essentials',
+                badge: 'Economy',
                 bowl: 'Oval Bowl',
                 description: 'Quality oval bowl sinks at an unbeatable value. Durable stainless steel construction for budget-conscious homes.',
                 sizes: ['24×18', '27×18', '30×18', '36×18', '37×18']
@@ -773,12 +770,10 @@
                         '<div class="grade-options">' +
                         '<div class="grade-option" id="grade-304" onclick="selectGrade(\'304\')">' +
                         '<h3>304 Grade</h3>' +
-                        '<div class="grade-nickel"></div>' +
                         '<p>Superior corrosion resistance, excellent durability, and a lasting matte finish.</p>' +
                         '</div>' +
                         '<div class="grade-option" id="grade-202" onclick="selectGrade(\'202\')">' +
                         '<h3>202 Grade</h3>' +
-                        '<div class="grade-nickel"></div>' +
                         '<p>A cost-effective choice with good corrosion resistance and a lasting mirror finish for everyday use.</p>' +
                         '</div>' +
                         '</div>' +
@@ -846,12 +841,12 @@
             selectedGrade = grade;
             document.querySelectorAll('.grade-option').forEach(function (el) { el.classList.remove('selected'); });
             document.getElementById('grade-' + grade).classList.add('selected');
-            document.getElementById('summary-grade').textContent = grade + ' Grade (' + (grade === '304' ? '18% Nickel' : '4% Nickel') + ')';
+            document.getElementById('summary-grade').textContent = grade + ' Grade';
             
             if (currentSeriesId === 'handmade') {
                 var sizes = grade === '202' 
                     ? ['24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
-                    : ['27×18', '18×16']; // 304 sizes
+                    : ['24×18', '18×16']; // 304 sizes
                     
                 var container = document.getElementById('size-options-container');
                 if (container) {
@@ -873,23 +868,24 @@
 
                 // Render finish step with product showcase
                 var defaultImg = 'handmade_single.png';
+                var mirrorStyle = (grade === '304') ? ' style="transform: scale(1.35) scaleX(-1);"' : '';
                 var finishHtml = '<div class="step-label"><span class="step-number">2</span><h2>Choose Finish / Color</h2></div>' +
                     '<div class="product-showcase">' +
                     '<div class="showcase-main-image" id="showcase-main">' +
-                    '<img id="showcase-img" src="https://raw.githubusercontent.com/Samayank/Aryan/main/' + defaultImg + '" alt="Product Preview">' +
+                    '<img id="showcase-img" src="https://raw.githubusercontent.com/Samayank/Aryan/main/' + defaultImg + '" alt="Product Preview"' + mirrorStyle + '>' +
                     '<span class="showcase-finish-label" id="showcase-label">Select a finish</span>' +
                     '</div>' +
                     '<div class="finish-grid">';
                 if (grade === '304') {
-                    // 304 grade: Matte finish ONLY — no mirror
-                    finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'handmade_single.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" class="finish-img" alt="Matte Finish"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
+                    // 304 grade: Matte finish ONLY — uses mirrored 202 matte image (CSS flip)
+                    finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'handmade_single.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" class="finish-img" alt="Matte Finish" style="transform: scaleX(-1);"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
                 } else {
                     // 202 grade: all finishes including Mirror
                     finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'handmade_single.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" class="finish-img" alt="Matte Finish"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
-                    finishHtml += '<div class="finish-card" id="finish-Mirror" onclick="selectFinish(\'Mirror Finish\', \'mirror_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/mirror_handmade.png" class="finish-img" alt="Mirror Finish"><div class="finish-card-body"><h4>Mirror</h4><p>Steel</p></div></div>';
-                    finishHtml += '<div class="finish-card" id="finish-Gold" onclick="selectFinish(\'Gold (Matte)\', \'gold_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/gold_handmade.png" class="finish-img" alt="Gold"><div class="finish-card-body"><h4>Gold</h4><p>Matte</p></div></div>';
-                    finishHtml += '<div class="finish-card" id="finish-Rose" onclick="selectFinish(\'Rose Gold (Matte)\', \'rose_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/rose_handmade.png" class="finish-img" alt="Rose Gold"><div class="finish-card-body"><h4>Rose Gold</h4><p>Matte</p></div></div>';
-                    finishHtml += '<div class="finish-card" id="finish-Black" onclick="selectFinish(\'Black (Matte)\', \'black_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/black_handmade.png" class="finish-img" alt="Black"><div class="finish-card-body"><h4>Black</h4><p>Matte</p></div></div>';
+                    finishHtml += '<div class="finish-card" id="finish-Mirror" onclick="selectFinish(\'Mirror Finish\', \'mirror_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/mirror_handmade.png" class="finish-img" alt="Mirror Finish"><div class="finish-card-body"><h4>Mirror</h4><p>Steel<br>24×18 only</p></div></div>';
+                    finishHtml += '<div class="finish-card" id="finish-Gold" onclick="selectFinish(\'Gold (Matte)\', \'gold_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/gold_handmade.png" class="finish-img" alt="Gold"><div class="finish-card-body"><h4>Gold</h4><p>Matte<br>24×18 only</p></div></div>';
+                    finishHtml += '<div class="finish-card" id="finish-Rose" onclick="selectFinish(\'Rose Gold (Matte)\', \'rose_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/rose_handmade.png" class="finish-img" alt="Rose Gold"><div class="finish-card-body"><h4>Rose Gold</h4><p>Matte<br>24×18 only</p></div></div>';
+                    finishHtml += '<div class="finish-card" id="finish-Black" onclick="selectFinish(\'Black (Matte)\', \'black_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/black_handmade.png" class="finish-img" alt="Black"><div class="finish-card-body"><h4>Black</h4><p>Matte<br>24×18 only</p></div></div>';
                 }
                 finishHtml += '</div></div>';
 
@@ -950,11 +946,57 @@
                 setTimeout(function() {
                     showcaseImg.src = 'https://raw.githubusercontent.com/Samayank/Aryan/main/' + image;
                     showcaseImg.alt = finish;
+                    // Mirror image for 304 grade
+                    if (selectedGrade === '304') {
+                        showcaseImg.style.transform = 'scale(1.35) scaleX(-1)';
+                    } else {
+                        showcaseImg.style.transform = 'scale(1.35)';
+                    }
                     showcaseImg.classList.remove('fade-out');
                 }, 300);
             }
             if (showcaseLabel) {
                 showcaseLabel.textContent = finish;
+            }
+
+            // For 202 grade, non-matte finishes are available in 24×18 only
+            if (selectedGrade === '202' && finish !== 'Matte Finish') {
+                var restrictedSizes = ['24×18'];
+                var container = document.getElementById('size-options-container');
+                if (container) {
+                    container.innerHTML = restrictedSizes.map(function (size) {
+                        return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
+                            '<div class="size-dimension">' + size + '"</div>' +
+                            '<div class="size-label">' + (size.indexOf('×10') > -1 ? 'L × W × D' : 'L × W') + '</div>' +
+                            '</div>';
+                    }).join('');
+                }
+                // Reset size if current selection is not in restricted list
+                if (selectedSize && restrictedSizes.indexOf(selectedSize) === -1) {
+                    selectedSize = null;
+                    document.getElementById('summary-size').textContent = '—';
+                }
+            } else if (selectedGrade === '202' && finish === 'Matte Finish') {
+                // Restore full 202 sizes for matte finish
+                var fullSizes = ['24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18'];
+                var container = document.getElementById('size-options-container');
+                if (container) {
+                    container.innerHTML = fullSizes.map(function (size) {
+                        return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
+                            '<div class="size-dimension">' + size + '"</div>' +
+                            '<div class="size-label">' + (size.indexOf('×10') > -1 ? 'L × W × D' : 'L × W') + '</div>' +
+                            '</div>';
+                    }).join('');
+                }
+                // Re-select if still valid
+                if (selectedSize) {
+                    var el = document.getElementById('size-' + selectedSize.replace(/×/g, 'x'));
+                    if (el) el.classList.add('selected');
+                    else {
+                        selectedSize = null;
+                        document.getElementById('summary-size').textContent = '—';
+                    }
+                }
             }
 
             var sizeStep = document.getElementById('size-step-container');

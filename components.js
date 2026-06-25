@@ -105,21 +105,8 @@ function renderHeader(activePage) {
                                         <div class="dropdown-category">Series</div>
                                         <a href="vanity.html" class="dropdown-item">
                                             <div class="dropdown-item-text">
-                                                <div class="dropdown-item-title">UV (Premium)</div>
-                                                <div class="dropdown-item-subtitle">High-gloss sheet finish</div>
-                                            </div>
-                                        </a>
-                                        <a href="vanity.html" class="dropdown-item">
-                                            <div class="dropdown-item-text">
                                                 <div class="dropdown-item-title">Golden (Deluxe)</div>
                                                 <div class="dropdown-item-subtitle">Elegant mica finish</div>
-                                            </div>
-                                        </a>
-                                        <hr class="dropdown-divider">
-                                        <a href="vanity.html" class="dropdown-item">
-                                            <div class="dropdown-item-text">
-                                                <div class="dropdown-item-title">Normal</div>
-                                                <div class="dropdown-item-subtitle">Reliable everyday build</div>
                                             </div>
                                         </a>
                                     </div>
@@ -181,7 +168,7 @@ function renderFooter() {
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Company</h3>
+                    <h3>Brand</h3>
                     <ul>
                         <li><a href="index.html#about">About ARYAN</a></li>
                     </ul>
@@ -194,7 +181,7 @@ function renderFooter() {
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; ${year} <span class="aryan-text">ARYAN</span> India Pvt. Ltd. All rights reserved. | <a href="#">Privacy Policy</a> <br><br> <span style="font-weight: 500;">Made in India 🇮🇳</span></p>
+                <p><span style="font-weight: 500;">Made in India 🇮🇳</span></p>
             </div>
         </div>
     </footer>`;
@@ -348,9 +335,7 @@ function renderMobileMenu() {
                         <span class="arrow">▼</span>
                     </div>
                     <div class="mobile-sub-menu" id="mobile-cistern-sub">
-                        <a href="vanity.html">UV (Premium)</a>
                         <a href="vanity.html">Golden (Deluxe)</a>
-                        <a href="vanity.html">Normal</a>
                     </div>
                 </li>
                 <li>
@@ -408,13 +393,10 @@ function renderSearchModal() {
                         <div class="popular-searches">
                             <h4>Popular Searches</h4>
                             <div class="popular-tags">
-                                <div class="popular-tag" onclick="performSearch('handmade')">Handmade</div>
-                                <div class="popular-tag" onclick="performSearch('continental')">Continental</div>
-                                <div class="popular-tag" onclick="performSearch('kubix')">Kubix</div>
-                                <div class="popular-tag" onclick="performSearch('deluxe')">Deluxe</div>
-                                <div class="popular-tag" onclick="performSearch('smart')">Smart</div>
-                                <div class="popular-tag" onclick="performSearch('deluxe shelf')">Deluxe Shelf</div>
-                                <div class="popular-tag" onclick="performSearch('set top box holder')">Set Top Box Holder</div>
+                                <div class="popular-tag" onclick="performSearch('kitchen')">Sinks</div>
+                                <div class="popular-tag" onclick="performSearch('cistern')">Cisterns</div>
+                                <div class="popular-tag" onclick="performSearch('accessories')">Accessories</div>
+                                <div class="popular-tag" onclick="performSearch('vanity')">Vanity</div>
                             </div>
                         </div>
                     </div>
