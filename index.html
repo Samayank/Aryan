@@ -13,13 +13,16 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aryansinks.com/">
     <link rel="icon" type="image/png" sizes="32x32"
-        href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+        href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="192x192"
-        href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+        href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
     <link rel="apple-touch-icon"
-        href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+        href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
     <link rel="stylesheet" href="styles.css">
@@ -46,7 +49,7 @@
                     </div>
                 </div>
                 <div class="hero-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png"
+                    <img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png"
                         alt="Premium Stainless Steel Sink" class="hero-product-img">
                 </div>
             </div>
@@ -59,7 +62,7 @@
                 <div class="category-grid">
                     <a href="kitchen.html" class="category-card">
                         <div class="category-image">
-                            <img src="https://raw.githubusercontent.com/Samayank/Aryan/main/smartCard.png"
+                            <img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/smartCard.png"
                                 style="width: 100%; height: 100%; object-fit: cover;" alt="Kitchen Sinks">
                         </div>
                         <div class="category-content">
@@ -70,7 +73,7 @@
                     </a>
                     <a href="cistern.html" class="category-card">
                         <div class="category-image">
-                            <img src="https://raw.githubusercontent.com/Samayank/Aryan/main/continentalCard.png"
+                            <img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/continentalCard.png"
                                 style="width: 100%; height: 100%; object-fit: cover;" alt="Flush Tanks">
                         </div>
                         <div class="category-content">
@@ -81,7 +84,7 @@
                     </a>
                     <a href="unbreak.html" class="category-card">
                         <div class="category-image">
-                            <img src="https://raw.githubusercontent.com/Samayank/Aryan/main/deluxeShelf.png"
+                            <img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/deluxeShelf.png"
                                 style="width: 100%; height: 100%; object-fit: contain;" alt="Accessories">
                         </div>
                         <div class="category-content">
@@ -122,17 +125,15 @@
                         <div class="feature-card-bg">02</div>
                         <div class="feature-tag">Service</div>
                         <div class="feature-line"></div>
-                        <h3 class="feature-heading">Expert Installation</h3>
-                        <p class="feature-text">Free installation by certified technicians across 5000+ service points
-                            in India.</p>
+                        <h3 class="feature-heading">Service Network</h3>
+                        <p class="feature-text">Service is provided at 5000+ service points across India.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-card-bg">03</div>
                         <div class="feature-tag">Assurance</div>
                         <div class="feature-line"></div>
-                        <h3 class="feature-heading">Warranty Covered</h3>
-                        <p class="feature-text">Comprehensive warranty and dedicated after-sales support on all
-                            products.</p>
+                        <h3 class="feature-heading">Refund &amp; Replacement</h3>
+                        <p class="feature-text">Refund or replacement of product within a given period of time in case of any manufacturing defects.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-card-bg">04</div>
@@ -186,7 +187,7 @@
                         <div class="quote-mark">“</div>
                         <div class="testimonial-stars">★★★★★</div>
                         <p class="testimonial-text">The concealed cistern we bought is whisper-quiet and saves water.
-                            ARYAN's service team installed it in under an hour. Very impressed!</p>
+                            Delivery was fast and the product build quality is top-notch. Very impressed!</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">PK</div>
                             <div>
@@ -260,8 +261,8 @@
             <div class="container">
                 <div class="network-header">
                     <span class="network-eyebrow">Across India</span>
-                    <h2 class="network-title">Our Service Network</h2>
-                    <p class="network-subtext">Trusted installation & after-sales support in states across India</p>
+                    <h2 class="network-title">Our Support Network</h2>
+                    <p class="network-subtext">Refund, replacement, and support network across states in India</p>
                 </div>
 
                 <div class="network-stats-strip">
@@ -410,15 +411,15 @@
     </script>
     <script>
         var homeProducts = [
-            { id: 'k1', name: 'Handmade Series Sink', category: 'kitchen', description: 'Our finest handcrafted square bowl kitchen sink — the pinnacle of ARYAN craftsmanship', price: 'View Series →', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png', badge: 'Handmade', features: ['Handcrafted Build', 'Square Bowl', '202 & 304 Grade', 'Tight Radius Corners'], link: 'customize.html?series=handmade' },
-            { id: 'k2', name: 'Smart Series Sink', category: 'kitchen', description: 'Clean geometric square bowl design for the modern kitchen', price: 'View Series →', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/smart.png', badge: 'Smart', features: ['Square Bowl', 'Modern Design', '202 & 304 Grade', 'Premium Finish'], link: 'customize.html?series=smart' },
-            { id: 'k3', name: 'Oscar Series Sink', category: 'kitchen', description: 'Deluxe oval bowl kitchen sink offering great value and refined design', price: 'View Series →', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/oscar.png', badge: 'Oscar', features: ['Oval Bowl', 'Deluxe Build', '202 Grade'], link: 'customize.html?series=oscar' },
-            { id: 'k4', name: 'Economy Series Sink', category: 'kitchen', description: 'Budget friendly oval bowl kitchen sink built for everyday use', price: 'View Series →', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/economy.png', badge: 'Economy', features: ['Oval Bowl', 'Budget-Friendly', '202 Grade'], link: 'customize.html?series=economy' },
-            { id: 'c1', name: 'Continental Cistern', category: 'cistern', description: 'Our most premium cistern — single flush center push & double flush options', price: 'View Series →', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/continental.png', badge: 'Continental', features: ['Single & Double Flush', 'Center Push', 'Most Premium', 'Silent Operation'], link: 'cistern.html' },
-            { id: 'c2', name: 'Curve Cistern', category: 'cistern', description: 'Premium cistern with sleek curved design and single flush side handle', price: 'Enquire for Price', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/curve.png', badge: 'Curve', features: ['Single Flush', 'Side Handle', 'Curved Design', 'Premium Build'], directCart: { series: 'Curve Cistern', subtitle: 'Single Flush, Side Handle', grade: 'Single Flush', size: 'Side Handle', bowl: 'Cistern' } },
+            { id: 'k1', name: 'Handmade Series Sink', category: 'kitchen', description: 'Our finest handcrafted square bowl kitchen sink — the pinnacle of ARYAN craftsmanship', price: 'View Series →', image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png', badge: 'Handmade', features: ['Handcrafted Build', 'Square Bowl', '202 & 304 Grade', 'Tight Radius Corners'], link: 'customize.html?series=handmade' },
+            { id: 'k2', name: 'Smart Series Sink', category: 'kitchen', description: 'Clean geometric square bowl design for the modern kitchen', price: 'View Series →', image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/smart.png', badge: 'Smart', features: ['Square Bowl', 'Modern Design', '202 & 304 Grade', 'Premium Finish'], link: 'customize.html?series=smart' },
+            { id: 'k3', name: 'Oscar Series Sink', category: 'kitchen', description: 'Deluxe oval bowl kitchen sink offering great value and refined design', price: 'View Series →', image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/oscar.png', badge: 'Oscar', features: ['Oval Bowl', 'Deluxe Build', '202 Grade'], link: 'customize.html?series=oscar' },
+            { id: 'k4', name: 'Economy Series Sink', category: 'kitchen', description: 'Budget friendly oval bowl kitchen sink built for everyday use', price: 'View Series →', image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/economy.png', badge: 'Economy', features: ['Oval Bowl', 'Budget-Friendly', '202 Grade'], link: 'customize.html?series=economy' },
+            { id: 'c1', name: 'Continental Cistern', category: 'cistern', description: 'Our most premium cistern — single flush center push & double flush options', price: 'View Series →', image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/continental.png', badge: 'Continental', features: ['Single & Double Flush', 'Center Push', 'Most Premium', 'Silent Operation'], link: 'cistern.html' },
+            { id: 'c2', name: 'Curve Cistern', category: 'cistern', description: 'Premium cistern with sleek curved design and single flush side handle', price: 'Enquire for Price', image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/curve.png', badge: 'Curve', features: ['Single Flush', 'Side Handle', 'Curved Design', 'Premium Build'], directCart: { series: 'Curve Cistern', subtitle: 'Single Flush, Side Handle', grade: 'Single Flush', size: 'Side Handle', bowl: 'Cistern' } },
             { id: 'v2', name: 'Golden Vanity', category: 'vanity', description: 'Deluxe vanity with elegant golden mica finish over HDHMR board', price: 'Enquire for Price', image: 'vanity_Golden.png', badge: 'Golden', features: ['Mica Finish', 'HDHMR Board', 'Golden Tone', 'Durable'], directCart: { series: 'Golden Vanity', subtitle: 'Mica finish', grade: 'Mica', size: 'HDHMR Board', bowl: 'Vanity Cabinet' } },
-            { id: 'u_acc1', name: 'Jumbo Corner Set', category: 'unbreakable', description: 'Large capacity transparent corner set for maximum storage in your bathroom.', price: 'View Details →', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/jumbo.png', badge: 'Jumbo', features: ['Unbreakable', 'Transparent Finish', 'Space Saving'], link: 'unbreak.html' },
-            { id: 'u_acc2', name: 'Bathroom Organizers', category: 'unbreakable', description: 'Versatile multi-purpose bathroom organizers. Available in 2, 3, 4, and 5-in-1 options.', price: 'View Options →', image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/5.png', badge: 'Organizer', features: ['Multiple Options', 'Transparent Finish'], link: 'organizer.html' }
+            { id: 'u_acc1', name: 'Jumbo Corner Set', category: 'unbreakable', description: 'Large capacity transparent corner set for maximum storage in your bathroom.', price: 'View Details →', image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/jumbo.png', badge: 'Jumbo', features: ['Unbreakable', 'Transparent Finish', 'Space Saving'], link: 'unbreak.html' },
+            { id: 'u_acc2', name: 'Bathroom Organizers', category: 'unbreakable', description: 'Versatile multi-purpose bathroom organizers. Available in 2, 3, 4, and 5-in-1 options.', price: 'View Options →', image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/5.png', badge: 'Organizer', features: ['Multiple Options', 'Transparent Finish'], link: 'organizer.html' }
         ];
 
 

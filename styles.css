@@ -494,6 +494,8 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-product-img {
@@ -682,6 +684,8 @@ header {
     justify-content: center;
     font-size: 52px;
     color: #0066cc;
+    position: relative;
+    overflow: hidden;
 }
 
 .category-content {
@@ -2556,4 +2560,59 @@ footer {
     .stats-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ============================================================
+   Image Loading: Shimmer skeleton + fade-in
+   ============================================================ */
+@keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Shimmer overlay on image containers while loading */
+.product-image::before,
+.category-image::before,
+.series-card-image::before,
+.cistern-card-image::before,
+.hero-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.4) 50%,
+        transparent 100%
+    );
+    animation: shimmer 1.5s infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Hide shimmer once image is loaded (JS adds .img-loaded) */
+.product-image.img-loaded::before,
+.category-image.img-loaded::before,
+.series-card-image.img-loaded::before,
+.cistern-card-image.img-loaded::before,
+.hero-image-wrapper.img-loaded::before {
+    display: none;
+}
+
+/* Smooth fade-in for images */
+.product-image img,
+.category-image img,
+.series-card-image img,
+.cistern-card-image img,
+.hero-product-img {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.product-image img.loaded,
+.category-image img.loaded,
+.series-card-image img.loaded,
+.cistern-card-image img.loaded,
+.hero-product-img.loaded {
+    opacity: 1;
 }

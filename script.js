@@ -46,7 +46,7 @@ function getRawImg(filename) {
     if (filename.startsWith('http')) {
         return '<img src="' + filename + '" alt="Product Image" style="width:100%; height:100%; object-fit:contain; border-radius:8px;">';
     }
-    return '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/' + filename + '" alt="Product Image" style="width:100%; height:100%; object-fit:contain; border-radius:8px; padding: 4px;">';
+    return '<img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + filename + '" alt="Product Image" style="width:100%; height:100%; object-fit:contain; border-radius:8px; padding: 4px;">';
 }
 
 var productDatabase = [
@@ -597,6 +597,51 @@ function initSharedListeners() {
     });
 }
 
+/* ---- Image Load Shimmer & Fade-in ---- */
+function initImageLoadHandlers() {
+    var CONTAINERS = '.product-image, .category-image, .series-card-image, .cistern-card-image, .hero-image-wrapper';
+    var IMG_SELECTOR = '.product-image img, .category-image img, .series-card-image img, .cistern-card-image img, .hero-product-img';
+
+    function handleImg(img) {
+        if (img.classList.contains('loaded')) return;
+        if (img.complete && img.naturalWidth > 0) {
+            img.classList.add('loaded');
+            var container = img.closest(CONTAINERS);
+            if (container) container.classList.add('img-loaded');
+        } else {
+            img.addEventListener('load', function onLoad() {
+                img.classList.add('loaded');
+                var container = img.closest(CONTAINERS);
+                if (container) container.classList.add('img-loaded');
+                img.removeEventListener('load', onLoad);
+            });
+            img.addEventListener('error', function onErr() {
+                // Still show image area even if load fails
+                img.classList.add('loaded');
+                var container = img.closest(CONTAINERS);
+                if (container) container.classList.add('img-loaded');
+                img.removeEventListener('error', onErr);
+            });
+        }
+    }
+
+    // Process existing images
+    document.querySelectorAll(IMG_SELECTOR).forEach(handleImg);
+
+    // Watch for dynamically added images (product cards rendered by JS)
+    var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+            m.addedNodes.forEach(function (node) {
+                if (node.nodeType !== 1) return;
+                if (node.tagName === 'IMG') handleImg(node);
+                var imgs = node.querySelectorAll ? node.querySelectorAll(IMG_SELECTOR) : [];
+                imgs.forEach(handleImg);
+            });
+        });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+}
+
 /* ---- Master Initialization ---- */
 function initAryanWebsite(activePage) {
     // Render shared components
@@ -612,6 +657,7 @@ function initAryanWebsite(activePage) {
     initCounters();
     initBackToTop();
     initParticles();
+    initImageLoadHandlers();
     // Update cart icon
     if (window.aryanCart) {
         window.aryanCart.updateCartIcon();
