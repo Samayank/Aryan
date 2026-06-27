@@ -50,7 +50,8 @@ function getRawImg(filename) {
 }
 
 var productDatabase = [
-    { id: 'k1', name: 'Handmade Series Sink', category: 'kitchen', description: 'Our finest handcrafted square bowl kitchen sink — the pinnacle of ARYAN craftsmanship', icon: getRawImg('handmade_single.png'), popular: true },
+    { id: 'k1a', name: 'Handmade 304 Series Sink', category: 'kitchen', description: 'Our finest handcrafted sink in premium 304 grade stainless steel — matte finish', icon: getRawImg('304_handmade.png'), popular: true },
+    { id: 'k1b', name: 'Handmade 202 Series Sink', category: 'kitchen', description: 'Our finest handcrafted sink in 202 grade — available in 5 finishes including Gold and Rose Gold', icon: getRawImg('handmade_single.png'), popular: true },
     { id: 'k2', name: 'Smart Series Sink', category: 'kitchen', description: 'Clean geometric square bowl design for the modern kitchen', icon: getRawImg('smart.png'), popular: true },
     { id: 'k3', name: 'Premium Series Sink', category: 'kitchen', description: 'Elegant oval bowl sinks with a silky-smooth finish', icon: getRawImg('silk.png'), popular: true },
     { id: 'k4', name: 'Oscar Series Sink', category: 'kitchen', description: 'Deluxe oval bowl kitchen sink offering great value and refined design', icon: getRawImg('oscar.png'), popular: false },

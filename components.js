@@ -23,10 +23,16 @@ function renderHeader(activePage) {
                                 <div class="dropdown-content mega-menu">
                                     <div class="dropdown-list">
                                         <div class="dropdown-category">Series</div>
-                                        <a href="customize.html?series=handmade" class="dropdown-item">
+                                        <a href="customize.html?series=handmade-304" class="dropdown-item">
                                             <div class="dropdown-item-text">
-                                                <div class="dropdown-item-title">Handmade <span class="nav-badge popular">Popular</span></div>
-                                                <div class="dropdown-item-subtitle">304 & 202 Grade</div>
+                                                <div class="dropdown-item-title">Handmade 304 <span class="nav-badge popular">Popular</span></div>
+                                                <div class="dropdown-item-subtitle">Premium grade, matte finish</div>
+                                            </div>
+                                        </a>
+                                        <a href="customize.html?series=handmade-202" class="dropdown-item">
+                                            <div class="dropdown-item-text">
+                                                <div class="dropdown-item-title">Handmade 202</div>
+                                                <div class="dropdown-item-subtitle">3+ color options</div>
                                             </div>
                                         </a>
                                         <a href="customize.html?series=smart" class="dropdown-item">
@@ -61,7 +67,7 @@ function renderHeader(activePage) {
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="dropdown-image-panel" style="background-image: url('https://raw.githubusercontent.com/Samayank/Aryan/main/smartCard.png');"></div>
+                                    <div class="dropdown-image-panel" style="background-image: url('https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/smartCard.png');"></div>
                                 </div>
                             </li>
                             <li class="dropdown">
@@ -95,7 +101,7 @@ function renderHeader(activePage) {
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="dropdown-image-panel" style="background-image: url('https://raw.githubusercontent.com/Samayank/Aryan/main/continentalCard.png');"></div>
+                                    <div class="dropdown-image-panel" style="background-image: url('https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/continentalCard.png');"></div>
                                 </div>
                             </li>
                             <li class="dropdown">
@@ -125,7 +131,7 @@ function renderHeader(activePage) {
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="dropdown-image-panel" style="background-image: url('https://raw.githubusercontent.com/Samayank/Aryan/main/deluxeShelf.png');"></div>
+                                    <div class="dropdown-image-panel" style="background-image: url('https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/deluxeShelf.png');"></div>
                                 </div>
                             </li>
                             <li><a href="index.html#about">About</a></li>
@@ -309,7 +315,8 @@ function renderMobileMenu() {
                         <span class="arrow">▼</span>
                     </div>
                     <div class="mobile-sub-menu" id="mobile-kitchen-sub">
-                        <a href="customize.html?series=handmade">Handmade</a>
+                        <a href="customize.html?series=handmade-304">Handmade 304</a>
+                        <a href="customize.html?series=handmade-202">Handmade 202</a>
                         <a href="customize.html?series=smart">Smart Series</a>
                         <a href="customize.html?series=premium">Premium (Silk)</a>
                         <a href="customize.html?series=oscar">Oscar (Deluxe)</a>

@@ -11,16 +11,18 @@
     <meta property="og:description"
         content="Build your perfect kitchen sink — choose series, grade, and size from ARYAN India.">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         .customize-layout {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
@@ -65,6 +67,29 @@
         }
 
         /* Step sections */
+        .customize-layout-grid {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+        .customize-left-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .customize-right-col {
+            width: 480px;
+            flex-shrink: 0;
+        }
+        @media (max-width: 900px) {
+            .customize-layout-grid {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .customize-right-col {
+                width: 100%;
+            }
+        }
         .customize-step {
             margin-bottom: 2.5rem;
         }
@@ -662,13 +687,23 @@
     <script src="script.js"></script>
     <script>
         var seriesData = {
-            handmade: {
-                name: 'Handmade Series',
-                subtitle: null,
-                badge: 'Handmade',
-                bowl: 'Handcrafted',
-                description: 'Our finest handcrafted sinks - meticulously built with precision square bowls, tight-radius corners, and a flawless finish. The pinnacle of ARYAN craftsmanship. (202 Grade available in 3+ colors)',
-                sizes: ['24×18', '18×16', '24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
+            'handmade-304': {
+                name: 'Handmade 304',
+                subtitle: 'Premium Grade',
+                badge: '304 Handmade',
+                bowl: 'Single Bowl',
+                grade: '304',
+                description: 'Our finest handcrafted sinks in premium 304 grade stainless steel — superior corrosion resistance, tight-radius corners, and a flawless matte finish.',
+                sizes: ['24×18', '18×16', '45×20', '37×18']
+            },
+            'handmade-202': {
+                name: 'Handmade 202',
+                subtitle: '3+ Color Options',
+                badge: '202 Handmade',
+                bowl: 'Single Bowl',
+                grade: '202',
+                description: 'Our finest handcrafted sinks in 202 grade — available in Matte, Mirror, Gold, Rose Gold & Black finishes with tight-radius corners.',
+                sizes: ['24×18×10', '21×18×10', '18×16×10', '27×18×10', '30×18×10']
             },
             smart: {
                 name: 'Smart Series',
@@ -720,7 +755,7 @@
 
         function getSeriesFromURL() {
             var params = new URLSearchParams(window.location.search);
-            return params.get('series') || 'handmade';
+            return params.get('series') || 'handmade-304';
         }
 
         function renderCustomize() {
@@ -743,9 +778,15 @@
             selectedSize = null;
             selectedFinish = null;
 
-            var isHandmade = seriesId === 'handmade';
-            if (!isHandmade) {
-                // Non-handmade: no grade customization; keep grade fixed so cart formatting doesn't break
+            var isHandmade304 = seriesId === 'handmade-304';
+            var isHandmade202 = seriesId === 'handmade-202';
+            var isHandmade = isHandmade304 || isHandmade202;
+
+            if (isHandmade) {
+                // Grade is pre-set based on which card was clicked
+                selectedGrade = series.grade;
+            } else {
+                // Non-handmade: no grade customization
                 selectedGrade = '202';
             }
 
@@ -758,160 +799,116 @@
                 '</div>' +
 
                 '<div class="bowl-info">' +
-                '<span class="bowl-chip">🔲 ' + escapeHTML(series.bowl) + '</span>' +
+                '<span class="bowl-chip" id="header-bowl-chip">🔲 ' + escapeHTML(series.bowl) + '</span>' +
                 '<span class="bowl-chip">🔩 Stainless Steel</span>' +
-                '</div>' +
-
-                (isHandmade
-                    ? (
-                        '<!-- Step 1: Grade -->' +
-                        '<div class="customize-step">' +
-                        '<div class="step-label"><span class="step-number">1</span><h2>Choose Steel Grade</h2></div>' +
-                        '<div class="grade-options">' +
-                        '<div class="grade-option" id="grade-304" onclick="selectGrade(\'304\')">' +
-                        '<h3>304 Grade</h3>' +
-                        '<p>Superior corrosion resistance, excellent durability, and a lasting matte finish.</p>' +
-                        '</div>' +
-                        '<div class="grade-option" id="grade-202" onclick="selectGrade(\'202\')">' +
-                        '<h3>202 Grade</h3>' +
-                        '<p>A cost-effective choice with good corrosion resistance and a lasting mirror finish for everyday use.</p>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-
-                        '<!-- Step 2: Finish & Color -->' +
-                        '<div class="customize-step" id="finish-step-container" style="display:none;"></div>' +
-                        '<!-- Step 3: Size -->' +
-                        '<div class="customize-step" id="size-step-container" style="display:none;">' +
-                        '<div class="step-label"><span class="step-number">3</span><h2>Choose Size (inches)</h2></div>' +
-                        '<div class="size-options" id="size-options-container">' +
-                        series.sizes.map(function (size) {
-                            return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
-                                '<div class="size-dimension">' + size + '"</div>' +
-                                '<div class="size-label">' + (size.indexOf('×10') > -1 ? 'L × W × D' : 'L × W') + '</div>' +
-                                '</div>';
-                        }).join('') +
-                        '</div>' +
-                        '</div>'
-                    )
-                    : (
-                        '<!-- Step 1: Size (Popup) -->' +
-                        '<div class="customize-step">' +
-                        '<div class="step-label"><span class="step-number">1</span><h2>Choose Size (inches)</h2></div>' +
-                        '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">' +
-                        '<button class="btn btn-primary" type="button" onclick="openSizePopup()" style="padding:12px 18px;">Choose Size</button>' +
-                        '<span style="color:var(--text-secondary,#666);font-size:0.9rem;">You’ll be prompted to pick a size for this series.</span>' +
-                        '</div>' +
-                        '</div>'
-                    )
-                ) +
-
-                '<!-- Summary -->' +
-                '<div class="customize-step">' +
-                '<div class="step-label"><span class="step-number">' + (isHandmade ? '4' : '2') + '</span><h2>Your Configuration</h2></div>' +
-                '<div class="summary-card" id="summary-card">' +
-                '<h3>Order Summary</h3>' +
-                '<div class="summary-row"><span class="label">Series</span><span class="value">' + escapeHTML(series.name) + (series.subtitle ? ' — ' + escapeHTML(series.subtitle) : '') + '</span></div>' +
-                '<div class="summary-row"><span class="label">Bowl Type</span><span class="value">' + escapeHTML(series.bowl) + '</span></div>' +
-                (isHandmade
-                    ? (
-                        '<div class="summary-row"><span class="label">Steel Grade</span><span class="value" id="summary-grade">—</span></div>' +
-                        '<div class="summary-row"><span class="label">Finish</span><span class="value" id="summary-finish">—</span></div>'
-                    )
-                    : ''
-                ) +
-                '<div class="summary-row"><span class="label">Size</span><span class="value" id="summary-size">—</span></div>' +
-                '<div class="summary-actions" id="summary-actions" style="display:none;">' +
-                '<button class="btn btn-primary" id="add-to-cart-btn" style="width:100%;font-size:1.05rem;padding:14px 24px;">🛒 Add to Cart</button>' +
-                '</div>' +
-                '<p class="note-text">Prices vary by city and dealer. Add items to cart and enquire via WhatsApp for the best quote.</p>' +
-                '</div>' +
+                '<span class="bowl-chip">📋 ' + escapeHTML(series.grade || '202') + ' Grade</span>' +
                 '</div>';
+
+            if (isHandmade) {
+                // Handmade flow: Step 1 = Finish/Color, Step 2 = Size
+                html +=
+                    '<div class="customize-layout-grid">' +
+                    '<div class="customize-left-col">' +
+                    '<!-- Step 1: Finish & Color -->' +
+                    '<div class="customize-step" id="finish-step-container"></div>' +
+                    '<!-- Step 2: Size removed -> triggered via popup -->' +
+                    '</div>' +
+
+                    '<div class="customize-right-col">' +
+                    '<!-- Summary -->' +
+                    '<div class="customize-step">' +
+                    '<div class="step-label"><span class="step-number">2</span><h2>Your Configuration</h2></div>' +
+                    '<div class="summary-card" id="summary-card">' +
+                    '<h3>Order Summary</h3>' +
+                    '<div class="summary-row"><span class="label">Series</span><span class="value">' + escapeHTML(series.name) + (series.subtitle ? ' — ' + escapeHTML(series.subtitle) : '') + '</span></div>' +
+                    '<div class="summary-row"><span class="label">Bowl Type</span><span class="value" id="summary-bowl">' + escapeHTML(series.bowl) + '</span></div>' +
+                    '<div class="summary-row"><span class="label">Steel Grade</span><span class="value" id="summary-grade">' + escapeHTML(series.grade) + ' Grade</span></div>' +
+                    '<div class="summary-row"><span class="label">Finish</span><span class="value" id="summary-finish">—</span></div>' +
+                    '<div class="summary-row"><span class="label">Size</span><span class="value" id="summary-size">—</span></div>' +
+                    '<div class="summary-actions" id="summary-actions" style="display:none;">' +
+                    '<button class="btn btn-primary" id="add-to-cart-btn" style="width:100%;font-size:1.05rem;padding:14px 24px;">🛒 Add to Cart</button>' +
+                    '</div>' +
+                    '<p class="note-text">Prices vary by city and dealer. Add items to cart and enquire via WhatsApp for the best quote.</p>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+            } else {
+                // Non-handmade flow: Step 1 = Size (popup), Step 2 = Summary
+                html +=
+                    '<!-- Step 1: Size (Popup) -->' +
+                    '<div class="customize-step">' +
+                    '<div class="step-label"><span class="step-number">1</span><h2>Choose Size (inches)</h2></div>' +
+                    '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">' +
+                    '<button class="btn btn-primary" type="button" onclick="openSizePopup()" style="padding:12px 18px;">Choose Size</button>' +
+                    '<span style="color:var(--text-secondary,#666);font-size:0.9rem;">You\'ll be prompted to pick a size for this series.</span>' +
+                    '</div>' +
+                    '</div>' +
+
+                    '<!-- Summary -->' +
+                    '<div class="customize-step">' +
+                    '<div class="step-label"><span class="step-number">2</span><h2>Your Configuration</h2></div>' +
+                    '<div class="summary-card" id="summary-card">' +
+                    '<h3>Order Summary</h3>' +
+                    '<div class="summary-row"><span class="label">Series</span><span class="value">' + escapeHTML(series.name) + (series.subtitle ? ' — ' + escapeHTML(series.subtitle) : '') + '</span></div>' +
+                    '<div class="summary-row"><span class="label">Bowl Type</span><span class="value" id="summary-bowl">' + escapeHTML(series.bowl) + '</span></div>' +
+                    '<div class="summary-row"><span class="label">Size</span><span class="value" id="summary-size">—</span></div>' +
+                    '<div class="summary-actions" id="summary-actions" style="display:none;">' +
+                    '<button class="btn btn-primary" id="add-to-cart-btn" style="width:100%;font-size:1.05rem;padding:14px 24px;">🛒 Add to Cart</button>' +
+                    '</div>' +
+                    '<p class="note-text">Prices vary by city and dealer. Add items to cart and enquire via WhatsApp for the best quote.</p>' +
+                    '</div>' +
+                    '</div>';
+            }
 
             document.getElementById('customize-content').innerHTML = html;
 
-            // Non-handmade: immediately prompt for size via popup
-            if (!isHandmade) {
+            if (isHandmade) {
+                // Immediately render finish step (grade is already pre-set)
+                renderFinishStep();
+            } else {
+                // Non-handmade: immediately prompt for size via popup
                 openSizePopup();
             }
         }
 
-        function selectGrade(grade) {
-            var previousGrade = selectedGrade;
-            selectedGrade = grade;
-            document.querySelectorAll('.grade-option').forEach(function (el) { el.classList.remove('selected'); });
-            document.getElementById('grade-' + grade).classList.add('selected');
-            document.getElementById('summary-grade').textContent = grade + ' Grade';
-            
-            if (currentSeriesId === 'handmade') {
-                var sizes = grade === '202' 
-                    ? ['24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
-                    : ['24×18', '18×16']; // 304 sizes
-                    
-                var container = document.getElementById('size-options-container');
-                if (container) {
-                    container.innerHTML = sizes.map(function (size) {
-                        return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
-                            '<div class="size-dimension">' + size + '"</div>' +
-                            '<div class="size-label">' + (size.indexOf('×10') > -1 ? 'L × W × D' : 'L × W') + '</div>' +
-                            '</div>';
-                    }).join('');
-                }
-                
-                if (selectedSize && sizes.indexOf(selectedSize) === -1) {
-                    selectedSize = null;
-                    document.getElementById('summary-size').textContent = '—';
-                } else if (selectedSize) {
-                    var el = document.getElementById('size-' + selectedSize.replace(/×/g, 'x'));
-                    if (el) el.classList.add('selected');
-                }
-
-                // Render finish step with product showcase
-                var defaultImg = 'handmade_single.png';
-                var mirrorStyle = (grade === '304') ? ' style="transform: scale(1.35) scaleX(-1);"' : '';
-                var finishHtml = '<div class="step-label"><span class="step-number">2</span><h2>Choose Finish / Color</h2></div>' +
-                    '<div class="product-showcase">' +
-                    '<div class="showcase-main-image" id="showcase-main">' +
-                    '<img id="showcase-img" src="https://raw.githubusercontent.com/Samayank/Aryan/main/' + defaultImg + '" alt="Product Preview"' + mirrorStyle + '>' +
-                    '<span class="showcase-finish-label" id="showcase-label">Select a finish</span>' +
-                    '</div>' +
-                    '<div class="finish-grid">';
-                if (grade === '304') {
-                    // 304 grade: Matte finish ONLY — uses mirrored 202 matte image (CSS flip)
-                    finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'handmade_single.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" class="finish-img" alt="Matte Finish" style="transform: scaleX(-1);"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
-                } else {
-                    // 202 grade: all finishes including Mirror
-                    finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'handmade_single.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" class="finish-img" alt="Matte Finish"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
-                    finishHtml += '<div class="finish-card" id="finish-Mirror" onclick="selectFinish(\'Mirror Finish\', \'mirror_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/mirror_handmade.png" class="finish-img" alt="Mirror Finish"><div class="finish-card-body"><h4>Mirror</h4><p>Steel<br>24×18 only</p></div></div>';
-                    finishHtml += '<div class="finish-card" id="finish-Gold" onclick="selectFinish(\'Gold (Matte)\', \'gold_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/gold_handmade.png" class="finish-img" alt="Gold"><div class="finish-card-body"><h4>Gold</h4><p>Matte<br>24×18 only</p></div></div>';
-                    finishHtml += '<div class="finish-card" id="finish-Rose" onclick="selectFinish(\'Rose Gold (Matte)\', \'rose_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/rose_handmade.png" class="finish-img" alt="Rose Gold"><div class="finish-card-body"><h4>Rose Gold</h4><p>Matte<br>24×18 only</p></div></div>';
-                    finishHtml += '<div class="finish-card" id="finish-Black" onclick="selectFinish(\'Black (Matte)\', \'black_handmade.png\')"><img src="https://raw.githubusercontent.com/Samayank/Aryan/main/black_handmade.png" class="finish-img" alt="Black"><div class="finish-card-body"><h4>Black</h4><p>Matte<br>24×18 only</p></div></div>';
-                }
-                finishHtml += '</div></div>';
-
-                var finishStep = document.getElementById('finish-step-container');
-                if (finishStep) {
-                    finishStep.innerHTML = finishHtml;
-                    finishStep.style.display = 'block';
-                }
-
-                if (previousGrade !== grade || !selectedFinish) {
-                    selectedFinish = null;
-                    window.selectedFinishImage = null;
-                    document.getElementById('summary-finish').textContent = '—';
-                    var sizeStep = document.getElementById('size-step-container');
-                    if (sizeStep) sizeStep.style.display = 'block';
-                } else {
-                    var finishId = selectedFinish.split(' ')[0];
-                    var fEl = document.getElementById('finish-' + finishId);
-                    if (fEl) fEl.classList.add('selected');
-                }
+        // Renders the finish step — called immediately on load (grade is pre-set)
+        function renderFinishStep() {
+            var grade = selectedGrade;
+            var defaultImg = (grade === '304') ? '304_handmade.png' : 'handmade_single.png';
+            var finishHtml = '<div class="step-label"><span class="step-number">1</span><h2>Choose Finish / Color</h2></div>' +
+                '<div class="product-showcase">' +
+                '<div class="showcase-main-image" id="showcase-main">' +
+                '<img id="showcase-img" src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + defaultImg + '" alt="Product Preview">' +
+                '<span class="showcase-finish-label" id="showcase-label">Select a finish</span>' +
+                '</div>' +
+                '<div class="finish-grid">';
+            if (grade === '304') {
+                // 304 grade: Matte finish ONLY
+                finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'304_handmade.png\')"><img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/304_handmade.png" class="finish-img" alt="Matte Finish"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
             } else {
-                selectedFinish = 'Mirror Finish';
-                window.selectedFinishImage = null;
-                var summaryEl = document.getElementById('summary-finish');
-                if (summaryEl) summaryEl.textContent = selectedFinish;
+                // 202 grade: all finishes
+                finishHtml += '<div class="finish-card" id="finish-Matte" onclick="selectFinish(\'Matte Finish\', \'handmade_single.png\')"><img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png" class="finish-img" alt="Matte Finish"><div class="finish-card-body"><h4>Matte</h4><p>Steel</p></div></div>';
+                finishHtml += '<div class="finish-card" id="finish-Mirror" onclick="selectFinish(\'Mirror Finish\', \'mirror_handmade.png\')"><img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/mirror_handmade.png" class="finish-img" alt="Mirror Finish"><div class="finish-card-body"><h4>Mirror</h4><p>Steel<br>24×18 only</p></div></div>';
+                finishHtml += '<div class="finish-card" id="finish-Gold" onclick="selectFinish(\'Gold (Matte)\', \'gold_handmade.png\')"><img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/gold_handmade.png" class="finish-img" alt="Gold"><div class="finish-card-body"><h4>Gold</h4><p>Matte<br>24×18 only</p></div></div>';
+                finishHtml += '<div class="finish-card" id="finish-Rose" onclick="selectFinish(\'Rose Gold (Matte)\', \'rose_handmade.png\')"><img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/rose_handmade.png" class="finish-img" alt="Rose Gold"><div class="finish-card-body"><h4>Rose Gold</h4><p>Matte<br>24×18 only</p></div></div>';
+                finishHtml += '<div class="finish-card" id="finish-Black" onclick="selectFinish(\'Black (Matte)\', \'black_handmade.png\')"><img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/black_handmade.png" class="finish-img" alt="Black"><div class="finish-card-body"><h4>Black</h4><p>Matte<br>24×18 only</p></div></div>';
             }
+            finishHtml += '</div></div>';
+
+            var finishStep = document.getElementById('finish-step-container');
+            if (finishStep) {
+                finishStep.innerHTML = finishHtml;
+                finishStep.style.display = 'block';
+            }
+            updateSummaryActions();
+        }
+
+        // Legacy — kept for backward compat but handmade flow no longer calls this
+        function selectGrade(grade) {
+            selectedGrade = grade;
+            var gradeEl = document.getElementById('summary-grade');
+            if (gradeEl) gradeEl.textContent = grade + ' Grade';
             updateSummaryActions();
         }
 
@@ -944,14 +941,10 @@
             if (showcaseImg && image) {
                 showcaseImg.classList.add('fade-out');
                 setTimeout(function() {
-                    showcaseImg.src = 'https://raw.githubusercontent.com/Samayank/Aryan/main/' + image;
+                    showcaseImg.src = 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + image;
                     showcaseImg.alt = finish;
-                    // Mirror image for 304 grade
-                    if (selectedGrade === '304') {
-                        showcaseImg.style.transform = 'scale(1.35) scaleX(-1)';
-                    } else {
-                        showcaseImg.style.transform = 'scale(1.35)';
-                    }
+                    // Set scale without mirroring
+                    showcaseImg.style.transform = 'scale(1.35)';
                     showcaseImg.classList.remove('fade-out');
                 }, 300);
             }
@@ -961,59 +954,44 @@
 
             // For 202 grade, non-matte finishes are available in 24×18 only
             if (selectedGrade === '202' && finish !== 'Matte Finish') {
-                var restrictedSizes = ['24×18'];
-                var container = document.getElementById('size-options-container');
-                if (container) {
-                    container.innerHTML = restrictedSizes.map(function (size) {
-                        return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
-                            '<div class="size-dimension">' + size + '"</div>' +
-                            '<div class="size-label">' + (size.indexOf('×10') > -1 ? 'L × W × D' : 'L × W') + '</div>' +
-                            '</div>';
-                    }).join('');
-                }
+                window.currentAvailableSizes = ['24×18'];
                 // Reset size if current selection is not in restricted list
-                if (selectedSize && restrictedSizes.indexOf(selectedSize) === -1) {
+                if (selectedSize && window.currentAvailableSizes.indexOf(selectedSize) === -1) {
                     selectedSize = null;
                     document.getElementById('summary-size').textContent = '—';
                 }
             } else if (selectedGrade === '202' && finish === 'Matte Finish') {
                 // Restore full 202 sizes for matte finish
-                var fullSizes = ['24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18'];
-                var container = document.getElementById('size-options-container');
-                if (container) {
-                    container.innerHTML = fullSizes.map(function (size) {
-                        return '<div class="size-option" id="size-' + size.replace(/×/g, 'x') + '" onclick="selectSize(\'' + size + '\')">' +
-                            '<div class="size-dimension">' + size + '"</div>' +
-                            '<div class="size-label">' + (size.indexOf('×10') > -1 ? 'L × W × D' : 'L × W') + '</div>' +
-                            '</div>';
-                    }).join('');
-                }
-                // Re-select if still valid
-                if (selectedSize) {
-                    var el = document.getElementById('size-' + selectedSize.replace(/×/g, 'x'));
-                    if (el) el.classList.add('selected');
-                    else {
-                        selectedSize = null;
-                        document.getElementById('summary-size').textContent = '—';
-                    }
-                }
+                window.currentAvailableSizes = ['24×18×10', '21×18×10', '18×16×10', '27×18×10', '30×18×10'];
+            } else {
+                window.currentAvailableSizes = null;
             }
 
-            var sizeStep = document.getElementById('size-step-container');
-            if (sizeStep) sizeStep.style.display = 'block';
+
+            // Auto-open size popup when finish is selected
+            setTimeout(openSizePopup, 100);
 
             updateSummaryActions();
         }
 
         function selectSize(size) {
             selectedSize = size;
-            // Size tiles exist only for handmade flow
-            if (document.querySelectorAll('.size-option').length) {
-                document.querySelectorAll('.size-option').forEach(function (el) { el.classList.remove('selected'); });
-                var el = document.getElementById('size-' + size.replace('×', 'x'));
-                if (el) el.classList.add('selected');
-            }
+            
+            
             document.getElementById('summary-size').textContent = size + ' inches';
+
+            var bowlEl = document.getElementById('summary-bowl');
+            var headerBowlChip = document.getElementById('header-bowl-chip');
+            if (bowlEl && currentSeries) {
+                if (size === '45×20' || size === '37×18') {
+                    bowlEl.textContent = 'Double Bowl';
+                    if (headerBowlChip) headerBowlChip.innerHTML = '🔲 Double Bowl';
+                } else {
+                    bowlEl.textContent = currentSeries.bowl;
+                    if (headerBowlChip) headerBowlChip.innerHTML = '🔲 ' + escapeHTML(currentSeries.bowl);
+                }
+            }
+
             updateSummaryActions();
         }
 
@@ -1022,10 +1000,15 @@
             var grid = document.getElementById('sizePopupGrid');
             if (!overlay || !grid || !currentSeries) return;
 
-            grid.innerHTML = (currentSeries.sizes || []).map(function (s) {
+            var sizesToUse = window.currentAvailableSizes || currentSeries.sizes || [];
+
+            grid.innerHTML = sizesToUse.map(function (s) {
+                var isDouble = s === '45×20' || s === '37×18';
+                var dim = s.indexOf('×10') > -1 ? 'L × W × D' : 'L × W';
+                if (isDouble) dim += '<br><span style="font-size:0.85em;opacity:0.8;">Double Bowl</span>';
                 return '<button type="button" class="size-popup-btn" onclick="selectPopupSize(\'' + s + '\')">' +
                     escapeHTML(s) + '"' +
-                    '<span class="sub">L × W</span>' +
+                    '<span class="sub">' + dim + '</span>' +
                     '</button>';
             }).join('');
 
@@ -1046,7 +1029,7 @@
         }
 
         function updateSummaryActions() {
-            var isHandmade = currentSeriesId === 'handmade';
+            var isHandmade = currentSeriesId === 'handmade-304' || currentSeriesId === 'handmade-202';
             var ready = isHandmade
                 ? !!(selectedGrade && selectedSize && selectedFinish)
                 : !!selectedSize;
@@ -1056,7 +1039,7 @@
                 var seriesId = currentSeriesId || getSeriesFromURL();
                 var cartBtn = document.getElementById('add-to-cart-btn');
                 cartBtn.onclick = function () {
-                    var isHm = seriesId === 'handmade';
+                    var isHm = seriesId === 'handmade-304' || seriesId === 'handmade-202';
                     var finishText = (isHm && selectedFinish) ? (', ' + selectedFinish) : '';
                     var base = series.name + (series.subtitle ? ' (' + series.subtitle + ')' : '');
                     var itemName = isHm
@@ -1064,22 +1047,22 @@
                         : (base + ' — ' + selectedSize + '"');
                     var cartItem = {
                         id: isHm
-                            ? (seriesId + '-' + selectedGrade + '-' + (selectedFinish ? selectedFinish.toLowerCase().replace(/\s+/g, '-') : 'finish') + '-' + selectedSize.replace('×', 'x'))
-                            : (seriesId + '-202-' + selectedSize.replace('×', 'x')),
+                            ? (seriesId + '-' + (selectedFinish ? selectedFinish.toLowerCase().replace(/\s+/g, '-') : 'finish') + '-' + selectedSize.replace(/×/g, 'x'))
+                            : (seriesId + '-202-' + selectedSize.replace(/×/g, 'x')),
                         name: itemName,
                         image: (isHm && window.selectedFinishImage)
-                            ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/' + window.selectedFinishImage
+                            ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + window.selectedFinishImage
                             : (seriesId === 'smart'
-                            ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/smart.png'
+                            ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/smart.png'
                             : (seriesId === 'premium'
-                                ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silk.png'
+                                ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silk.png'
                                 : (seriesId === 'silver'
-                                    ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silver.png'
+                                    ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silver.png'
                                     : (seriesId === 'oscar'
-                                        ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/oscar.png'
+                                        ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/oscar.png'
                                         : (seriesId === 'economy'
-                                            ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/economy.png'
-                                            : 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png'))))),
+                                            ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/economy.png'
+                                            : 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png'))))),
                         price: 0,
                         quantity: 1,
                         config: {
@@ -1088,7 +1071,7 @@
                             grade: isHm ? selectedGrade : '202',
                             finish: isHm ? (selectedFinish || null) : null,
                             size: selectedSize,
-                            bowl: series.bowl
+                            bowl: document.getElementById('summary-bowl') ? document.getElementById('summary-bowl').textContent : series.bowl
                         }
                     };
                     window.aryanCart.addToCart(cartItem);

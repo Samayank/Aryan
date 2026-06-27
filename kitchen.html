@@ -12,11 +12,13 @@
         content="Premium stainless steel kitchen sinks from ARYAN India — 6 distinct series, with Handmade available in 202 & 304 grade.">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" sizes="32x32"
-        href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
+        href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="192x192"
-        href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+        href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
     <link rel="apple-touch-icon"
-        href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+        href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -332,15 +334,26 @@
     <script>
         var seriesData = [
             {
-                id: 'handmade',
-                name: 'Handmade Series',
-                subtitle: null,
-                badge: 'Handmade',
-                bowl: 'Handcrafted',
+                id: 'handmade-304',
+                name: 'Handmade 304',
+                subtitle: 'Premium Grade',
+                badge: '304 Handmade',
+                bowl: 'Single Bowl',
                 emoji: '🔶',
-                description: 'Our finest handcrafted sinks - meticulously built with precision, tight-radius corners, and a flawless finish. The pinnacle of ARYAN craftsmanship. (202 Grade available in 3+ colors)',
-                tags: ['Handcrafted', '202 & 304 Grade'],
-                sizes: ['24×18', '18×16', '24×18×10', '21×18×10', '18×16×10', '21×27×10', '24×24×10', '30×18']
+                description: 'Our finest handcrafted sinks in premium 304 grade stainless steel — superior corrosion resistance, tight-radius corners, and a flawless matte finish.',
+                tags: ['Handcrafted', '304 Grade'],
+                sizes: ['24×18', '18×16', '45×20', '37×18']
+            },
+            {
+                id: 'handmade-202',
+                name: 'Handmade 202',
+                subtitle: '3+ Color Options',
+                badge: '202 Handmade',
+                bowl: 'Single Bowl',
+                emoji: '🔷',
+                description: 'Our finest handcrafted sinks in 202 grade — available in Matte, Mirror, Gold, Rose Gold & Black finishes with tight-radius corners.',
+                tags: ['Handcrafted', '202 Grade', '3+ Colors'],
+                sizes: ['24×18×10', '21×18×10', '18×16×10', '27×18×10', '30×18×10']
             },
             {
                 id: 'smart',
@@ -440,14 +453,14 @@
             var itemImage = seriesId === 'smart'
                 ? ''
                 : (seriesId === 'premium'
-                    ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silk.png'
+                    ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silk.png'
                     : (seriesId === 'silver'
-                        ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/silver.png'
+                        ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silver.png'
                         : (seriesId === 'oscar'
-                            ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/oscar.png'
+                            ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/oscar.png'
                             : (seriesId === 'economy'
-                                ? 'https://raw.githubusercontent.com/Samayank/Aryan/main/economy.png'
-                                : 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png'))));
+                                ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/economy.png'
+                                : 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png'))));
             var cartItem = {
                 id: seriesId + '-202-' + size.replace(/×/g, 'x'),
                 name: itemName,
@@ -471,13 +484,22 @@
             var grid = document.getElementById('series-grid');
             if (!grid) return;
             grid.innerHTML = '';
+
+            var imageMap = {
+                'handmade-304': '304_handmade.png',
+                'handmade-202': 'handmade_single.png',
+                'smart': 'smart.png',
+                'premium': 'silk.png',
+                'silver': 'silver.png',
+                'oscar': 'oscar.png',
+                'economy': 'economy.png'
+            };
+
             seriesData.forEach(function (series) {
-                var isHandmade = series.id === 'handmade';
-                var isSmart = series.id === 'smart';
-                var isSilk = series.id === 'premium';
-                var isSilver = series.id === 'silver';
-                var isOscar = series.id === 'oscar';
-                var isEconomy = series.id === 'economy';
+                var isHandmade = series.id === 'handmade-304' || series.id === 'handmade-202';
+                var imgFile = imageMap[series.id];
+
+                // Handmade cards link to customize page; others open size popup
                 var card = document.createElement(isHandmade ? 'a' : 'div');
                 if (isHandmade) {
                     card.href = 'customize.html?series=' + series.id;
@@ -492,19 +514,9 @@
                 card.className = 'series-card';
                 card.innerHTML =
                     '<div class="series-card-image">' +
-                    (isHandmade
-                        ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png" alt="Handmade kitchen sink" loading="lazy">'
-                        : isSmart
-                            ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/smart.png" alt="Smart series kitchen sink" loading="lazy">'
-                            : isSilk
-                                ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/silk.png" alt="Silk series kitchen sink" loading="lazy">'
-                                : isSilver
-                                    ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/silver.png" alt="Silver series kitchen sink" loading="lazy">'
-                                    : isOscar
-                                        ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/oscar.png" alt="Oscar series kitchen sink" loading="lazy">'
-                                        : isEconomy
-                                            ? '<img src="https://raw.githubusercontent.com/Samayank/Aryan/main/economy.png" alt="Economy series kitchen sink" loading="lazy">'
-                                            : '<span class="series-emoji">' + series.emoji + '</span>') +
+                    (imgFile
+                        ? '<img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + imgFile + '" alt="' + escapeHTML(series.name) + ' kitchen sink" loading="lazy">'
+                        : '<span class="series-emoji">' + series.emoji + '</span>') +
                     '<span class="series-card-badge">' + escapeHTML(series.badge) + '</span>' +
                     '</div>' +
                     '<div class="series-card-body">' +
@@ -514,7 +526,7 @@
                     '<div class="series-card-tags">' + series.tags.map(function (t) { return '<span class="series-tag">' + escapeHTML(t) + '</span>'; }).join('') + '</div>' +
                     '</div>' +
                     '<div class="series-card-footer">' +
-                    '<button class="btn btn-primary" type="button">' + (isHandmade ? 'Customize & Order →' : 'Choose Size →') + '</button>' +
+                    '<button class="btn btn-primary" type="button">' + (isHandmade ? 'Customize \u0026 Order →' : 'Choose Size →') + '</button>' +
                     '</div>';
                 if (!isHandmade) {
                     var btn = card.querySelector('button');
