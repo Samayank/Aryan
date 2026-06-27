@@ -325,7 +325,8 @@
                     "punjab", "himachal", "jammu", "kashmir", "ladakh", "leh",
                     "uttarakhand", "uttaranchal", "gujarat", "kerala",
                     "arunachal", "nagaland", "manipur", "mizoram", "tripura", "meghalaya",
-                    "west bengal", "odisha", "orissa"
+                    "west bengal", "odisha", "orissa", "andaman", "nicobar",
+                    "sikkim", "lakshadweep"
                 ];
 
                 function isServiced(stateName) {
@@ -344,13 +345,13 @@
                     var active = isServiced(name);
                     return {
                         fillColor: active ? '#1a5fd1' : '#e2e8f0',
-                        fillOpacity: active ? 0.75 : 0.6,
+                        fillOpacity: 1,
                         color: '#ffffff',
                         weight: 1.5
                     };
                 }
 
-                fetch('https://raw.githubusercontent.com/Subhash9325/GeoJson-Data-of-Indian-States/master/Indian_States')
+                fetch('https://raw.githubusercontent.com/datta07/INDIAN-SHAPEFILES/master/INDIA/INDIA_STATES.geojson')
                     .then(r => r.json())
                     .then(data => {
                         var statesLayer = L.geoJSON(data, {
