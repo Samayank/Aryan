@@ -584,6 +584,23 @@ function initSharedListeners() {
 
     // Removed detailAddToCart static event listener, handled globally via cart-btn-container
 
+    // Restrict phone calls to 10 AM - 7 PM
+    document.addEventListener('click', function(e) {
+        var target = e.target.closest('a[href^="tel:"]');
+        if (target) {
+            var currentHour = new Date().getHours();
+            // 10 AM = 10, 7 PM = 19
+            if (currentHour < 10 || currentHour >= 19) {
+                e.preventDefault();
+                if (typeof showToast === 'function') {
+                    showToast('Call support is available 10 AM to 7 PM. Please use WhatsApp!');
+                } else {
+                    alert('Call support is available 10 AM to 7 PM. Please use WhatsApp!');
+                }
+            }
+        }
+    });
+
     // Global Escape key
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
