@@ -121,10 +121,7 @@
             padding: 0 1.5rem 1.5rem;
         }
 
-        .cistern-card-footer .btn {
-            width: 100%;
-            text-align: center;
-        }
+
 
         /* Continental flush popup */
         .flush-overlay {
@@ -347,7 +344,7 @@
             filtered.forEach(function (series) {
                 var card = document.createElement('div');
                 card.className = 'cistern-card';
-                card.innerHTML =
+                var cardHtml = 
                     '<div class="cistern-card-image">' +
                     '<img src="' + escapeHTML(series.image) + '" alt="' + escapeHTML(series.name) + '" loading="lazy">' +
                     '<span class="cistern-card-badge">' + escapeHTML(series.badge) + '</span>' +
@@ -360,8 +357,7 @@
                     '<div class="cistern-card-footer">';
 
                 if (series.hasPopup) {
-                    card.innerHTML += '<button class="btn btn-primary add-cistern-btn">🛒 Add to Cart</button></div>';
-                    card.querySelector('.add-cistern-btn').addEventListener('click', function () { openFlushPopup(); });
+                    cardHtml += '<button class="btn btn-primary add-cistern-btn">🛒 Add to Cart</button></div>';
                 } else {
                     var cartItem;
                     if (series.category === 'tank') {
@@ -383,7 +379,14 @@
                             config: { series: series.name, subtitle: null, grade: series.tags.join(', '), size: 'Standard Fit', bowl: 'Seat Cover' }
                         };
                     }
-                    card.innerHTML += '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary add-cistern-btn" data-product=\'' + escapeHTML(JSON.stringify(cartItem)) + '\'></div></div>';
+                    cardHtml += '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary add-cistern-btn" data-product=\'' + escapeHTML(JSON.stringify(cartItem)) + '\'></div></div>';
+                }
+                
+                card.innerHTML = cardHtml;
+
+                if (series.hasPopup) {
+                    var btn = card.querySelector('.add-cistern-btn');
+                    if (btn) btn.addEventListener('click', function () { openFlushPopup(); });
                 }
                 
                 grid.appendChild(card);

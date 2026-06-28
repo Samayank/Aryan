@@ -68,7 +68,7 @@
                     '<ul class="product-features">' + product.features.map(function (f) { return '<li>' + escapeHTML(f) + '</li>'; }).join('') + '</ul>' +
                     '<div class="product-price">' + escapeHTML(product.price) + '</div>' +
                     '<div class="product-actions">' +
-                    '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary" data-custom-style="width: 100%;" data-product=\'' + escapeHTML(JSON.stringify({
+                    '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary" data-product=\'' + escapeHTML(JSON.stringify({
                         id: product.id, 
                         name: product.name, 
                         image: product.image, 
