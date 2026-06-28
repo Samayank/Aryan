@@ -2148,50 +2148,102 @@ footer {
 }
 
 .checkout-section {
-    background: #f8f9fa;
-    padding: 24px;
-    border-radius: 10px;
-    margin-top: 24px;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    margin-top: 32px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.checkout-section h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.checkout-form .form-group {
+    display: flex;
+    flex-direction: column;
 }
 
 .checkout-form label {
     display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
 }
 
 .checkout-form input,
 .checkout-form textarea {
-    padding: 10px 14px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 15px;
+    padding: 14px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1rem;
     width: 100%;
     box-sizing: border-box;
     font-family: inherit;
+    background: #fdfdfd;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.checkout-form input::placeholder,
+.checkout-form textarea::placeholder {
+    color: #adb5bd;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(26, 95, 209, 0.1);
 }
 
 .checkout-form textarea {
     resize: vertical;
-    min-height: 60px;
+    min-height: 100px;
 }
 
 .place-order-btn {
-    background: #25D366;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     color: #fff;
     border: none;
-    border-radius: 6px;
-    padding: 14px 0;
-    font-size: 18px;
-    font-weight: bold;
+    border-radius: 10px;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
     cursor: pointer;
     width: 100%;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+    margin-top: 10px;
 }
 
 .place-order-btn:hover {
-    background: #1da851;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+}
+
+.place-order-btn:active {
+    transform: translateY(1px);
 }
 
 /* ============================================================
