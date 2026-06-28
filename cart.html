@@ -8,9 +8,11 @@
     <meta name="description" content="Review your ARYAN cart and place your order via WhatsApp.">
     <meta property="og:title" content="Shopping Cart | ARYAN India">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -123,7 +125,7 @@
                         escapeHTML(item.config.size) + '"</div>';
                 }
                 tr.innerHTML =
-                    '<td><img src="' + escapeHTML(item.image || 'https://raw.githubusercontent.com/Samayank/Aryan/main/handmade_single.png') + '" alt="' + escapeHTML(item.name) + '" loading="lazy"></td>' +
+                    '<td><img src="' + escapeHTML(item.image || 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png') + '" alt="' + escapeHTML(item.name) + '" loading="lazy"></td>' +
                     '<td>' + nameCell + '</td>' +
                     '<td>' + (isEnquiry ? '<span style="color:var(--accent,#e67e22);font-weight:600;">Enquire</span>' : '₹' + item.price.toLocaleString()) + '</td>' +
                     '<td><input type="number" min="1" max="99" value="' + item.quantity + '" data-id="' + escapeHTML(String(item.id)) + '" class="qty-input"></td>' +

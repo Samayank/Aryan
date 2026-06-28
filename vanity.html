@@ -11,9 +11,11 @@
     <meta property="og:description"
         content="Premium vanity cabinets from ARYAN India — Golden series in durable HDHMR board.">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -217,27 +219,20 @@
                     '<div class="vanity-card-tags">' + series.tags.map(function (t) { return '<span class="vanity-tag">' + escapeHTML(t) + '</span>'; }).join('') + '</div>' +
                     '</div>' +
                     '<div class="vanity-card-footer">' +
-                    '<button class="btn btn-primary add-vanity-btn">\ud83d\uded2 Add to Cart</button>' +
-                    '</div>';
-                card.querySelector('.add-vanity-btn').addEventListener('click', function () {
-                    window.aryanCart.addToCart({
+                    '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary" data-product=\'' + escapeHTML(JSON.stringify({
                         id: 'vanity-' + series.id,
                         name: series.name + ' (' + series.material + ', HDHMR Board)',
                         image: series.image,
                         price: 0,
                         quantity: 1,
                         config: {
-                            series: series.name,
-                            subtitle: series.material + ' finish',
-                            grade: series.material,
-                            size: 'HDHMR Board',
-                            bowl: 'Vanity Cabinet'
+                            series: series.name, subtitle: series.material + ' finish', grade: series.material, size: 'HDHMR Board', bowl: 'Vanity Cabinet'
                         }
-                    });
-                    showToast('\u2713 ' + series.name + ' added to cart!');
-                });
+                    })) + '\'></div>' +
+                    '</div>';
                 grid.appendChild(card);
             });
+            if (typeof renderCartButtons === 'function') renderCartButtons();
         }
 
         document.addEventListener('DOMContentLoaded', function () {

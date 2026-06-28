@@ -68,23 +68,18 @@
                     '<ul class="product-features">' + product.features.map(function (f) { return '<li>' + escapeHTML(f) + '</li>'; }).join('') + '</ul>' +
                     '<div class="product-price">' + escapeHTML(product.price) + '</div>' +
                     '<div class="product-actions">' +
-                    '<button class="btn btn-primary add-to-cart-btn" style="width: 100%;">🛒 Add to Cart</button>' +
-                    '</div></div>';
-                card.querySelector('.add-to-cart-btn').addEventListener('click', function () {
-                    var priceNum = Number(String(product.price).replace(/[^\d.]/g, ''));
-                    if (isNaN(priceNum)) priceNum = 0;
-                    window.aryanCart.addToCart({ 
+                    '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary" data-custom-style="width: 100%;" data-product=\'' + escapeHTML(JSON.stringify({
                         id: product.id, 
                         name: product.name, 
                         image: product.image, 
-                        price: priceNum, 
+                        price: Number(String(product.price).replace(/[^\d.]/g, '')) || 0, 
                         quantity: 1, 
                         config: { series: 'Unbreakable Accessories', grade: 'Unbreakable', size: 'Organizer', bowl: 'Accessory' } 
-                    });
-                    showToast('✓ ' + product.name + ' added to cart!');
-                });
+                    })) + '\'></div>' +
+                    '</div></div>';
                 grid.appendChild(card);
             });
+            if (typeof renderCartButtons === 'function') renderCartButtons();
         }
 
         document.addEventListener('DOMContentLoaded', function () {

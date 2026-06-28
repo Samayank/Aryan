@@ -450,31 +450,26 @@
                     (hasLink
                         ? '<a href="' + escapeHTML(product.link) + '" class="btn btn-primary" style="text-decoration:none;text-align:center;">Customize & Order \u2192</a>'
                         : hasDirect
-                            ? '<button class="btn btn-primary direct-cart-btn">\ud83d\uded2 Add to Cart</button>'
+                            ? '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-product=\'' + escapeHTML(JSON.stringify({
+                                id: product.id,
+                                name: product.name,
+                                image: product.image,
+                                price: 0,
+                                quantity: 1,
+                                config: product.directCart
+                            })) + '\'></div>'
                             : '<button class="btn btn-primary view-detail-btn">View Details</button>' +
-                            '<button class="btn btn-secondary add-to-cart-btn">Add to Cart</button>') +
+                            '<div class="cart-btn-container" data-btn-text="Add to Cart" data-custom-class="btn btn-secondary" data-product=\'' + escapeHTML(JSON.stringify({
+                                id: product.id, name: product.name, image: product.image, price: Number(String(product.price).replace(/[^\d.]/g, '')), quantity: 1
+                            })) + '\'></div>') +
                     '</div></div>';
                 if (hasLink) {
                     // link items — no extra listeners needed
                 } else if (hasDirect) {
-                    card.querySelector('.direct-cart-btn').addEventListener('click', function () {
-                        window.aryanCart.addToCart({
-                            id: product.id,
-                            name: product.name,
-                            image: product.image,
-                            price: 0,
-                            quantity: 1,
-                            config: product.directCart
-                        });
-                        showToast('\u2713 ' + product.name + ' added to cart!');
-                    });
+                    // Handled globally by cart-btn-container
                 } else {
                     card.querySelector('.view-detail-btn').addEventListener('click', function () { openProductDetail(product); });
-                    card.querySelector('.add-to-cart-btn').addEventListener('click', function () {
-                        var priceNum = Number(String(product.price).replace(/[^\d.]/g, ''));
-                        window.aryanCart.addToCart({ id: product.id, name: product.name, image: product.image, price: priceNum, quantity: 1 });
-                        showToast('\u2713 Added to cart!');
-                    });
+                    // Add to cart handled globally by cart-btn-container
                 }
                 grid.appendChild(card);
             });

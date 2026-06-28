@@ -364,7 +364,7 @@
                 emoji: '⬛',
                 description: 'Clean, geometric square bowl design for the modern kitchen. Engineered for functionality with a contemporary aesthetic.',
                 tags: ['Square Bowl', 'Modern Design'],
-                sizes: ['18×16×8', '20×18×9']
+                sizes: ['18×16×8', '24×18×9']
             },
             {
                 id: 'premium',
@@ -427,14 +427,24 @@
 
             grid.innerHTML = (series.sizes || []).map(function (s) {
                 var dimLabel = (s.match(/×/g) || []).length === 2 ? 'L × W × H' : 'L × W';
-                return '<button type="button" class="size-popup-btn" onclick="addSeriesToCart(\'' + series.id + '\', \'' + s + '\')">' +
-                    escapeHTML(s) + '"' +
-                    '<span class="sub">' + dimLabel + '</span>' +
-                    '</button>';
+                var itemName = series.name + (series.subtitle ? ' (' + series.subtitle + ')' : '') + ' — ' + s + '"';
+                var itemImage = series.id === 'smart' ? '' : (series.id === 'premium' ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silk.png' : (series.id === 'silver' ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silver.png' : (series.id === 'oscar' ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/oscar.png' : (series.id === 'economy' ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/economy.png' : 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png'))));
+                var product = {
+                    id: series.id + '-202-' + s.replace(/×/g, 'x'),
+                    name: itemName,
+                    image: itemImage,
+                    price: 0,
+                    quantity: 1,
+                    config: {
+                        series: series.name, subtitle: series.subtitle, grade: '202', finish: null, size: s, bowl: series.bowl
+                    }
+                };
+                return '<div class="cart-btn-container" data-btn-text="' + s + '&quot; <span class=\'sub\'>' + dimLabel + '</span>" data-custom-class="size-popup-btn" style="width: 100%; margin-bottom: 10px;" data-product=\'' + escapeHTML(JSON.stringify(product)) + '\'></div>';
             }).join('');
 
             overlay.classList.add('active');
             overlay.setAttribute('aria-hidden', 'false');
+            if (typeof renderCartButtons === 'function') renderCartButtons();
         }
 
         function closeKitchenSizePopup() {

@@ -237,8 +237,25 @@ function openProductDetail(product) {
         }).join('');
     }
 
+    var addBtnContainer = document.getElementById('detail-add-to-cart-container');
+    if (addBtnContainer) {
+        var priceNum = Number(String(product.price).replace(/[^\d.]/g, ''));
+        if (isNaN(priceNum)) priceNum = 0;
+        var cartItem = {
+            id: product.id,
+            name: product.name,
+            image: product.image || '',
+            price: priceNum,
+            quantity: 1
+            // config is optionally added depending on where it comes from
+        };
+        addBtnContainer.innerHTML = '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary" data-product=\'' + escapeHTML(JSON.stringify(cartItem)) + '\'></div>';
+    }
+
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    if (typeof renderCartButtons === 'function') renderCartButtons();
 }
 
 function closeProductDetail() {
@@ -565,23 +582,7 @@ function initSharedListeners() {
         });
     }
 
-    var detailAddToCart = document.getElementById('detailAddToCart');
-    if (detailAddToCart) {
-        detailAddToCart.addEventListener('click', function () {
-            if (currentDetailProduct && window.aryanCart) {
-                var priceNum = Number(String(currentDetailProduct.price).replace(/[^\d.]/g, ''));
-                window.aryanCart.addToCart({
-                    id: currentDetailProduct.id,
-                    name: currentDetailProduct.name,
-                    image: currentDetailProduct.image || '',
-                    price: priceNum,
-                    quantity: 1
-                });
-                showToast('✓ Added to cart!');
-                closeProductDetail();
-            }
-        });
-    }
+    // Removed detailAddToCart static event listener, handled globally via cart-btn-container
 
     // Global Escape key
     document.addEventListener('keydown', function (e) {

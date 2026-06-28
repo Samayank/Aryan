@@ -2616,3 +2616,37 @@ footer {
 .hero-product-img.loaded {
     opacity: 1;
 }
+
+/* Cart Quantity Controls */
+.cart-qty-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 44px;
+    width: 100%;
+}
+.cart-qty-control button {
+    background: none;
+    border: none;
+    padding: 0 16px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--primary, #0056b3);
+    height: 100%;
+    transition: background 0.2s, color 0.2s;
+    font-weight: bold;
+}
+.cart-qty-control button:hover {
+    background: #e9ecef;
+    color: #003d82;
+}
+.cart-qty-control span {
+    font-weight: 600;
+    min-width: 40px;
+    text-align: center;
+    font-size: 1.1rem;
+}

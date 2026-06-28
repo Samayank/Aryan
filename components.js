@@ -433,7 +433,7 @@ function renderProductDetailModal() {
                 <div class="detail-price" id="detailPrice"></div>
                 <ul class="product-features" id="detailFeatures"></ul>
                 <div class="detail-actions">
-                    <button class="btn btn-primary" id="detailAddToCart">Add to Cart</button>
+                    <div id="detail-add-to-cart-container"></div>
                     <button class="btn btn-secondary" id="detailClose2">Close</button>
                 </div>
             </div>

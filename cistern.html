@@ -11,9 +11,11 @@
     <meta property="og:description"
         content="Premium cisterns from ARYAN India — Continental, Curve, Kubix, and Deluxe series for modern bathrooms.">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Samayank/Aryan/main/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Samayank/Aryan/main/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/android-chrome-192x192.png">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -255,14 +257,7 @@
         <div class="flush-popup">
             <h3>Continental Cistern</h3>
             <p class="flush-sub">Choose your flush type to add to cart:</p>
-            <div class="flush-option" id="flush-single" onclick="addContinental('single')">
-                <h4>Single Flush — Center Push</h4>
-                <p>Classic single flush mechanism with a center push button for reliable, consistent flushing.</p>
-            </div>
-            <div class="flush-option" id="flush-double" onclick="addContinental('double')">
-                <h4>Double Flush</h4>
-                <p>Dual flush system with half and full flush options for water conservation.</p>
-            </div>
+            <div id="flush-options-container"></div>
             <button class="flush-cancel" onclick="closeFlushPopup()">Cancel</button>
         </div>
     </div>
@@ -277,7 +272,7 @@
                 name: 'Continental',
                 category: 'tank',
                 badge: 'Continental',
-                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/continental.png',
+                image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/continental.png',
                 description: 'Our most premium cistern — available in both single flush (center push) and double flush configurations. Superior build quality and elegant design.',
                 tags: ['Single Flush Center Push', 'Double Flush'],
                 hasPopup: true
@@ -287,7 +282,7 @@
                 name: 'Curve',
                 category: 'tank',
                 badge: 'Curve',
-                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/curve.png',
+                image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/curve.png',
                 description: 'Premium cistern with sleek curved aesthetics and a reliable single flush side handle mechanism.',
                 tags: ['Single Flush', 'Side Handle'],
                 hasPopup: false
@@ -297,7 +292,7 @@
                 name: 'Kubix',
                 category: 'tank',
                 badge: 'Kubix',
-                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/kubix.png',
+                image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/kubix.png',
                 description: 'Clean, geometric cistern design with a dependable single flush side handle for everyday use.',
                 tags: ['Single Flush', 'Side Handle'],
                 hasPopup: false
@@ -307,7 +302,7 @@
                 name: 'Deluxe',
                 category: 'tank',
                 badge: 'Deluxe',
-                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/deluxe.png',
+                image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/deluxe.png',
                 description: 'Reliable and durable cistern with single flush side handle — great value for any bathroom.',
                 tags: ['Single Flush', 'Side Handle'],
                 hasPopup: false
@@ -317,7 +312,7 @@
                 name: 'Solid Seat Cover',
                 category: 'cover',
                 badge: 'Solid',
-                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/solid.png',
+                image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/solid.png',
                 description: 'Durable and high-quality solid toilet seat cover for everyday use.',
                 tags: ['Normal'],
                 hasPopup: false
@@ -327,7 +322,7 @@
                 name: 'EWC Seat Cover',
                 category: 'cover',
                 badge: 'EWC',
-                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/ewc.png',
+                image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/ewc.png',
                 description: 'Standard EWC toilet seat cover ensuring comfort and a perfect fit.',
                 tags: ['Normal'],
                 hasPopup: false
@@ -337,7 +332,7 @@
                 name: 'Jet Seat Cover',
                 category: 'cover',
                 badge: 'Jet',
-                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/jet.png',
+                image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/jet.png',
                 description: 'Reliable jet toilet seat cover designed for convenience and hygiene.',
                 tags: ['Normal'],
                 hasPopup: false
@@ -362,79 +357,74 @@
                     '<p>' + escapeHTML(series.description) + '</p>' +
                     '<div class="cistern-card-tags">' + series.tags.map(function (t) { return '<span class="cistern-tag">' + escapeHTML(t) + '</span>'; }).join('') + '</div>' +
                     '</div>' +
-                    '<div class="cistern-card-footer">' +
-                    '<button class="btn btn-primary add-cistern-btn">🛒 Add to Cart</button>' +
-                    '</div>';
-                var btn = card.querySelector('.add-cistern-btn');
+                    '<div class="cistern-card-footer">';
+
                 if (series.hasPopup) {
-                    btn.addEventListener('click', function () { openFlushPopup(); });
+                    card.innerHTML += '<button class="btn btn-primary add-cistern-btn">🛒 Add to Cart</button></div>';
+                    card.querySelector('.add-cistern-btn').addEventListener('click', function () { openFlushPopup(); });
                 } else {
-                    btn.addEventListener('click', function () {
-                        if (series.category === 'tank') {
-                            window.aryanCart.addToCart({
-                                id: 'cistern-' + series.id,
-                                name: series.name + ' Cistern (Single Flush, Side Handle)',
-                                image: series.image,
-                                price: 0,
-                                quantity: 1,
-                                config: {
-                                    series: series.name + ' Cistern',
-                                    subtitle: null,
-                                    grade: 'Single Flush',
-                                    size: 'Side Handle',
-                                    bowl: 'Cistern'
-                                }
-                            });
-                            showToast('✓ ' + series.name + ' Cistern added to cart!');
-                        } else {
-                            window.aryanCart.addToCart({
-                                id: 'cover-' + series.id,
-                                name: series.name,
-                                image: series.image,
-                                price: 0,
-                                quantity: 1,
-                                config: {
-                                    series: series.name,
-                                    subtitle: null,
-                                    grade: series.tags.join(', '),
-                                    size: 'Standard Fit',
-                                    bowl: 'Seat Cover'
-                                }
-                            });
-                            showToast('✓ ' + series.name + ' added to cart!');
-                        }
-                    });
+                    var cartItem;
+                    if (series.category === 'tank') {
+                        cartItem = {
+                            id: 'cistern-' + series.id,
+                            name: series.name + ' Cistern (Single Flush, Side Handle)',
+                            image: series.image,
+                            price: 0,
+                            quantity: 1,
+                            config: { series: series.name + ' Cistern', subtitle: null, grade: 'Single Flush', size: 'Side Handle', bowl: 'Cistern' }
+                        };
+                    } else {
+                        cartItem = {
+                            id: 'cover-' + series.id,
+                            name: series.name,
+                            image: series.image,
+                            price: 0,
+                            quantity: 1,
+                            config: { series: series.name, subtitle: null, grade: series.tags.join(', '), size: 'Standard Fit', bowl: 'Seat Cover' }
+                        };
+                    }
+                    card.innerHTML += '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary add-cistern-btn" data-product=\'' + escapeHTML(JSON.stringify(cartItem)) + '\'></div></div>';
                 }
+                
                 grid.appendChild(card);
             });
+            if (typeof renderCartButtons === 'function') renderCartButtons();
         }
 
         function openFlushPopup() {
+            var container = document.getElementById('flush-options-container');
+            if (container) {
+                var singleProduct = {
+                    id: 'cistern-continental-single',
+                    name: 'Continental Cistern (Single Flush, Center Push)',
+                    image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/continental.png',
+                    price: 0,
+                    quantity: 1,
+                    config: { series: 'Continental Cistern', subtitle: 'Single Flush, Center Push', grade: 'Single Flush', size: 'Center Push', bowl: 'Cistern' }
+                };
+                var doubleProduct = {
+                    id: 'cistern-continental-double',
+                    name: 'Continental Cistern (Double Flush)',
+                    image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/continental.png',
+                    price: 0,
+                    quantity: 1,
+                    config: { series: 'Continental Cistern', subtitle: 'Double Flush', grade: 'Double Flush', size: 'Dual Button', bowl: 'Cistern' }
+                };
+                
+                var singleText = '<h4>Single Flush — Center Push</h4><p>Classic single flush mechanism with a center push button for reliable, consistent flushing.</p>';
+                var doubleText = '<h4>Double Flush</h4><p>Dual flush system with half and full flush options for water conservation.</p>';
+                
+                container.innerHTML = 
+                    '<div class="cart-btn-container" data-btn-text="' + escapeHTML(singleText).replace(/"/g, '&quot;') + '" data-custom-class="flush-option" data-custom-style="width: 100%; text-align: left;" data-product=\'' + escapeHTML(JSON.stringify(singleProduct)) + '\'></div>' +
+                    '<div class="cart-btn-container" data-btn-text="' + escapeHTML(doubleText).replace(/"/g, '&quot;') + '" data-custom-class="flush-option" data-custom-style="width: 100%; text-align: left;" data-product=\'' + escapeHTML(JSON.stringify(doubleProduct)) + '\'></div>';
+            }
+            
             document.getElementById('flushOverlay').classList.add('active');
+            if (typeof renderCartButtons === 'function') renderCartButtons();
         }
 
         function closeFlushPopup() {
             document.getElementById('flushOverlay').classList.remove('active');
-        }
-
-        function addContinental(flushType) {
-            var flushLabel = flushType === 'single' ? 'Single Flush, Center Push' : 'Double Flush';
-            window.aryanCart.addToCart({
-                id: 'cistern-continental-' + flushType,
-                name: 'Continental Cistern (' + flushLabel + ')',
-                image: 'https://raw.githubusercontent.com/Samayank/Aryan/main/continental.png',
-                price: 0,
-                quantity: 1,
-                config: {
-                    series: 'Continental Cistern',
-                    subtitle: flushLabel,
-                    grade: flushType === 'single' ? 'Single Flush' : 'Double Flush',
-                    size: flushType === 'single' ? 'Center Push' : 'Dual Button',
-                    bowl: 'Cistern'
-                }
-            });
-            closeFlushPopup();
-            showToast('✓ Continental Cistern (' + flushLabel + ') added to cart!');
         }
 
         // Close popup on overlay click

@@ -826,7 +826,7 @@
                     '<div class="summary-row"><span class="label">Finish</span><span class="value" id="summary-finish">—</span></div>' +
                     '<div class="summary-row"><span class="label">Size</span><span class="value" id="summary-size">—</span></div>' +
                     '<div class="summary-actions" id="summary-actions" style="display:none;">' +
-                    '<button class="btn btn-primary" id="add-to-cart-btn" style="width:100%;font-size:1.05rem;padding:14px 24px;">🛒 Add to Cart</button>' +
+                    '<div id="add-to-cart-container"></div>' +
                     '</div>' +
                     '<p class="note-text">Prices vary by city and dealer. Add items to cart and enquire via WhatsApp for the best quote.</p>' +
                     '</div>' +
@@ -854,7 +854,7 @@
                     '<div class="summary-row"><span class="label">Bowl Type</span><span class="value" id="summary-bowl">' + escapeHTML(series.bowl) + '</span></div>' +
                     '<div class="summary-row"><span class="label">Size</span><span class="value" id="summary-size">—</span></div>' +
                     '<div class="summary-actions" id="summary-actions" style="display:none;">' +
-                    '<button class="btn btn-primary" id="add-to-cart-btn" style="width:100%;font-size:1.05rem;padding:14px 24px;">🛒 Add to Cart</button>' +
+                    '<div id="add-to-cart-container"></div>' +
                     '</div>' +
                     '<p class="note-text">Prices vary by city and dealer. Add items to cart and enquire via WhatsApp for the best quote.</p>' +
                     '</div>' +
@@ -1037,46 +1037,47 @@
                 document.getElementById('summary-actions').style.display = 'flex';
                 var series = currentSeries || seriesData[getSeriesFromURL()];
                 var seriesId = currentSeriesId || getSeriesFromURL();
-                var cartBtn = document.getElementById('add-to-cart-btn');
-                cartBtn.onclick = function () {
-                    var isHm = seriesId === 'handmade-304' || seriesId === 'handmade-202';
-                    var finishText = (isHm && selectedFinish) ? (', ' + selectedFinish) : '';
-                    var base = series.name + (series.subtitle ? ' (' + series.subtitle + ')' : '');
-                    var itemName = isHm
-                        ? (base + ' — ' + selectedGrade + ' Grade' + finishText + ', ' + selectedSize + '"')
-                        : (base + ' — ' + selectedSize + '"');
-                    var cartItem = {
-                        id: isHm
-                            ? (seriesId + '-' + (selectedFinish ? selectedFinish.toLowerCase().replace(/\s+/g, '-') : 'finish') + '-' + selectedSize.replace(/×/g, 'x'))
-                            : (seriesId + '-202-' + selectedSize.replace(/×/g, 'x')),
-                        name: itemName,
-                        image: (isHm && window.selectedFinishImage)
-                            ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + window.selectedFinishImage
-                            : (seriesId === 'smart'
-                            ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/smart.png'
-                            : (seriesId === 'premium'
-                                ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silk.png'
-                                : (seriesId === 'silver'
-                                    ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silver.png'
-                                    : (seriesId === 'oscar'
-                                        ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/oscar.png'
-                                        : (seriesId === 'economy'
-                                            ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/economy.png'
-                                            : 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png'))))),
-                        price: 0,
-                        quantity: 1,
-                        config: {
-                            series: series.name,
-                            subtitle: series.subtitle,
-                            grade: isHm ? selectedGrade : '202',
-                            finish: isHm ? (selectedFinish || null) : null,
-                            size: selectedSize,
-                            bowl: document.getElementById('summary-bowl') ? document.getElementById('summary-bowl').textContent : series.bowl
-                        }
-                    };
-                    window.aryanCart.addToCart(cartItem);
-                    showToast('✓ ' + series.name + ' added to cart!');
+                var isHm = seriesId === 'handmade-304' || seriesId === 'handmade-202';
+                var finishText = (isHm && selectedFinish) ? (', ' + selectedFinish) : '';
+                var base = series.name + (series.subtitle ? ' (' + series.subtitle + ')' : '');
+                var itemName = isHm
+                    ? (base + ' — ' + selectedGrade + ' Grade' + finishText + ', ' + selectedSize + '"')
+                    : (base + ' — ' + selectedSize + '"');
+                var cartItem = {
+                    id: isHm
+                        ? (seriesId + '-' + (selectedFinish ? selectedFinish.toLowerCase().replace(/\s+/g, '-') : 'finish') + '-' + selectedSize.replace(/×/g, 'x'))
+                        : (seriesId + '-202-' + selectedSize.replace(/×/g, 'x')),
+                    name: itemName,
+                    image: (isHm && window.selectedFinishImage)
+                        ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + window.selectedFinishImage
+                        : (seriesId === 'smart'
+                        ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/smart.png'
+                        : (seriesId === 'premium'
+                            ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silk.png'
+                            : (seriesId === 'silver'
+                                ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/silver.png'
+                                : (seriesId === 'oscar'
+                                    ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/oscar.png'
+                                    : (seriesId === 'economy'
+                                        ? 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/economy.png'
+                                        : 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/handmade_single.png'))))),
+                    price: 0,
+                    quantity: 1,
+                    config: {
+                        series: series.name,
+                        subtitle: series.subtitle,
+                        grade: isHm ? selectedGrade : '202',
+                        finish: isHm ? (selectedFinish || null) : null,
+                        size: selectedSize,
+                        bowl: document.getElementById('summary-bowl') ? document.getElementById('summary-bowl').textContent : series.bowl
+                    }
                 };
+
+                var actionsContainer = document.getElementById('add-to-cart-container');
+                if (actionsContainer) {
+                    actionsContainer.innerHTML = '<div class="cart-btn-container" data-btn-text="🛒 Add to Cart" data-custom-class="btn btn-primary" data-custom-style="width:100%;font-size:1.05rem;height:52px;" data-product=\'' + escapeHTML(JSON.stringify(cartItem)) + '\'></div>';
+                    if (typeof renderCartButtons === 'function') renderCartButtons();
+                }
             } else {
                 var actions = document.getElementById('summary-actions');
                 if (actions) actions.style.display = 'none';
