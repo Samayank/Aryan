@@ -328,6 +328,89 @@
         </div>
     </div>
 
+    <!-- Handmade Customization Popup -->
+    <div class="size-overlay" id="handmadeOverlay" aria-hidden="true">
+        <div class="size-popup handmade-popup" role="dialog" aria-modal="true" aria-labelledby="handmadeTitle" style="max-width:560px;">
+            <h3 id="handmadeTitle">Customize Handmade Sink</h3>
+            <p class="size-sub" id="handmadeSub">Select finish & size</p>
+
+            <!-- Step 1: Finish/Color -->
+            <div id="handmadeFinishStep">
+                <div style="font-size:0.85rem;font-weight:600;margin-bottom:0.75rem;color:var(--accent,#e67e22);text-transform:uppercase;letter-spacing:0.05em;">Step 1 — Choose Finish</div>
+                <div class="handmade-finish-grid" id="handmadeFinishGrid"></div>
+            </div>
+
+            <!-- Step 2: Size (shown after finish selected) -->
+            <div id="handmadeSizeStep" style="display:none;">
+                <div style="font-size:0.85rem;font-weight:600;margin-bottom:0.75rem;color:var(--accent,#e67e22);text-transform:uppercase;letter-spacing:0.05em;margin-top:1.25rem;">Step 2 — Choose Size</div>
+                <div class="size-popup-grid" id="handmadeSizeGrid"></div>
+            </div>
+
+            <button class="size-popup-cancel" type="button" onclick="closeHandmadePopup()">Cancel</button>
+        </div>
+    </div>
+
+    <style>
+        .handmade-finish-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .handmade-finish-btn {
+            width: 80px;
+            border: 2.5px solid var(--border, #e0e0e0);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--card-bg, #fff);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            padding: 0;
+        }
+        .handmade-finish-btn:hover {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            transform: translateY(-2px);
+        }
+        .handmade-finish-btn.selected {
+            border-color: var(--accent, #e67e22);
+            box-shadow: 0 4px 16px rgba(230, 126, 34, 0.25);
+            transform: translateY(-2px);
+        }
+        .handmade-finish-btn img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            background: #f8f9fa;
+        }
+        .handmade-finish-btn .finish-label {
+            padding: 0.35rem 0.25rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .handmade-finish-btn .finish-note {
+            font-size: 0.6rem;
+            color: var(--text-secondary, #666);
+            margin: 0;
+        }
+        .handmade-popup .size-popup-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        @media (max-width: 520px) {
+            .handmade-popup .size-popup-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .handmade-finish-btn {
+                width: 68px;
+            }
+        }
+    </style>
+
     <script src="cart.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
@@ -339,10 +422,14 @@
                 subtitle: 'Premium Grade',
                 badge: '304 Handmade',
                 bowl: 'Single Bowl',
+                grade: '304',
                 emoji: '🔶',
                 description: 'Our finest handcrafted sinks in premium 304 grade stainless steel — superior corrosion resistance, tight-radius corners, and a flawless matte finish.',
                 tags: ['Handcrafted', '304 Grade'],
-                sizes: ['24×18', '18×16', '45×20', '37×18']
+                sizes: ['24×18', '18×16', '45×20', '37×18'],
+                finishes: [
+                    { name: 'Matte Finish', image: '304_handmade.png', note: 'Steel' }
+                ]
             },
             {
                 id: 'handmade-202',
@@ -350,10 +437,18 @@
                 subtitle: '3+ Color Options',
                 badge: '202 Handmade',
                 bowl: 'Single Bowl',
+                grade: '202',
                 emoji: '🔷',
                 description: 'Our finest handcrafted sinks in 202 grade — available in Matte, Mirror, Gold, Rose Gold & Black finishes with tight-radius corners.',
                 tags: ['Handcrafted', '202 Grade', '3+ Colors'],
-                sizes: ['24×18×10', '21×18×10', '18×16×10', '27×18×10', '30×18×10']
+                sizes: ['24×18×10', '21×18×10', '18×16×10', '27×18×10', '30×18×10'],
+                finishes: [
+                    { name: 'Matte Finish', image: 'handmade_single.png', note: 'Steel' },
+                    { name: 'Mirror Finish', image: 'mirror_handmade.png', note: 'Steel\n24×18 only', sizeRestrict: ['24×18'] },
+                    { name: 'Gold (Matte)', image: 'gold_handmade.png', note: 'Matte\n24×18 only', sizeRestrict: ['24×18'] },
+                    { name: 'Rose Gold (Matte)', image: 'rose_handmade.png', note: 'Matte\n24×18 only', sizeRestrict: ['24×18'] },
+                    { name: 'Black (Matte)', image: 'black_handmade.png', note: 'Matte\n24×18 only', sizeRestrict: ['24×18'] }
+                ]
             },
             {
                 id: 'smart',
@@ -414,6 +509,7 @@
 
         var popupSeries = null;
 
+        // ---- Non-Handmade: Size-only popup ----
         function openKitchenSizePopup(series) {
             popupSeries = series;
             var overlay = document.getElementById('kitchenSizeOverlay');
@@ -449,6 +545,110 @@
 
         function closeKitchenSizePopup() {
             var overlay = document.getElementById('kitchenSizeOverlay');
+            if (!overlay) return;
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        // ---- Handmade: Finish + Size popup ----
+        var handmadeSelectedFinish = null;
+        var handmadeSelectedSeries = null;
+
+        function openHandmadePopup(series) {
+            handmadeSelectedSeries = series;
+            handmadeSelectedFinish = null;
+            var overlay = document.getElementById('handmadeOverlay');
+            var sub = document.getElementById('handmadeSub');
+            var title = document.getElementById('handmadeTitle');
+            var finishGrid = document.getElementById('handmadeFinishGrid');
+            var sizeStep = document.getElementById('handmadeSizeStep');
+            if (!overlay || !finishGrid) return;
+
+            if (title) title.textContent = series.name;
+            if (sub) sub.textContent = series.grade + ' Grade — ' + series.bowl;
+            if (sizeStep) sizeStep.style.display = 'none';
+
+            // Render finish buttons
+            finishGrid.innerHTML = (series.finishes || []).map(function (f, i) {
+                var noteHtml = (f.note || '').replace(/\n/g, '<br>');
+                return '<button type="button" class="handmade-finish-btn" data-finish-idx="' + i + '" onclick="selectHandmadeFinish(' + i + ')">' +
+                    '<img src="https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + f.image + '" alt="' + escapeHTML(f.name) + '">' +
+                    '<div class="finish-label">' + escapeHTML(f.name.split('(')[0].trim()) + '</div>' +
+                    (noteHtml ? '<div class="finish-note">' + noteHtml + '</div>' : '') +
+                    '</button>';
+            }).join('');
+
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function selectHandmadeFinish(idx) {
+            var series = handmadeSelectedSeries;
+            if (!series || !series.finishes || !series.finishes[idx]) return;
+            handmadeSelectedFinish = series.finishes[idx];
+
+            // Highlight selected finish
+            document.querySelectorAll('#handmadeFinishGrid .handmade-finish-btn').forEach(function(btn) {
+                btn.classList.remove('selected');
+            });
+            var selectedBtn = document.querySelector('#handmadeFinishGrid .handmade-finish-btn[data-finish-idx="' + idx + '"]');
+            if (selectedBtn) selectedBtn.classList.add('selected');
+
+            // Show size step with appropriate sizes
+            var sizeStep = document.getElementById('handmadeSizeStep');
+            var sizeGrid = document.getElementById('handmadeSizeGrid');
+            if (!sizeStep || !sizeGrid) return;
+
+            var sizesToUse = handmadeSelectedFinish.sizeRestrict || series.sizes || [];
+
+            sizeGrid.innerHTML = sizesToUse.map(function (s) {
+                var isDouble = s === '45×20' || s === '37×18';
+                var dim = (s.match(/×/g) || []).length === 2 ? 'L × W × D' : 'L × W';
+                if (isDouble) dim += '<br><span style="font-size:0.85em;opacity:0.8;">Double Bowl</span>';
+                return '<button type="button" class="size-popup-btn" onclick="selectHandmadeSize(\'' + s + '\')">' +
+                    escapeHTML(s) + '"' +
+                    '<span class="sub">' + dim + '</span>' +
+                    '</button>';
+            }).join('');
+
+            sizeStep.style.display = 'block';
+        }
+
+        function selectHandmadeSize(size) {
+            var series = handmadeSelectedSeries;
+            var finish = handmadeSelectedFinish;
+            if (!series || !finish) return;
+
+            closeHandmadePopup();
+
+            var isDouble = size === '45×20' || size === '37×18';
+            var bowlType = isDouble ? 'Double Bowl' : series.bowl;
+            var finishText = finish.name;
+            var base = series.name + (series.subtitle ? ' (' + series.subtitle + ')' : '');
+            var itemName = base + ' — ' + series.grade + ' Grade, ' + finishText + ', ' + size + '"';
+
+            var cartItem = {
+                id: series.id + '-' + finishText.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '') + '-' + size.replace(/×/g, 'x'),
+                name: itemName,
+                image: 'https://cdn.jsdelivr.net/gh/Samayank/Aryan@main/' + finish.image,
+                price: 0,
+                quantity: 1,
+                config: {
+                    series: series.name,
+                    subtitle: series.subtitle,
+                    grade: series.grade,
+                    finish: finishText,
+                    size: size,
+                    bowl: bowlType
+                }
+            };
+
+            window.aryanCart.addToCart(cartItem);
+            showToast('✓ ' + series.name + ' (' + finishText + ', ' + size + '") added to cart!');
+        }
+
+        function closeHandmadePopup() {
+            var overlay = document.getElementById('handmadeOverlay');
             if (!overlay) return;
             overlay.classList.remove('active');
             overlay.setAttribute('aria-hidden', 'true');
@@ -509,13 +709,16 @@
                 var isHandmade = series.id === 'handmade-304' || series.id === 'handmade-202';
                 var imgFile = imageMap[series.id];
 
-                // Handmade cards link to customize page; others open size popup
-                var card = document.createElement(isHandmade ? 'a' : 'div');
+                // All cards are divs now — handmade opens finish+size popup, others open size popup
+                var card = document.createElement('div');
+                card.setAttribute('role', 'button');
+                card.tabIndex = 0;
                 if (isHandmade) {
-                    card.href = 'customize.html?series=' + series.id;
+                    card.addEventListener('click', function () { openHandmadePopup(series); });
+                    card.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter' || e.key === ' ') openHandmadePopup(series);
+                    });
                 } else {
-                    card.setAttribute('role', 'button');
-                    card.tabIndex = 0;
                     card.addEventListener('click', function () { openKitchenSizePopup(series); });
                     card.addEventListener('keydown', function (e) {
                         if (e.key === 'Enter' || e.key === ' ') openKitchenSizePopup(series);
@@ -536,14 +739,22 @@
                     '<div class="series-card-tags">' + series.tags.map(function (t) { return '<span class="series-tag">' + escapeHTML(t) + '</span>'; }).join('') + '</div>' +
                     '</div>' +
                     '<div class="series-card-footer">' +
-                    '<button class="btn btn-primary" type="button">' + (isHandmade ? 'Customize \u0026 Order →' : 'Choose Size →') + '</button>' +
+                    '<button class="btn btn-primary" type="button">' + (isHandmade ? 'Choose Finish & Size →' : 'Choose Size →') + '</button>' +
                     '</div>';
-                if (!isHandmade) {
-                    var btn = card.querySelector('button');
-                    if (btn) btn.addEventListener('click', function (e) {
-                        e.stopPropagation();
-                        openKitchenSizePopup(series);
-                    });
+                
+                var btn = card.querySelector('button');
+                if (btn) {
+                    if (isHandmade) {
+                        btn.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            openHandmadePopup(series);
+                        });
+                    } else {
+                        btn.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            openKitchenSizePopup(series);
+                        });
+                    }
                 }
                 grid.appendChild(card);
             });
@@ -554,9 +765,12 @@
             renderSeries();
         });
 
-        // Close popup on overlay click
+        // Close popups on overlay click
         document.getElementById('kitchenSizeOverlay').addEventListener('click', function (e) {
             if (e.target === this) closeKitchenSizePopup();
+        });
+        document.getElementById('handmadeOverlay').addEventListener('click', function (e) {
+            if (e.target === this) closeHandmadePopup();
         });
     </script>
 </body>

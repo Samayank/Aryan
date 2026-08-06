@@ -170,7 +170,6 @@ function renderFooter() {
                         <li><a href="cistern.html">Flush Tanks</a></li>
                         <li><a href="vanity.html">Vanity</a></li>
                         <li><a href="unbreak.html">Accessories</a></li>
-                        <li><a href="aryan-catalogue.pdf" target="_blank">Complete Catalogue</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
